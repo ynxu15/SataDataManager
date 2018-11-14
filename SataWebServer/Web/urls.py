@@ -15,9 +15,20 @@ Including another URLconf
 """
 from django.conf.urls import url
 from . import views
+from . import indexView
+from . import govPolicyView
+from . import comSupportView
+from . import talentCultivationView
+from . import proIntroView
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
+    url(r'^$', indexView.indexView, name='index'),
+    #url(r'^$', views.index, name='index'),
     url(r'^back/$', views.back_page),
-	url(r'^login/$', views.login),
+    url(r'^login/$', views.login),
+    url('index', indexView.indexView),
+    url('about', govPolicyView.govPolicyView),
+    url('rooms', comSupportView.comSupportView),
+    url('gallery', talentCultivationView.talentCultivationView),
+    url('dinning', proIntroView.proIntroView),    
 ]
