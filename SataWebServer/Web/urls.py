@@ -20,6 +20,7 @@ from . import govPolicyView
 from . import comSupportView
 from . import talentCultivationView
 from . import proIntroView
+from . import devPredictionView
 
 urlpatterns = [
     url(r'^$', indexView.indexView, name='index'),
@@ -30,5 +31,6 @@ urlpatterns = [
     url('about', govPolicyView.govPolicyView),
     url('rooms', comSupportView.comSupportView),
     url('gallery', talentCultivationView.talentCultivationView),
-    url('dinning', proIntroView.proIntroView),    
+    url('dinning', proIntroView.proIntroView),
+    url('predict', devPredictionView.devPredictionView)
 ]
