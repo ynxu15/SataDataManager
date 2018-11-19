@@ -6,4 +6,5 @@ from django.shortcuts import render
 def govPolicyView(request):
     context          = {}
     context['hello'] = 'Hello World!'
-    return render(request, 'test.html', context)
+    #return render(request, 'tb.html', context)
+    return render(request, 'base_govPolicy1.html', context)

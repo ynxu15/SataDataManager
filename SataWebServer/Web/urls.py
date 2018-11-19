@@ -25,8 +25,8 @@ from . import devPredictionView
 urlpatterns = [
     url(r'^$', indexView.indexView, name='index'),
     #url(r'^$', views.index, name='index'),
-    url(r'^back/$', views.back_page),
-    url(r'^login/$', views.login),
+    url(r'back/$', views.back_page),
+    url(r'login/$', views.login),
     url('index', indexView.indexView),
     url('about', govPolicyView.govPolicyView),
     url('rooms', comSupportView.comSupportView),

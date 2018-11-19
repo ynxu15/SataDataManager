@@ -1,0 +1,24 @@
+*html, _html{background-image:url(about:blank); background-attachment:fixed; height:100%; min-height:100%;}
+* {border:none; padding:0; margin:0;}
+body, button, input, select, textarea, h2, option{font-family:'Microsoft Yahei', '\5B8B\4F53', Tahoma, sans-serif; outline:none; background:#fff;}
+
+em, i{font-style:normal;}
+a{text-decoration:none; cursor:pointer; outline:none;}
+button{cursor:pointer;}
+input{outline:none; color:#222;}
+input[type=button], input[type=submit], input[type=file], button{cursor:pointer;  appearance:none;}
+input[type='number']{-moz-appearance:textfield;}
+input[type=number]::inner-spin-button,
+input[type=number]::outer-spin-button{appearance:none;  margin:0;}
+img{border:0; -ms-interpolation-mode:bicubic; vertical-align:middle; display:inline-block;}
+table{border-collapse:collapse; border-spacing:0;}
+ul, ul li, p, dl, dl dd{list-style:none;}
+.clearfix:after, .clear:before{display:table; content:'';}
+.clearfix:after{clear:both; overflow:hidden;}
+.clearfix{zoom:1;}
+.center{margin:0 auto;}
+.fl{float:left;}
+.fr{float:right;}
+.tar{text-align:right;}
+.tal{text-align:left;}
+.clr{clear:both; height:0px; display:block; *display:inline;}
