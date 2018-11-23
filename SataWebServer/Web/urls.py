@@ -28,9 +28,16 @@ urlpatterns = [
     url(r'back/$', views.back_page),
     url(r'login/$', views.login),
     url('index', indexView.indexView),
-    url('about', govPolicyView.govPolicyView),
+    url('about', govPolicyView.govPolicyExampleView),
     url('rooms', comSupportView.comSupportView),
     url('gallery', talentCultivationView.talentCultivationView),
     url('dinning', proIntroView.proIntroView),
-    url('predict', devPredictionView.devPredictionView)
+    url('predict', devPredictionView.devPredictionView),
+    url('govPolicyMacroRegion', govPolicyView.govPolicyRegionView),
+    url('govPolicyMacroTime', govPolicyView.govPolicyTimeView),
+    url('govPolicyMacroBusiness', govPolicyView.govPolicyBusinessView),
+    url('govPolicyMicroCom', govPolicyView.govPolicyComView),
+    url('govPolicyAnalysis.html$', govPolicyView.govPolicyAnalysisView),
+    url('govPolicyAnalysisPrediction', govPolicyView.govPolicyAnalysisPredictionView),
+    url('govPolicyExamples', govPolicyView.govPolicyExampleView),
 ]

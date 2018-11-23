@@ -2,130 +2,61 @@
 {% load static %}
 
 {% block title %}科技政务大数据平台{% endblock %}
-    {% block  content%}
+{% block  content%}
 
-<link href="{% static 'css/govPolicy.css' %}" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
-	<script src="{% static 'js/echarts.js'%}"></script>
+<link href="{% static 'css/govPolicy.css' %}" rel="stylesheet">    
+ <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
+	<script src="{% static 'js/echarts.min.js'%}"></script>
+<!-- <link rel="stylesheet" href="{% static 'tubiao/css/ver1.0.css' %}" type="text/css" />
+ --><script src="{% static 'lib/jQuery/jquery-3.2.1.min.js' %}"></script>
+<!-- <script src="{% static 'lib/echarts/echarts.min.js' %}"></script>
+ -->
 
-    <!-- Sidebar -->
-    <nav class="navbar nav-tabs" role="navigation" id="govNav">
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse navbar-ex1-collapse nav-stacked"> 
-            <ul class="nav nav-tabs nav-stacked"> <!-- navbar-nav side-nav -->
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-caret-square-o-down"></i>
-                        宏观对比 <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">不同地区对比</a></li>
-                        <li><a href="#">不同时间对比</a></li>
-                        <li><a href="#">不同行业对比</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-caret-square-o-down"></i>
-                        微观统计 <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">企业发展状况对比</a></li>
-                    </ul>
-                </li>
-				<li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-caret-square-o-down"></i>
-                        分析评价 <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">归因分析</a></li>
-                        <li><a href="#">预测评价</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div><!-- /.navbar-collapse -->
-    </nav>
+<div class="container">
+    <!-- <h1>Hello, world!</h1> -->
+    <div class="row">
+        <div class="col-md-2" >
+            <nav class="navbar nav-tabs" role="navigation" id="govNav">
+				<div class="collapse navbar-collapse navbar-ex1-collapse nav-stacked"> 
+					<ul class="nav nav-tabs nav-stacked"> 
+						<li class="dropdown">
+							<a href="govPolicyMacroRegion.html" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-caret-square-o-down"></i>
+								宏观对比 <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="govPolicyMacroRegion.html">不同地区对比</a></li>
+								<li><a href="govPolicyMacroTime.html">不同时间对比</a></li>
+								<li><a href="govPolicyMacroBusiness.html">不同行业对比</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="govPolicyMicroCom.html" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-caret-square-o-down"></i>
+								微观统计 <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="govPolicyMicroCom.html">企业发展状况对比</a></li>
+							</ul>
+						</li>
+							<li class="dropdown">
+							<a href="govPolicyAnalysis.html" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-caret-square-o-down"></i>
+								分析评价 <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="govPolicyAnalysis.html">归因分析</a></li>
+								<li><a href="govPolicyAnalysisPrediction.html">预测评价</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</nav>
+        </div>
 
-	<div class="container" id="tableView">
-	   <div class="row">
-		  <div class="col-xs-2" id="first" onload="drawBar();"></div>
-<!-- 			<div class="col-xs-4"></div> 
-					  <div class="col-xs-4"></div>   -->    
-	   </div>
-<!-- 	   <div class="row">
-	   		  <div class="col-xs-4"></div>
-	   		  <div class="col-xs-4"></div>      
-	   </div>
-	   <div class="row">
-	   		  <div class="col-xs-4"></div>
-	   		  <div class="col-xs-4"></div>      
-	   </div> -->
-	</div>
+		<!-- TABLES --> 
+        <div class="col-md-10">
 
-	<script type="text/javascript">
-        // 基于准备好的dom，初始化echarts实例
-     var myChart = echarts.init(document.getElementById('first'));
+		    {% block  contentTable%}
 
-        // 指定图表的配置项和数据
-       var option = {
-           barWidth:30,//条形的宽的为30
-           tooltip: {},
-           legend: {//说明
-                    //orient: 'vertical', //说明显示在的位置所在
-                    // center: 'center ',//说明的位置居中显示 默认居中横排显示
-                    data:['累积', '新增']//数据说明
-                    },
-           xAxis: {//X轴上的内容
-                    type : 'category',
-                    axisLabel:{
-                        //横坐标上的文字斜着显示 文字颜色 begin 
-                             interval:0,
-                            rotate:45,
-                             margin:2,
-                             textStyle:{color:"#ec6869" }
-                        //横坐标上的文字换行显示 文字颜色end
-                             },
-                    type : 'category',
-                    data: ["饭店供应商数量","酒店供应商数量","合作大巴公司数量","保险供应商数量","票务供应商数量"]
-                  },
-            yAxis: {//Y轴上的内容
-                     type : 'value'
-                   },
-            series: [
-                //第一条数据 begin
-                    {
-                    type: 'bar',//Echart 柱状图（bar）
-                    name:'累积',
-                    data: [610, 700, 400, 600, 500],
-                        //柱状条颜色的设置为#eb6768 begin
-                        itemStyle: {
-                                normal: {
-                                color: '#eb6768',
-                                shadowBlur: 2,
-                                shadowColor: 'rgba(3, 3, 4, 0.5)'
-                                        }
-                                    }
-                        //柱状条颜色的设置为#eb6768 end
-                    },
-                 //第一条数据 end
-                 
-                 //第二条数据 begin    
-                    {
-                    type: 'bar',
-                    name:'新增',
-                    data: [510, 400, 300, 200, 100],
-                    //柱状条颜色的设置为#eb6768 begin
-                    itemStyle: {
-                            normal: {
-                                color: '#3b8ede',
-                                shadowBlur: 2,
-                                shadowColor: 'rgba(3, 3, 4, 0.5)'
-                                  }
-                               }
-                    //柱状条颜色的设置为#eb6768  end    
-                  } 
-               //第二条数据 end    
-               ] 
-             };
-       
+			{% endblock contentTable%}
 
-        // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
-    </script>
-<!-- </div>/#wrapper -->
+        </div>
+    </div>
+</div>
+
 {% endblock content%}

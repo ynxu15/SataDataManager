@@ -7,4 +7,42 @@ def govPolicyView(request):
     context          = {}
     context['hello'] = 'Hello World!'
     #return render(request, 'tb.html', context)
-    return render(request, 'base_govPolicy1.html', context)
+    return render(request, 'govPolicyMacroRegion.html', context)
+
+
+def govPolicyRegionView(request):
+    context          = {}
+    context['hello'] = 'Hello World!'
+    return render(request, 'govPolicyMacroRegion.html', context)
+
+def govPolicyTimeView(request):
+    context          = {}
+    context['hello'] = 'Hello World!'
+    return render(request, 'govPolicyMacroTime.html', context)
+
+def govPolicyBusinessView(request):
+    context          = {}
+    context['hello'] = 'Hello World!'
+    return render(request, 'govPolicyMacroBusiness.html', context)
+
+def govPolicyComView(request):
+    context          = {}
+    context['hello'] = 'Hello World!'
+    return render(request, 'govPolicyMicroCom.html', context)
+
+def govPolicyAnalysisView(request):
+    context          = {}
+    context['hello'] = 'Hello World!'
+    return render(request, 'govPolicyAnalysis.html', context)
+
+
+def govPolicyAnalysisPredictionView(request):
+    context          = {}
+    context['hello'] = 'Hello World!'
+    return render(request, 'govPolicyAnalysisPrediction.html', context)
+
+
+def govPolicyExampleView(request):
+    context          = {}
+    context['hello'] = 'Hello World!'
+    return render(request, 'govPolicyExamples.html', context)
