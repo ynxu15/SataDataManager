@@ -32,5 +32,7 @@ urlpatterns = [
     url('rooms', comSupportView.comSupportView),
     url('gallery', talentCultivationView.talentCultivationView),
     url('dinning', proIntroView.proIntroView),
-    url('predict', devPredictionView.devPredictionView)
+    url('predictMain', devPredictionView.predictMainView),
+    url('predictPart',devPredictionView.predictPartView),
+    url('predictCom',devPredictionView.predictComView)
 ]

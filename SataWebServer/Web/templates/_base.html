@@ -20,6 +20,7 @@
     <script src="{% static 'js/lightbox-plus-jquery.min.js' %}" type="text/javascript"></script>
     <script src="{% static 'js/instafeed.min.js' %}" type="text/javascript"></script>
     <script src="{% static 'js/custom.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/echarts.min.js' %}" type="text/javascript"></script>
 </head>
 <body>
 <div id="page">
@@ -79,7 +80,7 @@
                                         <a data-hover="企业扶持" href="rooms.html"><span>企业扶持</span></a>
                                         <ul class="dropdown-menu">
                                             <a data-hover="企业全息画像" href="dinning.html"><span>企业全息画像</span></a>
-                                            <a data-hover="企业成长预测" href="predict"><span>企业成长预测</span></a>
+                                            <a data-hover="企业成长预测" href="predictMain"><span>企业成长预测</span></a>
                                             <a data-hover="科技政策推荐" href="dinning.html"><span>科技政策推荐</span></a>
                                         </ul>
                                     </li>
@@ -104,7 +105,7 @@
         </div>
     </header>
     <!--end-->
-    {% block  content%}
+    {% block content%}
 
     {% endblock content%}
     <!---footer--->
