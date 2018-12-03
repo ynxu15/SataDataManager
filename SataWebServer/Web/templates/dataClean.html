@@ -1,0 +1,256 @@
+{% extends '_baseAdmin.html' %}
+{% load static %}
+{% block title %}数据清洗{% endblock title%}
+{% block content%}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="form-group step1">
+            <label><h3>选择要清洗的数据库表</h3></label>
+            <select class="form-control sel1">
+                <option>数据库表名</option>
+                <option value="table1">绩效分析</option>
+                <option value="table2">企业画像</option>
+                <option value="table3">成长预测</option>
+            </select>
+        </div>
+        <script type="text/javascript">
+        $('.sel1').selectric().on('change', function() {
+            if ($(this).val() == 'table1') {
+                $('.step2').show()
+            }
+        });
+        </script>
+        <div class="form-group step2">
+            <hr>
+            <label><h3>选择清洗方案</h3></label>
+            <select class="form-control sel2">
+                <option>数据清洗方案</option>
+                <option value="met1">数据去重</option>
+                <option value="met2">异常值检测</option>
+                <option value="met3">缺失数据填充</option>
+            </select>
+        </div>
+        <script type="text/javascript">
+        $('.sel2').selectric().on('change', function() {
+            if ($(this).val() == 'met1') {
+                $('.step31').show()
+            }
+        });
+        </script>
+        <div class="form-group step31">
+            <hr>
+            <label><h3>重复数据：</h3></label>
+            <table id="tb_order" class="table table-bordered">
+                <tr>
+                    <th><input type="checkbox" value=""></th>
+                    <th>com_id</th>
+                    <th>com_name</th>
+                    <th>bf_141</th>
+                    <th>bf_142</th>
+                    <th>bf_143</th>
+                    <th>bf_144</th>
+                    <th>bf_151</th>
+                    <th>bf_152</th>
+                    <th>bf_153</th>
+                    <th>bf_154</th>
+                    <th>bf_161</th>
+                    <th>bf_162</th>
+                    <th>bf_163</th>
+                    <th>bf_164</th>
+                    <th>bf_171</th>
+                    <th>bf_172</th>
+                    <th>bf_173</th>
+                    <th>bf_174</th>
+                </tr>
+                <tr>
+                    <td>
+                    <input type="checkbox" value=""></td>
+                    <td>727298</td>
+                    <td>上海朗脉洁净技术股份有限公司</td>
+                    <td>117.30</td>
+                    <td>178.43</td>
+                    <td>65.33</td>
+                    <td>175.50</td>
+                    <td>124.50</td>
+                    <td>131.84</td>
+                    <td>187.08</td>
+                    <td>NULL</td>
+                    <td>117.30</td>
+                    <td>178.43</td>
+                    <td>65.33</td>
+                    <td>175.50</td>
+                    <td>124.50</td>
+                    <td>131.84</td>
+                    <td>187.08</td>
+                    <td>NULL</td>
+                </tr>
+                <tr>
+                    <td>
+                    <input type="checkbox" value=""></td>
+                    <td>727298</td>
+                    <td>上海朗脉洁净技术股份有限公司</td>
+                    <td>117.30</td>
+                    <td>178.43</td>
+                    <td>65.33</td>
+                    <td>175.50</td>
+                    <td>124.50</td>
+                    <td>131.84</td>
+                    <td>187.08</td>
+                    <td>NULL</td>
+                    <td>117.30</td>
+                    <td>178.43</td>
+                    <td>65.33</td>
+                    <td>175.50</td>
+                    <td>124.50</td>
+                    <td>131.84</td>
+                    <td>187.08</td>
+                    <td>NULL</td>
+                </tr>
+            </table>
+            <div class="form-group">
+                <div>&nbsp </div>
+                <button type="button" class="btn btn-primary">去重</button>
+            </div>
+        </div>
+        <div class="form-group step32">
+            <hr>
+            <label><h3>设置异常阈值：</h3></label>
+            <table id="tb_order" class="table table-bordered">
+                <tr>
+                    <th>#</th>
+                    <th>com_id</th>
+                    <th>com_name</th>
+                    <th>bf_141</th>
+                    <th>bf_142</th>
+                    <th>bf_143</th>
+                    <th>bf_144</th>
+                    <th>bf_151</th>
+                    <th>bf_152</th>
+                    <th>bf_153</th>
+                    <th>bf_154</th>
+                    <th>bf_161</th>
+                    <th>bf_162</th>
+                    <th>bf_163</th>
+                    <th>bf_164</th>
+                    <th>bf_171</th>
+                    <th>bf_172</th>
+                    <th>bf_173</th>
+                    <th>bf_174</th>
+                </tr>
+                <tr>
+                    <td>
+                    最小值</td>
+                    <td></td>
+                    <td></td>
+                    <td><input type="text" name=""></td>
+                    <td><input type="text" name=""></td>
+                    <td><input type="text" name=""></td>
+                    <td><input type="text" name=""></td>
+                    <td><input type="text" name=""></td>
+                    <td><input type="text" name=""></td>
+                    <td><input type="text" name=""></td>
+                    <td><input type="text" name=""></td>
+                    <td><input type="text" name=""></td>
+                    <td><input type="text" name=""></td>
+                    <td><input type="text" name=""></td>
+                    <td><input type="text" name=""></td>
+                    <td><input type="text" name=""></td>
+                    <td><input type="text" name=""></td>
+                    <td><input type="text" name=""></td>
+                    <td><input type="text" name=""></td>
+                </tr><tr>
+                    <td>
+                    最大值</td>
+                    <td></td>
+                    <td></td>
+                    <td><input type="text" name=""></td>
+                    <td><input type="text" name=""></td>
+                    <td><input type="text" name=""></td>
+                    <td><input type="text" name=""></td>
+                    <td><input type="text" name=""></td>
+                    <td><input type="text" name=""></td>
+                    <td><input type="text" name=""></td>
+                    <td><input type="text" name=""></td>
+                    <td><input type="text" name=""></td>
+                    <td><input type="text" name=""></td>
+                    <td><input type="text" name=""></td>
+                    <td><input type="text" name=""></td>
+                    <td><input type="text" name=""></td>
+                    <td><input type="text" name=""></td>
+                    <td><input type="text" name=""></td>
+                    <td><input type="text" name=""></td>
+                </tr>
+            </table>
+            <div class="form-group">
+                <div>&nbsp </div>
+                <button type="button" class="btn btn-primary">查询</button>
+            </div>
+        </div>
+        <div class="form-group step4">
+            <label><h3>查询到的异常数据：</h3></label>
+            <table id="tb_order" class="table table-bordered">
+                <tr>
+                    <th><input type="checkbox" value=""></th>
+                    <th>com_id</th>
+                    <th>com_name</th>
+                    <th>bf_141</th>
+                    <th>bf_142</th>
+                    <th>bf_143</th>
+                    <th>bf_144</th>
+                    <th>bf_151</th>
+                    <th>bf_152</th>
+                    <th>bf_153</th>
+                    <th>bf_154</th>
+                    <th>bf_161</th>
+                    <th>bf_162</th>
+                    <th>bf_163</th>
+                    <th>bf_164</th>
+                    <th>bf_171</th>
+                    <th>bf_172</th>
+                    <th>bf_173</th>
+                    <th>bf_174</th>
+                </tr>
+                <tr>
+                    <td>
+                    <input type="checkbox" value=""></td>
+                    <td>727298</td>
+                    <td>上海朗脉洁净技术股份有限公司</td>
+                    <td>117.30</td>
+                    <td>178.43</td>
+                    <td>65.33</td>
+                    <td>175.50</td>
+                    <td>124.50</td>
+                    <td>131.84</td>
+                    <td>187.08</td>
+                    <td>NULL</td>
+                    <td>117.30</td>
+                    <td>178.43</td>
+                    <td>65.33</td>
+                    <td>175.50</td>
+                    <td>124.50</td>
+                    <td>131.84</td>
+                    <td>187.08</td>
+                    <td>NULL</td>
+                </tr>
+            </table>
+            <div class="form-group">
+                <div>&nbsp </div>
+                <button type="button" class="btn btn-primary">删除</button>
+                <button type="button" class="btn btn-primary">修改</button>
+            </div>
+        </div>
+        <div class="form-group step33">
+            <hr>
+            <label><h3>选择填充方案：</h3></label>
+            <select class="form-control sel2">
+                <option>数据填充方案</option>
+                <option value="met1">平均值</option>
+                <option value="met2">最大值</option>
+                <option value="met3">最小值</option>
+                <option value="met3">前一项</option>
+                <option value="met3">后一项</option>
+            </select>
+        </div>
+    </div>
+</div><!-- /.row -->
+{% endblock content%}

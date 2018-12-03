@@ -34,5 +34,9 @@ urlpatterns = [
     url('dinning', proIntroView.proIntroView),
     url('predictMain', devPredictionView.predictMainView),
     url('predictPart',devPredictionView.predictPartView),
-    url('predictCom',devPredictionView.predictComView)
+    url('predictCom',devPredictionView.predictComView),
+    url('dataImport', devPredictionView.dataImport),
+    url('dataExport', devPredictionView.dataExport),
+    url('dataClean', devPredictionView.dataClean),
+    url('dataUpdate', devPredictionView.dataUpdate)
 ]

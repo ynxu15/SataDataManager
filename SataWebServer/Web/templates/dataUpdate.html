@@ -1,0 +1,121 @@
+{% extends '_baseAdmin.html' %}
+{% load static %}
+{% block title %}数据修改{% endblock title%}
+{% block content%}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="form-group">
+            <label><h3>选择要修改的数据库表</h3></label>
+            <select class="form-control">
+                <option>数据库表名</option>
+                <option value="table1">绩效分析</option>
+                <option value="table2">企业画像</option>
+                <option value="table3">成长预测</option>
+            </select>
+        </div>
+        <hr>
+            <div>
+                <label><h3>数据库表结构样例</h3></label>
+                <table id="tb_order" class="table table-bordered">
+                    <tr>
+                        <td>com_id</td>
+                        <td>com_name</td>
+                        <td>bf_141</td>
+                        <td>bf_142</td>
+                        <td>bf_143</td>
+                        <td>bf_144</td>
+                        <td>bf_151</td>
+                        <td>bf_152</td>
+                        <td>bf_153</td>
+                        <td>bf_154</td>
+                        <td>bf_161</td>
+                        <td>bf_162</td>
+                        <td>bf_163</td>
+                        <td>bf_164</td>
+                        <td>bf_171</td>
+                        <td>bf_172</td>
+                        <td>bf_173</td>
+                        <td>bf_174</td>
+                    </tr>
+                    <tr>
+                        <td>727298</td>
+                        <td>上海朗脉洁净技术股份有限公司</td>
+                        <td>117.30</td>
+                        <td>178.43</td>
+                        <td>65.33</td>
+                        <td>175.50</td>
+                        <td>124.50</td>
+                        <td>131.84</td>
+                        <td>187.08</td>
+                        <td>NULL</td>
+                        <td>117.30</td>
+                        <td>178.43</td>
+                        <td>65.33</td>
+                        <td>175.50</td>
+                        <td>124.50</td>
+                        <td>131.84</td>
+                        <td>187.08</td>
+                        <td>NULL</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="form-group">
+                <label><h3>查询SQL语句</h3></label>
+                <textarea class="form-control" rows="3"></textarea>
+                <div>&nbsp </div>
+                <button type="button" class="btn btn-primary">查询</button>
+            </div>
+            <div class="form-group">
+                <label><h3>查询结果</h3></label>
+                <table id="tb_order" class="table table-bordered">
+                    <tr>
+                    <th><input type="checkbox" value=""></th>
+                    <th>com_id</th>
+                    <th>com_name</th>
+                    <th>bf_141</th>
+                    <th>bf_142</th>
+                    <th>bf_143</th>
+                    <th>bf_144</th>
+                    <th>bf_151</th>
+                    <th>bf_152</th>
+                    <th>bf_153</th>
+                    <th>bf_154</th>
+                    <th>bf_161</th>
+                    <th>bf_162</th>
+                    <th>bf_163</th>
+                    <th>bf_164</th>
+                    <th>bf_171</th>
+                    <th>bf_172</th>
+                    <th>bf_173</th>
+                    <th>bf_174</th>
+                </tr>
+                <tr>
+                    <td>
+                    <input type="checkbox" value=""></td>
+                    <td>727298</td>
+                    <td>上海朗脉洁净技术股份有限公司</td>
+                    <td>117.30</td>
+                    <td>178.43</td>
+                    <td>65.33</td>
+                    <td>175.50</td>
+                    <td>124.50</td>
+                    <td>131.84</td>
+                    <td>187.08</td>
+                    <td>NULL</td>
+                    <td>117.30</td>
+                    <td>178.43</td>
+                    <td>65.33</td>
+                    <td>175.50</td>
+                    <td>124.50</td>
+                    <td>131.84</td>
+                    <td>187.08</td>
+                    <td>NULL</td>
+                </tr>
+                </table>
+                <!-- <div>&nbsp </div> -->
+                <button type="button" class="btn btn-primary">修改</button>
+            </div>
+
+        </div>
+</div><!-- /.row -->
+{% endblock content%}
