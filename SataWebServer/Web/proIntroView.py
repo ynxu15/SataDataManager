@@ -6,4 +6,4 @@ from django.shortcuts import render
 def proIntroView(request):
     context          = {}
     context['hello'] = 'Hello World!'
-    return render(request, 'test.html', context)
+    return render(request, 'proIntro.html', context)

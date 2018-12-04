@@ -9,7 +9,7 @@ def index(request):
 	return render(request, 'index.html')
 
 def back_page(request):
-	return render(request, 'back.html')
+	return render(request, 'backMain.html')
 
 def login(request):
 	return render(request, 'login.html')

@@ -1,0 +1,794 @@
+{% extends 'base_back.html' %}
+{% load static %}
+
+{% block  pageWrapper %}
+
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>企业盈利预测模型
+                    <!-- <small>Statistics Overview</small> -->
+                </h1>
+                <ol class="breadcrumb">
+                    <li class="active"><i class="fa fa-dashboard"></i> 1. 模型选择</li>
+                </ol>
+            </div>
+        </div><!-- /.row -->
+
+
+		<div class="row">
+            <div class="col-lg-4">
+            <p align=right> 模型选择： </p>
+            </div>
+        
+            <div class="col-lg-4">             
+        			<select class="selectpicker show-tick form-control" data-live-search="true">
+        				<option>移动平均过程(MA)</option>
+						<option>自回归过程(AR)</option>
+						<option>自回归移动平均过程(ARMA)</option>
+						<option>自回归积分滑动平均模型(ARIMA)</option>
+        				<option>循环神经网络(RNN)</option>
+        				<option>长短时记忆神经网络(LSTM)</option>
+					</select>
+            </div>
+        
+        </div><!-- /.row -->
+
+		<!-- 模型介绍 -->
+		<div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-1">
+                                <i class="fa fa-tasks fa-5x"></i>
+                            </div>
+                            <div class="col-xs-10"> <!-- right -->
+                                <p class="announcement-heading">移动平均过程(MA)</p>
+                                <p class="announcement-text">移动平均，Moving Average，简称MA，原本的意思是移动平均。MA模型将前几个时刻的平均值作为未来的预测值</p>
+                            </div>
+							<div class="col-xs-1">
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <div class="panel-footer announcement-bottom">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    详细介绍
+                                </div>
+                                <div class="col-xs-6 text-right">
+                                    <i class="fa fa-arrow-circle-right"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+           
+        </div><!-- /.row -->
+
+
+		<!-- 超参设置 -->
+		<div class="row">
+            <div class="col-lg-12">
+                <ol class="breadcrumb">
+                    <li class="active"><i class="fa fa-dashboard"></i> 2. 模型超参设置</li>
+                </ol>
+            </div>
+        </div><!-- /.row -->
+
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="panel panel-info">
+                    <div class="panel-heading" style = "overflow-x:hidden">
+						<!-- 输入框 -->
+						<div class="row">
+                            <div class="col-xs-12">
+								<div class="input-group">
+									<span class="input-group-addon">时间窗口大小</span>
+									<input type="text" class="form-control" placeholder="2">
+								</div>
+                            </div>
+                        </div>
+						
+						<!-- 参数介绍 -->
+                        <div class="row">
+                            <div class="col-xs-12 text-right">
+                                <p> 时间窗口是指每次考虑的元素个数。 </p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <div class="panel-footer announcement-bottom">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    详细信息
+                                </div>
+                                <div class="col-xs-6 text-right">
+                                    <i class="fa fa-arrow-circle-right"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+        </div><!-- /.row -->
+
+
+		<!-- 训练数据设置 -->
+		<div class="row">
+            <div class="col-lg-12">
+                <ol class="breadcrumb">
+                    <li class="active"><i class="fa fa-dashboard"></i> 3. 模型训练数据设置</li>
+                </ol>
+            </div>
+        </div><!-- /.row -->
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+						<!-- 输入框 -->
+						<div class="row">
+                            <div class="col-xs-6">
+								<div class="input-group">
+									<span class="input-group-addon">开始时间</span>
+									<input type="text" class="form-control" placeholder="2018-10-1 12:00">
+								</div>
+                            </div>
+							<div class="col-xs-6">
+								<div class="input-group">
+									<span class="input-group-addon">开始时间</span>
+									<input type="text" class="form-control" placeholder="2018-10-1 12:00">
+								</div>
+                            </div>
+                        </div>
+					</div>
+                </div>
+            </div>
+		</div> <!-- row -->
+
+		<div class="row">
+			<div class="col-lg-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-money"></i> 输入数据所在表格</h3>
+                    </div>
+                    <div class="panel-body" >
+                        <div class="table-responsive" >  <!-- style="height:300px;overflow:auto; position: relative;" -->
+						<div style="height:200px;overflow:auto; position: relative;">
+                            <table class="table table-bordered table-hover table-striped tablesorter" style="height:100px;overflow:scroll;">
+                                <thead>
+                                <tr>
+                                    <th>表名<i class="fa fa-sort"></i></th>
+									<th>表说明<i class="fa fa-sort"></i></th>
+									<th>数据起始时间 <i class="fa fa-sort"></i></th>
+                                    <th>数据结束时间 <i class="fa fa-sort"></i></th>
+                                    <th>时间粒度 <i class="fa fa-sort"></i></th>
+									<th>选为输入 <i class="fa fa-sort"></i></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>3326</td>
+									<th>表说明<i class="fa fa-sort"></i></th>
+                                    <td>10/21/2013</td>
+                                    <td>10/21/2018</td>
+                                    <td>每季度</td>
+									<td><input id="ck1" type="checkbox" /> </td>
+                                </tr>
+                                <tr>
+                                    <td>3325</td>
+									<th>表说明<i class="fa fa-sort"></i></th>
+                                    <td>10/21/2013</td>
+                                    <td>10/21/2018</td>
+                                    <td>每季度</td>
+									<td><input id="ck1" type="checkbox" /> </td>
+                                </tr>
+                                <tr>
+                                    <td>3324</td>
+									<th>表说明<i class="fa fa-sort"></i></th>
+                                    <td>10/21/2013</td>
+                                    <td>10/21/2018</td>
+                                    <td>每季度</td>
+									<td><input id="ck1" type="checkbox" /> </td>
+                                </tr>
+                                <tr>
+                                    <td>3323</td>
+									<th>表说明<i class="fa fa-sort"></i></th>
+                                    <td>10/21/2013</td>
+                                    <td>10/21/2018</td>
+                                    <td>每季度</td>
+									<td><input id="ck1" type="checkbox" /> </td>
+                                </tr>
+                                <tr>
+                                    <td>3322</td>
+									<th>表说明<i class="fa fa-sort"></i></th>
+                                    <td>10/21/2013</td>
+                                    <td>10/21/2018</td>
+                                    <td>每季度</td>
+									<td><input id="ck1" type="checkbox" /> </td>
+                                </tr>
+                                <tr>
+                                    <td>3321</td>
+									<th>表说明<i class="fa fa-sort"></i></th>
+                                    <td>10/21/2013</td>
+                                    <td>10/21/2018</td>
+                                    <td>每季度</td>
+									<td><input id="ck1" type="checkbox" /> </td>
+                                </tr>
+                                </tbody>
+                            </table>
+							</div>
+                        </div>
+<!-- 						<div>
+						<button type="button">保存设置并刷新</button>
+						</div> -->
+                        <div class="text-right">
+                            <a href="#">查看所有 <i class="fa fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+			<div class="col-lg-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-money"></i> xxx表</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+						<div style="height:200px;overflow:auto; position: relative;">
+                            <table class="table table-bordered table-hover table-striped tablesorter">
+                                <thead>
+                                <tr>
+                                    <th>表头 <i class="fa fa-sort"></i></th>
+									<th>说明 <i class="fa fa-sort"></i></th>
+									<th>数据类型 <i class="fa fa-sort"></i></th>
+                                    <th>样例 <i class="fa fa-sort"></i></th>
+                                    <th>选为模型输入<i class="fa fa-sort"></i></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>3326</td>
+									<td>MA</td>
+                                    <td>10/21/2013</td>
+                                    <td>3:29 PM</td>
+									<td><input id="ck1" type="checkbox" /> </td>
+                                </tr>
+                                <tr>
+                                    <td>3325</td>
+									<td>MA</td>
+                                    <td>10/21/2013</td>
+                                    <td>3:29 PM</td>
+									<td><input id="ck1" type="checkbox" /> </td>
+                                </tr>
+                                <tr>
+                                    <td>3324</td>
+									<td>MA</td>
+                                    <td>10/21/2013</td>
+                                    <td>3:29 PM</td>
+									<td><input id="ck1" type="checkbox" /> </td>
+                                </tr>
+                                <tr>
+                                    <td>3323</td>
+									<td>MA</td>
+                                    <td>10/21/2013</td>
+                                    <td>3:29 PM</td>
+									<td><input id="ck1" type="checkbox" /> </td>
+                                </tr>
+                                <tr>
+                                    <td>3322</td>
+									<td>MA</td>
+                                    <td>10/21/2013</td>
+                                    <td>3:29 PM</td>
+									<td><input id="ck1" type="checkbox" /> </td>
+                                </tr>
+                                <tr>
+                                    <td>3321</td>
+									<td>MA</td>
+                                    <td>10/21/2013</td>
+                                    <td>3:29 PM</td>
+									<td><input id="ck1" type="checkbox" /> </td>
+                                </tr>
+                                </tbody>
+                            </table>
+						</div>
+                        </div>
+<!-- 						<div>
+						<button type="button">保存设置并刷新</button>
+						</div> -->
+                        <div class="text-right">
+                            <a href="#">查看所有 <i class="fa fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div><!-- /.row -->
+
+
+		<!-- 模型设置保存 -->
+		<div class="row">
+            <div class="col-lg-12">
+                <ol class="breadcrumb">
+                    <li class="active"><i class="fa fa-dashboard"></i> 4. 模型设置保存</li>
+                </ol>
+            </div>
+        </div><!-- /.row -->
+
+		<div class="row">
+			<div class="col-lg-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-money"></i> 已保存模型</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+						<div style="height:200px;overflow:auto; position: relative;">
+                            <table class="table table-bordered table-hover table-striped tablesorter">
+                                <thead>
+                                <tr>
+                                    <th>模型编号<i class="fa fa-sort"></i></th>
+									<th>模型类型<i class="fa fa-sort"></i></th>
+									<th>模型设置保存时间 <i class="fa fa-sort"></i></th>
+									<th>备注<i class="fa fa-sort"></i></th>
+									<th>删除<i class="fa fa-sort"></i></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>3326</td>
+									<th>MA<i class="fa fa-sort"></i></th>
+                                    <td>10/21/2013</td>
+									<td>预测模型</td>
+									<td><input id="ck1" type="checkbox" /> </td>
+                                </tr>
+                                <tr>
+                                    <td>3325</td>
+									<th>MA<i class="fa fa-sort"></i></th>
+                                    <td>10/21/2013</td>
+									<td>预测模型</td>
+									<td><input id="ck1" type="checkbox" /> </td>
+                                </tr>
+                                <tr>
+                                    <td>3324</td>
+									<th>MA<i class="fa fa-sort"></i></th>
+                                    <td>10/21/2013</td>
+									<td>预测模型</td>
+									<td><input id="ck1" type="checkbox" /> </td>
+                                </tr>
+                                <tr>
+                                    <td>3323</td>
+									<th>MA<i class="fa fa-sort"></i></th>
+                                    <td>10/21/2013</td>
+									<td>预测模型</td>
+									<td><input id="ck1" type="checkbox" /> </td>
+                                </tr>
+                                <tr>
+                                    <td>3322</td>
+									<th>MA<i class="fa fa-sort"></i></th>
+                                    <td>10/21/2013</td>
+									<td>预测模型</td>
+									<td><input id="ck1" type="checkbox" /> </td>
+                                </tr>
+                                <tr>
+                                    <td>3321</td>
+									<th>MA<i class="fa fa-sort"></i></th>
+                                    <td>10/21/2013</td>
+									<td>预测模型</td>
+									<td><input id="ck1" type="checkbox" /> </td>
+                                </tr>
+                                </tbody>
+                            </table>
+							</div>
+                        </div>
+						<div>
+						<button type="button">保存当前设置到列表</button>
+						<button type="button">确认删除</button>
+						</div>
+                        <div class="text-right">
+                            <a href="#">查看所有数据表 <i class="fa fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+		</div>
+
+
+
+		<!-- 训练时间设置 -->
+		<div class="row">
+            <div class="col-lg-12">
+                <ol class="breadcrumb">
+                    <li class="active"><i class="fa fa-dashboard"></i> 5. 模型训练时间设置</li>
+                </ol>
+            </div>
+        </div><!-- /.row -->
+
+        <div class="row">
+
+			<div class="col-lg-3">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+						<!-- 输入框 -->
+						<div class="row">
+                            <div class="col-xs-12">
+							<p>模型选择</p>
+							    <select class="selectpicker show-tick form-control" data-live-search="true">
+									<option>MA-1</option>
+									<option>MA-2</option>
+								</select>
+								<input type="text" class="form-control" placeholder="10min">
+								<div>
+									<button type="button">保存设置</button>
+								</div>
+                            </div>
+                        </div>
+						
+						<!-- 参数介绍 -->
+                        <div class="row">
+                            <div class="col-xs-12 text-right">
+                                <!-- <p> 时间窗口是指每次考虑的元素个数。 </p> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+						<!-- 输入框 -->
+						<div class="row">
+                            <div class="col-xs-12">
+							<p>立即训练</p>
+							    <select class="selectpicker show-tick form-control" data-live-search="true">
+									<option>立即开始</option>
+									<option>训练延后时间</option>
+								</select>
+								<input type="text" class="form-control" placeholder="10min">
+								<div>
+									<button type="button">保存设置</button>
+								</div>
+                            </div>
+                        </div>
+						
+						<!-- 参数介绍 -->
+                        <div class="row">
+                            <div class="col-xs-12 text-right">
+                                <!-- <p> 时间窗口是指每次考虑的元素个数。 </p> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+			<div class="col-lg-3">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+						<!-- 输入框 -->
+						<div class="row">
+                            <div class="col-xs-12">
+							<p>定时训练</p>
+							    <select class="selectpicker show-tick form-control" data-live-search="true">
+									<option>定时训练</option>
+								</select>
+								<!-- <input type="text" class="form-control" placeholder="2018-11-1 18:10"> -->
+								<div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+									<input class="form-control" size="16" type="text" value="02 November 2018" readonly>
+									<!-- <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span> -->
+									<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+								</div>
+								<div class="input-group date form_time" data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
+									<input class="form-control" size="16" type="text" value="" readonly>
+									<!-- <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span> -->
+									<span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+								</div>
+								<div>
+									<button type="button">保存设置</button>
+								</div>        
+                            </div>
+                        </div>
+						
+						<!-- 参数介绍 -->
+                        <div class="row">
+                            <div class="col-xs-12 text-right">
+                                <!-- <p> 时间窗口是指每次考虑的元素个数。 </p> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+			<div class="col-lg-3">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+						<!-- 输入框 -->
+						<div class="row">
+                            <div class="col-xs-12">
+								<p> 周期训练 </p>
+							    <select class="selectpicker show-tick form-control" data-live-search="true">
+									<option>每天</option>
+									<option>每周</option>
+									<option>每月</option>
+									<option>每年</option>
+								</select>
+								<input type="text" class="form-control" placeholder="周一">
+								<input type="text" class="form-control" placeholder="18:10">
+								<div>
+									<button type="button">保存设置</button>
+								</div>
+                            </div>
+                        </div>
+						
+						<!-- 参数介绍 -->
+                        <div class="row">
+                            <div class="col-xs-12 text-right">
+                                <!-- <p> 时间窗口是指每次考虑的元素个数。 </p> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div><!-- /.row -->
+
+
+
+		<!-- 模型效果评价 -->
+<!-- 		<div class="row">
+		            <div class="col-lg-12">
+		                <ol class="breadcrumb">
+		                    <li class="active"><i class="fa fa-dashboard"></i> 5. 模型效果评价</li>
+		                </ol>
+		            </div>
+		        </div>/.row -->
+
+
+
+		<!-- 训练模型的保存和应用 -->
+		<div class="row">
+            <div class="col-lg-12">
+                <ol class="breadcrumb">
+                    <li class="active"><i class="fa fa-dashboard"></i> 6. 模型参数保存和应用</li>
+                </ol>
+            </div>
+        </div><!-- /.row -->
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-clock-o"></i> 模型训练记录 </h3>
+                    </div>
+                    <div class="panel-body">
+					<div style="height:225px;overflow:auto; position: relative;">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item">
+                                <span class="badge">just now</span>
+                                <i class="fa fa-calendar"></i> 模型训练开始
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="badge">4 minutes ago</span>
+                                <i class="fa fa-comment"></i> 模型删除
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="badge">23 minutes ago</span>
+                                <i class="fa fa-truck"></i> 模型保存
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="badge">46 minutes ago</span>
+                                <i class="fa fa-money"></i> 模型训练开始
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="badge">1 hour ago</span>
+                                <i class="fa fa-user"></i> 训练数据处理完成
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="badge">2 hours ago</span>
+                                <i class="fa fa-check"></i> 训练数据导入
+                            </a>
+                        </div>
+					</div>
+                        <div class="text-right">
+                            <a href="#">查看所有事件 <i class="fa fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-money"></i> 模型情况</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+						<div style="height:200px;overflow:auto; position: relative;">
+                            <table class="table table-bordered table-hover table-striped tablesorter">
+                                <thead>
+                                <tr>
+                                    <th>模型编号 <i class="fa fa-sort"></i></th>
+									<th>模型类型 <i class="fa fa-sort"></i></th>
+                                    <th>保存日期 <i class="fa fa-sort"></i></th>
+                                    <th>保存时间 <i class="fa fa-sort"></i></th>
+									<th>模型效能 <i class="fa fa-sort"></i></th>
+                                    <th>保存 <i class="fa fa-sort"></i></th>
+									<th>删除 <i class="fa fa-sort"></i></th>
+									<th>应用 <i class="fa fa-sort"></i></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>3326</td>
+									<td>MA</td>
+                                    <td>10/21/2013</td>
+                                    <td>3:29 PM</td>
+                                    <td>0.98</td>
+									<td><input id="ck1" type="checkbox" /> </td>
+									<td><input id="ck1" type="checkbox" /> </td>
+									<td><input id="ck1" type="checkbox" /> </td>
+                                </tr>
+                                <tr>
+                                    <td>3325</td>
+									<td>AR</td>
+                                    <td>10/21/2013</td>
+                                    <td>3:20 PM</td>
+                                    <td>0.98</td>
+									<td><input id="ck1" type="checkbox" /> </td>
+									<td><input id="ck1" type="checkbox" /> </td>
+									<td><input id="ck1" type="checkbox" /> </td>
+                                </tr>
+                                <tr>
+                                    <td>3324</td>
+									<td>MA</td>
+                                    <td>10/21/2013</td>
+                                    <td>3:03 PM</td>
+                                    <td>0.98</td>
+									<td><input id="ck1" type="checkbox" /> </td>
+									<td><input id="ck1" type="checkbox" /> </td>
+									<td><input id="ck1" type="checkbox" /> </td>
+                                </tr>
+                                <tr>
+                                    <td>3323</td>
+									<td>ARMA</td>
+                                    <td>10/21/2013</td>
+                                    <td>3:00 PM</td>
+                                    <td>0.98</td>
+									<td><input id="ck1" type="checkbox" /> </td>
+									<td><input id="ck1" type="checkbox" /> </td>
+									<td><input id="ck1" type="checkbox" /> </td>
+                                </tr>
+                                <tr>
+                                    <td>3322</td>
+									<td>RNN</td>
+                                    <td>10/21/2013</td>
+                                    <td>2:49 PM</td>
+                                    <td>0.98</td>
+									<td><input id="ck1" type="checkbox" /> </td>
+									<td><input id="ck1" type="checkbox" /> </td>
+									<td><input id="ck1" type="checkbox" /> </td>
+                                </tr>
+                                <tr>
+                                    <td>3321</td>
+									<td>LSTM</td>
+                                    <td>10/21/2013</td>
+                                    <td>2:23 PM</td>
+                                    <td>0.98</td>
+									<td><input id="ck1" type="checkbox" /> </td>
+									<td><input id="ck1" type="checkbox" /> </td>
+									<td><input id="ck1" type="checkbox" /> </td>
+                                </tr>
+                                </tbody>
+                            </table>
+							</div>
+                        </div>
+						<div>
+						<button type="button">保存设置并刷新</button>
+						</div>
+                        <div class="text-right">
+                            <a href="#">查看所有保存模型 <i class="fa fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.row -->
+
+		<div class="row">
+            <div class="col-lg-3">
+				<!-- <p> 训练损失值情况</p> -->
+				<div id="performChart1" style="width: 300px;height:300px;"></div>
+            </div>
+        </div><!-- /.row -->
+
+		<script src="{% static 'js/backModel.js' %}" type="text/javascript"></script>
+
+
+
+
+
+<div class="container">
+    <form action="" class="form-horizontal"  role="form">
+        <fieldset>
+            <legend>Test</legend>
+            <div class="form-group">
+                <label for="dtp_input1" class="col-md-2 control-label">DateTime Picking</label>
+                <div class="input-group date form_datetime col-md-5" data-date="1979-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
+                    <input class="form-control" size="16" type="text" value="" readonly>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+					<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                </div>
+				<input type="hidden" id="dtp_input1" value="" /><br/>
+            </div>
+			<div class="form-group">
+                <label for="dtp_input2" class="col-md-2 control-label">Date Picking</label>
+                <div class="input-group date form_date col-md-5" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                    <input class="form-control" size="16" type="text" value="" readonly>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+				<input type="hidden" id="dtp_input2" value="" /><br/>
+            </div>
+			<div class="form-group">
+                <label for="dtp_input3" class="col-md-2 control-label">Time Picking</label>
+                <div class="input-group date form_time col-md-5" data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
+                    <input class="form-control" size="16" type="text" value="" readonly>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+					<span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+                </div>
+				<input type="hidden" id="dtp_input3" value="" /><br/>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+
+<!-- <script type="text/javascript" src="./jquery/jquery-1.8.3.min.js" charset="UTF-8"></script>
+ --><!-- <script type="text/javascript" src="./jquery/jquery.min.js" charset="UTF-8"></script>
+ -->
+<!-- <script type="text/javascript" src="./bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script> -->
+
+<!-- <script type="text/javascript" src="{% static 'date/bootstrap/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'date/js/bootstrap-datetimepicker.js' %}" charset="UTF-8"></script>
+<script type="text/javascript" src="{% static 'date/js/locales/bootstrap-datetimepicker.fr.js' %}" charset="UTF-8"></script>  -->
+<script type="text/javascript">
+    $('.form_datetime').datetimepicker({
+        //language:  'fr',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		forceParse: 0,
+        showMeridian: 1
+    });
+	$('.form_date').datetimepicker({
+        language:  'en',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0
+    });
+	$('.form_time').datetimepicker({
+        language:  'en',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 1,
+		minView: 0,
+		maxView: 1,
+		forceParse: 0
+    });
+</script>
+
+
+{% endblock pageWrapper %}
+

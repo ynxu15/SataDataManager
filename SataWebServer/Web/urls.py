@@ -21,11 +21,13 @@ from . import comSupportView
 from . import talentCultivationView
 from . import proIntroView
 from . import devPredictionView
+from . import backModelView
 
 urlpatterns = [
     url(r'^$', indexView.indexView, name='index'),
     #url(r'^$', views.index, name='index'),
     url(r'back/$', views.back_page),
+    url(r'backModel', backModelView.backModelView),
     url(r'login/$', views.login),
     url('index', indexView.indexView),
     url('about', govPolicyView.govPolicyExampleView),

@@ -235,15 +235,11 @@ option = {
 }
 
 
-
-
-
-
 $(function(){
 	setChart1();
 	setChart2();
 	setChart3(); 
 //	setChart4();
 //	setChart5();
-//    setChart6();
+//  setChart6();
 });
