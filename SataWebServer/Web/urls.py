@@ -36,7 +36,7 @@ urlpatterns = [
     url('gallery', talentCultivationView.talentCultivationView),
     url('dinning', proIntroView.proIntroView),
     url('predict', devPredictionView.devPredictionView),
-    url('govPolicyMacroRegion', govPolicyView.govPolicyRegionView),
+    url('govPolicyMacroRegion.html$', govPolicyView.govPolicyRegionView),
     url('govPolicyMacroTime', govPolicyView.govPolicyTimeView),
     url('govPolicyMacroBusiness', govPolicyView.govPolicyBusinessView),
     url('govPolicyMicroCom', govPolicyView.govPolicyComView),
@@ -51,4 +51,5 @@ urlpatterns = [
     url(r'^ajax_dict/$', testView.ajax_dict),
     url(r'testCelery$', testView.testCelery),
     url(r'testCeleryRe', testView.testCeleryRe),
+    url(r'comNum', govPolicyView.comNum),
 ]

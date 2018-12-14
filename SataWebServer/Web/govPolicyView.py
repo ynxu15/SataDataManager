@@ -2,6 +2,8 @@
  
 #from django.http import HttpResponse
 from django.shortcuts import render
+from django.http import HttpResponse
+import json
  
 def govPolicyView(request):
     context          = {}
@@ -14,6 +16,11 @@ def govPolicyRegionView(request):
     context          = {}
     context['hello'] = 'Hello World!'
     return render(request, 'govPolicyMacroRegion.html', context)
+
+def comNum(request):
+    print('aaaaa', request.POST.get('a'))
+    a = list(range(10))
+    return HttpResponse(json.dumps(a), content_type='application/json')
 
 def govPolicyTimeView(request):
     context          = {}
