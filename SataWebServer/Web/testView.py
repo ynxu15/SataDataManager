@@ -110,12 +110,7 @@ def svr(request):
 def addTest(request):
     return render(request, 'addTest.html')
 
-def add1(request):
-    a = request.GET['a']
-    b = request.GET['b']
-    a = int(a)
-    b = int(b)
-    return HttpResponse(str(a+b))
+
 
 
 import json
@@ -132,4 +127,10 @@ def ajax_dict(request):
 def myget(request):
     return render(request, 'myget.html')
 
+def add1(request):
+    a = request.GET['a']
+    b = request.GET['b']
+    a = int(a)
+    b = int(b)
+    return HttpResponse(str(a+b))
 
