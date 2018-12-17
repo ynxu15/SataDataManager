@@ -201,29 +201,29 @@ option = {
     grid: {
         left: 100
     },
-    visualMap: {
-        type: 'continuous',
-        dimension: 1,
-        text: ['High', 'Low'],
-        inverse: true,
-        itemHeight: 100,
-        calculable: true,
-        min: -2,
-        max: 6,
-        top: 60,
-        left: 10,
-        inRange: {
-            colorLightness: [0.4, 0.8]
-        },
-        outOfRange: {
-            color: '#bbb'
-        },
-        controller: {
-            inRange: {
-                color: '#2f4554'
-            }
-        }
-    },
+//    visualMap: {
+//        type: 'continuous',
+//        dimension: 1,
+//        text: ['High', 'Low'],
+//        inverse: true,
+//        itemHeight: 100,
+//        calculable: true,
+//        min: -2,
+//        max: 6,
+//        top: 60,
+//        left: 10,
+//        inRange: {
+//            colorLightness: [0.4, 0.8]
+//        },
+//        outOfRange: {
+//            color: '#bbb'
+//        },
+//        controller: {
+//            inRange: {
+//                color: '#2f4554'
+//            }
+//        }
+//    },
     series: [
         {
             name: 'bar',
@@ -258,29 +258,29 @@ option = {
 
 //myChart.on('brushSelected', renderBrushed);
 
-function renderBrushed(params) {
-    var brushed = [];
-    var brushComponent = params.batch[0];
-
-    for (var sIdx = 0; sIdx < brushComponent.selected.length; sIdx++) {
-        var rawIndices = brushComponent.selected[sIdx].dataIndex;
-        brushed.push('[Series ' + sIdx + '] ' + rawIndices.join(', '));
-    }
-
-    myChart.setOption({
-        title: {
-            backgroundColor: '#333',
-            text: 'SELECTED DATA INDICES: \n' + brushed.join('\n'),
-            bottom: 0,
-            right: 0,
-            width: 100,
-            textStyle: {
-                fontSize: 12,
-                color: '#fff'
-            }
-        }
-    });
-}
+//function renderBrushed(params) {
+//    var brushed = [];
+//    var brushComponent = params.batch[0];
+//
+//    for (var sIdx = 0; sIdx < brushComponent.selected.length; sIdx++) {
+//        var rawIndices = brushComponent.selected[sIdx].dataIndex;
+//        brushed.push('[Series ' + sIdx + '] ' + rawIndices.join(', '));
+//    }
+//
+//    myChart.setOption({
+//        title: {
+//            backgroundColor: '#333',
+//            text: 'SELECTED DATA INDICES: \n' + brushed.join('\n'),
+//            bottom: 0,
+//            right: 0,
+//            width: 100,
+//            textStyle: {
+//                fontSize: 12,
+//                color: '#fff'
+//            }
+//        }
+//    });
+//}
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 }
@@ -2075,15 +2075,6 @@ option = {
 function setChartD1(){
 		// 基于准备好的dom，初始化echarts实例
      var myChart = echarts.init(document.getElementById('chart1'));
-//alert("here");
-
-//	$.get('/Web/govPolicyMacroRegion/comNum',function(ret){
-//              //返回值 ret 在这里是一个字典
-//              //alert(ret);
-//              // 也可以用 ret['twz']
-//			//$('#testDiv').html(ret);
-//          })
-//      })
 
         // 指定图表的配置项和数据
 
@@ -2154,34 +2145,10 @@ yAxisData = ['周一','周二','周三','周四','周五','周六','周日']
         }
     ]
 
-option = {
-    tooltip : {
-        trigger: 'axis',
-        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-        }
-    },
-    legend: {
-        data: legendData
-    },
-    grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true
-    },
-    xAxis:  {
-        type: 'value'
-    },
-    yAxis: {
-        type: 'category',
-        data: yAxisData
-    },
-    series: sData
-};
+setStackChart(myChart, legendData, yAxisData, sData);
 
         // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
+       // myChart.setOption(option);
 }
 
 function setStackChart(myChart, legendData, yAxisData, seriesData){
@@ -2209,38 +2176,844 @@ function setStackChart(myChart, legendData, yAxisData, seriesData){
         type: 'category',
         data: yAxisData
     },
-    series: seriesData
+    series: sData
 };
 
 		myChart.setOption(option);
 
 };
 
+function initChart1(){
+	// set chart 1
+	//$('#testDiv').html("hello");
+
+	$.post("govPolicyMacroRegion/comNum", {'region':'0'}, function(ret){
+            //$('#testDiv').html(ret['legendData']);
+			legendData = ret['legendData']
+			yAxisData = ret['yAxisData']
+			seriesData = ret['seriesData']
+			//alert(seriesData)
+			sData = []
+			for (i=0; i<seriesData.length ;i++ )
+			{
+				d = {
+						name: legendData[i],
+						type: 'bar',
+						stack: '总量',
+//						label: {
+//							normal: {
+//								show: true,
+//								position: 'insideRight'
+//							}
+//						},
+						data: seriesData[i]
+					}
+				sData.push(d)
+
+			}
+			var myChart = echarts.init(document.getElementById('chart1'));
+			setStackChart(myChart, legendData, yAxisData, sData)
+
+    });
+
+
+} // initChart1
+
+function initChart3(){
+
+//$('#testDiv').html("hello1");
+
+	//set chart 3
+	$('#testDiv').html("chart3");
+
+		$.post("govPolicyMacroRegion/comCapital", {'region':'0'}, function(ret){
+			
+				// 基于准备好的dom，初始化echarts实例
+     var myChart = echarts.init(document.getElementById('chart3'));
+
+			legendData = ret['legendData']
+			yAxisData = ret['yAxisData']
+			seriesData = ret['seriesData']
+			//alert(ret['seriesData']);
+
+			sData = []
+			for (i=0; i<seriesData.length ;i++ )
+			{
+				d = {
+				type: 'bar',
+				data: seriesData[i],
+				coordinateSystem: 'polar',
+				name: legendData[i],
+				stack: 'a'
+					}
+				sData.push(d)
+
+			}
+
+			option = {
+					tooltip : {
+					trigger: 'axis',
+					axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+						type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+					}
+				},
+				angleAxis: {
+					type: 'category',
+					data: yAxisData,
+					z: 10
+				},
+				radiusAxis: {
+				},
+				polar: {
+				},
+				series: sData,
+				legend: {
+					show: true,
+					data: legendData
+				}
+			};
+        
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+
+
+	});
+
+}  // initChart3
+
+function initChart4(){
+	
+	// set chart 4
+	$.post("govPolicyMacroRegion/comTaxRelief", {'region':'0'}, function(ret){
+	//alert(ret['legendData'])
+	var myChart = echarts.init(document.getElementById('chart4'));
+	legendData = ret['legendData']
+	yAxisData = ret['yAxisData']
+	seriesData = ret['seriesData']
+	regionSum = ret['regionSum']
+	test = ret['test']
+	//alert(test)
+
+	sData = []
+	for (i=0; i<seriesData.length ;i++ )
+	{
+		d = {
+		type: 'bar',
+		data: seriesData[i],
+		name: legendData[i],
+		stack: 'sum'
+		}
+		sData.push(d)
+
+	}
+
+	option = {
+    tooltip : {
+        trigger: 'axis',
+        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+        }
+    },
+    legend: {
+        data: legendData  //['直接访问','邮件营销','联盟广告','视频广告','搜索引擎','百度','谷歌','必应','其他']
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    xAxis : [
+        {
+            type : 'category',
+            data : yAxisData
+        }
+    ],
+    yAxis : [
+        {
+            type : 'value'
+        }
+    ],
+    series : sData
+};
+
+
+	// 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+
+// set chart 7
+var myChart = echarts.init(document.getElementById('chart7'));
+
+	sData = []
+	for (i=0; i<regionSum.length ;i++ )
+	{
+		d = {value:regionSum[i], name:yAxisData[i]}
+		sData.push(d)
+	}
+
+	sData1 = []
+	s = []
+	for (i=0; i<regionSum.length;i++ )
+	{
+		for (j=0;j<legendData.length ;j++ )
+		{
+			d = {value:seriesData[j][i], name:legendData[j]}
+			sData1.push(d)
+		}		
+	}
+
+option = {
+    tooltip: {
+        trigger: 'item',
+        formatter: "{a} <br/>{b}: {c} ({d}%)"
+    },
+    legend: {
+        orient: 'vertical',
+        x: 'left',
+        data: yAxisData 
+    },
+    series: [
+        {
+            name:'访问来源',
+            type:'pie',
+            selectedMode: 'single',
+            radius: [0, '35%'],
+
+            label: {
+                normal: {
+                    position: 'inner'
+                }
+            },
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            data: sData
+        },
+        {
+            name:'访问来源',
+            type:'pie',
+            radius: ['40%', '55%'],
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+			label: {
+                normal: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    show: true,
+                    textStyle: {
+                        fontSize: '30',
+                        fontWeight: 'bold'
+                    }
+                }
+            },
+            data: sData1
+        }
+    ]
+};
+	// 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+
+	});  // post 结尾
+
+
+}; // initChar 4 and 7
+
+
+function initChart5(){
+	
+	// set chart 5
+	$.post("govPolicyMacroRegion/comIncom", {'region':'0'}, function(ret){
+	//alert(ret['legendData'])
+	var myChart = echarts.init(document.getElementById('chart5'));
+	legendData = ret['legendData']
+	yAxisData = ret['yAxisData']
+	seriesData = ret['seriesData']
+	regionSum = ret['regionSum']
+	test = ret['test']
+	//alert(test)
+
+	sData = []
+	for (i=0; i<seriesData.length ;i++ )
+	{
+		d = {
+		type: 'bar',
+		data: seriesData[i],
+		name: legendData[i],
+		stack: 'sum'
+		}
+		sData.push(d)
+
+	}
+
+	option = {
+    tooltip : {
+        trigger: 'axis',
+        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+        }
+    },
+    legend: {
+        data: legendData  //['直接访问','邮件营销','联盟广告','视频广告','搜索引擎','百度','谷歌','必应','其他']
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    xAxis : [
+        {
+            type : 'category',
+            data : yAxisData
+        }
+    ],
+    yAxis : [
+        {
+            type : 'value'
+        }
+    ],
+    series : sData
+};
+
+
+	// 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+
+// set chart 8
+var myChart = echarts.init(document.getElementById('chart8'));
+
+	sData = []
+	for (i=0; i<regionSum.length ;i++ )
+	{
+		d = {value:regionSum[i], name:yAxisData[i]}
+		sData.push(d)
+	}
+
+	sData1 = []
+	s = []
+	for (i=0; i<regionSum.length;i++ )
+	{
+		for (j=0;j<legendData.length ;j++ )
+		{
+			d = {value:seriesData[j][i], name:legendData[j]}
+			sData1.push(d)
+		}		
+	}
+
+option = {
+    tooltip: {
+        trigger: 'item',
+        formatter: "{a} <br/>{b}: {c} ({d}%)"
+    },
+    legend: {
+        orient: 'vertical',
+        x: 'left',
+        data: yAxisData 
+    },
+    series: [
+        {
+            name:'访问来源',
+            type:'pie',
+            selectedMode: 'single',
+            radius: [0, '35%'],
+
+            label: {
+                normal: {
+                    position: 'inner'
+                }
+            },
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            data: sData
+        },
+        {
+            name:'访问来源',
+            type:'pie',
+            radius: ['40%', '55%'],
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+			label: {
+                normal: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    show: true,
+                    textStyle: {
+                        fontSize: '30',
+                        fontWeight: 'bold'
+                    }
+                }
+            },
+            data: sData1
+        }
+    ]
+};
+	// 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+
+	});  // post 结尾
+
+
+}; // initChar 5 and 8
+
+function initChart6(){
+	
+	// set chart 6
+	$.post("govPolicyMacroRegion/comIncrease", {'region':'0'}, function(ret){
+	//alert(ret['legendData'])
+	var myChart = echarts.init(document.getElementById('chart6'));
+	legendData = ret['legendData']
+	yAxisData = ret['yAxisData']
+	seriesData = ret['seriesData']
+	regionSum = ret['regionSum']
+	regionSumMin = ret['regionSumMin']
+	regionSumMax = ret['regionSumMax']
+
+	sData = []
+	for (i=0; i<seriesData.length ;i++ )
+	{
+		d = {
+		type: 'bar',
+		data: seriesData[i],
+		name: legendData[i],
+		stack: 'sum'
+		}
+		sData.push(d)
+
+	}
+
+	sData = []
+	for (i = 0; i<legendData.length ; i++)
+	{
+		d ={
+            name: legendData[i],
+            type: 'bar',
+            stack: 'one',
+            itemStyle: itemStyle,
+            data: seriesData[i]
+        }
+			sData.push(d)
+	}
+
+
+
+var xAxisData = [];
+var data1 = [];
+var data2 = [];
+var data3 = [];
+var data4 = [];
+
+for (var i = 0; i < 10; i++) {
+    xAxisData.push('Class' + i);
+    data1.push((Math.random() * 2).toFixed(2));
+    data2.push(-Math.random().toFixed(2));
+    data3.push((Math.random() * 5).toFixed(2));
+    data4.push((Math.random() + 0.3).toFixed(2));
+}
+
+var itemStyle = {
+    normal: {
+    },
+    emphasis: {
+        barBorderWidth: 1,
+        shadowBlur: 10,
+        shadowOffsetX: 0,
+        shadowOffsetY: 0,
+        shadowColor: 'rgba(0,0,0,0.5)'
+    }
+};
+
+option = {
+    toolbox: {
+        feature: {
+            magicType: {
+                type: ['stack', 'tiled']
+            },
+            dataView: {}
+        }
+    },
+    tooltip: {},
+    xAxis: {
+        data: yAxisData,
+        name: 'X Axis',
+        silent: false,
+        axisLine: {onZero: true},
+        splitLine: {show: false},
+        splitArea: {show: false}
+    },
+    yAxis: {
+        inverse: true,
+        splitArea: {show: false}
+    },
+    grid: {
+        left: 100
+    },
+    series: sData
+};
+
+	// 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+
+// set chart 9
+var myChart = echarts.init(document.getElementById('chart9'));
+
+	sData = []
+	for (i=0; i<regionSum.length;i++ )
+	{
+		d = [regionSumMin[i], regionSumMax[i], regionSum[i]]
+		sData.push(d)	
+	}
+
+//var data = [
+//    [5000, 10000, 6785.71],
+//    [4000, 10000, 6825],
+//    [3000, 6500, 4463.33],
+//    [2500, 5600, 3793.83],
+//    [2000, 4000, 3060],
+//    [2000, 4000, 3222.33],
+//    [2500, 4000, 3133.33],
+//    [1800, 4000, 3100],
+//    [2000, 3500, 2750],
+//    [2000, 3000, 2500],
+//    [1800, 3000, 2433.33],
+//    [2000, 2700, 2375],
+//    [1500, 2800, 2150],
+//    [1500, 2300, 2100],
+//    [1600, 3500, 2057.14],
+//    [1500, 2600, 2037.5],
+//    [1500, 2417.54, 1905.85],
+//    [1500, 2000, 1775],
+//    [1500, 1800, 1650]
+//];
+data = sData
+//var cities = ['北京', '上海', '深圳', '广州', '苏州', '杭州', '南京', '福州', '青岛', '济南', '长春', '大连', '温州', '郑州', '武汉', '成都', '东莞', '沈阳', '烟台'];
+var barHeight = 5;
+
+option = {
+//    title: {
+//        text: '在中国租个房子有多贵？',
+//        subtext: '市中心一室月租费（数据来源：https://www.numbeo.com）'
+//    },
+    legend: {
+        show: true,
+        data: ['价格范围', '均值']
+    },
+    grid: {
+        top: 100
+    },
+    angleAxis: {
+        type: 'category',
+        data: yAxisData
+    },
+    tooltip: {
+        show: true,
+        formatter: function (params) {
+            var id = params.dataIndex;
+            return yAxisData[id] + '<br>最低：' + data[id][0] + '<br>最高：' + data[id][1] + '<br>平均：' + data[id][2];
+        }
+    },
+    radiusAxis: {
+    },
+    polar: {
+    },
+    series: [{
+        type: 'bar',
+        itemStyle: {
+            normal: {
+                color: 'transparent'
+            }
+        },
+        data: data.map(function (d) {
+            return d[0];
+        }),
+        coordinateSystem: 'polar',
+        stack: '最大最小值',
+        silent: true
+    }, {
+        type: 'bar',
+        data: data.map(function (d) {
+            return d[1] - d[0];
+        }),
+        coordinateSystem: 'polar',
+        name: '价格范围',
+        stack: '最大最小值'
+    }, {
+        type: 'bar',
+        itemStyle: {
+            normal: {
+                color: 'transparent'
+            }
+        },
+        data: data.map(function (d) {
+            return d[2] - barHeight;
+        }),
+        coordinateSystem: 'polar',
+        stack: '均值',
+        silent: true,
+        z: 10
+    }, {
+        type: 'bar',
+        data: data.map(function (d) {
+            return barHeight * 2
+        }),
+        coordinateSystem: 'polar',
+        name: '均值',
+        stack: '均值',
+        barGap: '-100%',
+        z: 10
+    }],
+    legend: {
+        show: true,
+        data: ['A', 'B', 'C']
+    }
+};
+
+	// 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+
+	});  // post 结尾
+
+
+}; // initChar 6 and 9
+
+function changeChart1(selectRegion, selectTime, selectIndust){
+	$.post("govPolicyMacroRegion/comNum", {'region':selectRegion, 'time':selectTime, 'industType':selectIndust }, function(ret){
+            //$('#testDiv').html(ret['legendData']);
+//			legendData = ret['legendData']
+//			yAxisData = ret['yAxisData']
+//			seriesData = ret['seriesData']
+//			//alert(seriesData)
+//			sData = []
+//			for (i=0; i<seriesData.length ;i++ )
+//			{
+//				d = {
+//						name: legendData[i],
+//						type: 'bar',
+//						stack: '总量',
+////						label: {
+////							normal: {
+////								show: true,
+////								position: 'insideRight'
+////							}
+////						},
+//						data: seriesData[i]
+//					}
+//				sData.push(d)
+//
+//			}
+//			var myChart = echarts.init(document.getElementById('chart1'));
+//			setStackChart(myChart, legendData, yAxisData, sData)
+
+
+		// 基于准备好的dom，初始化echarts实例
+     var myChart = echarts.init(document.getElementById('chart1'));
+
+        // 指定图表的配置项和数据
+
+var weatherIcons = {
+    'Sunny': './data/asset/img/weather/sunny_128.png',
+    'Cloudy': './data/asset/img/weather/cloudy_128.png',
+    'Showers': './data/asset/img/weather/showers_128.png'
+};
+
+var seriesLabel = {
+    normal: {
+        show: true,
+        textBorderColor: '#333',
+        textBorderWidth: 2
+    }
+}
+
+option = {
+    //title: {
+    //    text: 'Wheater Statistics'
+    //},
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'shadow'
+        }
+    },
+    //legend: {
+    //    data: ['City Alpha', 'City Beta', 'City Gamma']
+    //},
+    grid: {
+        left: 40
+    },
+    toolbox: {
+        show: true,
+        feature: {
+            saveAsImage: {}
+        }
+    },
+    xAxis: {
+        type: 'value',
+        name: '家',
+        axisLabel: {
+            formatter: '{value}'
+        }
+    },
+    yAxis: {
+        type: 'category',
+        inverse: true,
+        data: ['徐家汇', '闵行区', '松江区'],
+        axisLabel: {
+            //formatter: function (value) {
+            //    return '{' + value + '| }\n{value|' + value + '}';
+            //},
+            margin: 5,
+            rich: {
+                value: {
+                    lineHeight: 10,
+                    align: 'center'
+                },
+                Sunny: {
+                    height: 20,
+                    align: 'center',
+                    backgroundColor: {
+                        image: weatherIcons.Sunny
+                    }
+                },
+                Cloudy: {
+                    height: 20,
+                    align: 'center',
+                    backgroundColor: {
+                        image: weatherIcons.Cloudy
+                    }
+                },
+                Showers: {
+                    height: 20,
+                    align: 'center',
+                    backgroundColor: {
+                        image: weatherIcons.Showers
+                    }
+                }
+            }
+        }
+    },
+    series: [
+        {
+            name: '互联网行业',
+            type: 'bar',
+            data: [165, 170, 30],
+            label: seriesLabel,
+            markPoint: {
+                symbolSize: 1,
+                symbolOffset: [0, '50%'],
+                label: {
+                   normal: {
+                        formatter: '{a|{a}\n}{b|{b} }{c|{c}}',
+                        backgroundColor: 'rgb(242,242,242)',
+                        borderColor: '#aaa',
+                        borderWidth: 1,
+                        borderRadius: 4,
+                        padding: [4, 10],
+                        lineHeight: 26,
+                        // shadowBlur: 5,
+                        // shadowColor: '#000',
+                        // shadowOffsetX: 0,
+                        // shadowOffsetY: 1,
+                        position: 'right',
+                        distance: 20,
+                        rich: {
+                            a: {
+                                align: 'center',
+                                color: '#fff',
+                                fontSize: 10,
+                                textShadowBlur: 2,
+                                textShadowColor: '#000',
+                                textShadowOffsetX: 0,
+                                textShadowOffsetY: 2,
+                                textBorderColor: '#333',
+                                textBorderWidth: 2
+                            },
+                            b: {
+                                 color: '#333'
+                            },
+                            c: {
+                                color: '#ff8811',
+                                textBorderColor: '#000',
+                                textBorderWidth: 1,
+                                fontSize: 10
+                            }
+                        }
+                   }
+                },
+                data: [
+                    {type: 'max', name: '最多数量：'},
+                    {type: 'min', name: '最少数量: '}
+                ]
+            }
+        },
+        {
+            name: '机械制造业',
+            type: 'bar',
+            label: seriesLabel,
+            data: [150, 105, 110]
+        },
+        {
+            name: '加工业',
+            type: 'bar',
+            label: seriesLabel,
+            data: [220, 82, 63]
+        }
+    ]
+};
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+
+    });
+}
+
+function selectRegion(){
+
+ alert("change region");
+ regionPicker = document.getElementById('regionClassPicker');
+ industPicker = document.getElementById('industryClassPicker');
+ timePicker = document.getElementById('timeClassPicker');
+ selectRegion = regionPicker.options[regionPicker.selectedIndex].value
+ selectTime = timePicker.options[timePicker.selectedIndex].value
+ selectIndust = industPicker.options[industPicker.selectedIndex].value
+// alert(selectRegion)
+// alert(selectTime)
+// alert(selectIndust)
+changeChart1(selectRegion, selectTime, selectIndust);
+}
+
 
 $(function(){
 
-	//alert("I am an alert box!!")
-	$('#testDiv').html("hello");
+	initChart1();
+	initChart3();
 
-	a = 1;
-	b = 2;
+	initChart4();
+	initChart5();
+	initChart6();
 
-	$.post("comNum", {'a':a,'b':b}, function(ret){
-            //$('#testDiv').html("good");
-    });
-
-	$('#testDiv').html("hello1");
-
-
-	setChartD1();
+	//setChartD1();
 	setChart2();
-	setChart3(); 
-	setChart4();
-	setChart5();
-    setChart6();
-	setChart7();
-	setChart8();
-	setChart9();
+	//setChart3(); 
+	//setChart4();
+	//setChart5();
+    //setChart6();
+	//setChart7();
+	//setChart8();
+	//setChart9();
 //	setChart10();
 //	setChart11();
 //	setChart12();

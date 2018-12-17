@@ -2251,7 +2251,7 @@ class EnvProjectActivityInfo(models.Model):
 
 
 class ZfjcCompanyBaseInfoRegionDist(models.Model):
-    myid = models.TextField(db_column='myID', unique=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='myID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
     region = models.TextField(db_column='REGION', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     industry_type = models.TextField(db_column='INDUSTRY_TYPE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     year = models.TextField(db_column='YEAR', blank=True, null=True)  # Field name made lowercase. This field type is a guess.

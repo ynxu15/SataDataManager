@@ -16,7 +16,7 @@
 	<div class="col-md-2">
 		<p>地区：</p>
 		<div class="form-group">
-				<select class="selectpicker">
+				<select id="regionClassPicker" class="selectpicker">
 					<option value="00">所有区域</option>
 					<option value="01">浦东区</option>
 					<option value="02">黄浦区</option>
@@ -41,7 +41,7 @@
 	<div class="col-md-2">
 		<p>时间：</p>
 		<div class="form-group">
-				<select class="selectpicker">
+				<select id="timeClassPicker" class="selectpicker">
 					<option>2018</option>
 					<option>2017</option>
 					<option>2016</option>
@@ -52,7 +52,7 @@
 	<div class="col-md-2">
 		<p>行业：</p>
 		<div class="form-group">
-				<select class="selectpicker">
+				<select id="industryClassPicker" class="selectpicker">
 					<option value="0">所有行业</option>
 					<option value="A">A</option>
 					<option value="B">B</option>
@@ -78,7 +78,7 @@
 	</div>
 
 	<div class="col-md-2">
-		<button type="button" class="btn btn-secondary">查询</button>
+		<button id="changeRegionButton" type="button" class="btn btn-secondary" onclick="selectRegion();">查询</button>
 	</div>
 	<div class="col-md-2">
 	</div>
