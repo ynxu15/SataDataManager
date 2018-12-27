@@ -507,8 +507,179 @@ option = {
 
 }
 
+// 点击操作，更新图
+function updateLineChart(myChartId, legendData, xAxisData, seriesData){
+
+	// 基于准备好的dom，初始化echarts实例
+     var myChart = echarts.init(document.getElementById(myChartId));
+
+    // 指定图表的配置项和数据
+	sData = [];
+	for (i=0; i<seriesData.length; i++)
+	{
+		d = {
+            name:legendData[i],
+            type:'line',
+            stack: '总量',
+            data:seriesData[i]
+        }
+		sData.push(d);
+	}
+
+//alert(legendData);
+
+option = {
+    //title: {
+    //    text: '企业接受资助情况'
+    //},
+    tooltip: {
+        trigger: 'axis'
+    },
+    legend: {
+        data:legendData
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    toolbox: {
+        feature: {
+            saveAsImage: {}
+        }
+    },
+    xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: xAxisData
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: sData
+}; // end of option
 
 
+	// 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option, true);
+	
+
+}// end of changeLineChart
+
+// 查询按钮操作
+function qButtonClick(){
+
+ timePicker1 = document.getElementById('timeClassPickerQMin');
+ timePicker2 = document.getElementById('timeClassPickerQMax');
+ regionPicker = document.getElementById('regionClassPicker');
+ industPicker = document.getElementById('industryClassPicker');
+ selectRegion = regionPicker.options[regionPicker.selectedIndex].value;
+ selectTimeMin = timePicker1.options[timePicker1.selectedIndex].value;
+ selectTimeMax = timePicker2.options[timePicker2.selectedIndex].value;
+ selectIndust = industPicker.options[industPicker.selectedIndex].value;
+
+ $.post("govPolicyMacroTime/regionInfoQuery", {'selectRegion':selectRegion, 'selectTimeMin':selectTimeMin, 'selectTimeMax':selectTimeMax,'selectIndust':selectIndust}, function(ret){
+	legendData = ret['legendData']
+	xAxisData = ret['xAxisData']
+	taxReliefSData = ret['taxReliefSData']
+	incomeSData = ret['incomeSData']
+	increaseSData = ret['increaseSData']
+	
+	// 更新图表
+	updateLineChart("chart1", legendData, xAxisData, taxReliefSData);
+	updateLineChart("chart4", legendData, xAxisData, incomeSData)
+	updateLineChart("chart7", legendData, xAxisData, increaseSData)
+	
+}); // end of post
+
+} // end of qButtonClick
+
+
+
+function updateRadarChart(myChartId, legendData, xAxisData, seriesData){
+
+	// 基于准备好的dom，初始化echarts实例
+     var myChart = echarts.init(document.getElementById(myChartId));
+
+    // 指定图表的配置项和数据
+	sData = [];
+	for (i=0; i<seriesData.length; i++)
+	{
+		d = {
+        type: 'bar',
+        data: seriesData[i],
+        coordinateSystem: 'polar',
+        name: legendData[i],
+        stack: 'a'
+		}
+		sData.push(d);
+	}
+
+	option = {
+		tooltip: {
+        trigger: 'axis'
+		},
+		angleAxis: {
+			type: 'category',
+			data: xAxisData,
+			//z: 10
+		},
+		radiusAxis: {
+		},
+		polar: {
+		},
+		series: sData,
+		legend: {
+			show: true,
+			data: legendData
+		}
+	};// end of option
+
+
+	// 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option, true);
+
+}// end of changeLineChart
+
+
+// 比较按钮操作
+function cButtonClick(){
+
+ timePicker1 = document.getElementById('timeClassPickerC1');
+ timePicker2 = document.getElementById('timeClassPickerC2');
+ regionPicker = document.getElementById('regionClassPicker');
+ industPicker = document.getElementById('industryClassPicker');
+
+ selectTime1 = timePicker1.options[timePicker1.selectedIndex].value;
+ selectTime2 = timePicker2.options[timePicker2.selectedIndex].value;
+ selectRegion = regionPicker.options[regionPicker.selectedIndex].value;
+ selectIndust = industPicker.options[industPicker.selectedIndex].value;
+
+ $.post("govPolicyMacroTime/regionInfoCompare", {'selectRegion':selectRegion, 'selectTime1':selectTime1, 'selectTime2':selectTime2,'selectIndust':selectIndust}, function(ret){
+	legendData = ret['legendData']
+	xAxisData = ret['xAxisData']
+	taxReliefSData1 = ret['taxReliefSData1']
+	taxReliefSData2 = ret['taxReliefSData2']
+	incomeSData1 = ret['incomeSData1']
+	incomeSData2 = ret['incomeSData2']
+	increaseSData1 = ret['increaseSData1']
+	increaseSData2 = ret['increaseSData2']
+
+	alert(increaseSData1);
+	
+	// 更新图表
+	updateRadarChart("chart2", legendData, xAxisData, taxReliefSData1);
+	updateRadarChart("chart3", legendData, xAxisData, taxReliefSData2);
+	updateRadarChart("chart5", legendData, xAxisData, incomeSData1);
+	updateRadarChart("chart6", legendData, xAxisData, incomeSData2);
+	updateRadarChart("chart8", legendData, xAxisData, increaseSData1);
+	updateRadarChart("chart9", legendData, xAxisData, increaseSData2);
+	
+}); // end of post
+
+
+} // end of cButtonClick
 
 
 $(function(){

@@ -9,7 +9,7 @@ from django.db import models
 
 
 class TempExpertPatent(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     expert_id = models.TextField(db_column='EXPERT_ID', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     protection_time = models.TextField(db_column='PROTECTION_TIME', blank=True, null=True)  # Field name made lowercase.
     patent_name = models.TextField(db_column='PATENT_NAME', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -27,7 +27,7 @@ class TempExpertPatent(models.Model):
 
 
 class TempExpertProjectInfo(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     expert_id = models.TextField(db_column='EXPERT_ID', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     start_time = models.TextField(db_column='START_TIME', blank=True, null=True)  # Field name made lowercase.
     end_time = models.TextField(db_column='END_TIME', blank=True, null=True)  # Field name made lowercase.
@@ -44,7 +44,7 @@ class TempExpertProjectInfo(models.Model):
 
 
 class TempExpertRepresentPapers(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     expert_id = models.TextField(db_column='EXPERT_ID', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     publish_time = models.TextField(db_column='PUBLISH_TIME', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     title = models.TextField(db_column='TITLE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -70,31 +70,31 @@ class TempProTcRegisterUser(models.Model):
         db_table = '_temp_pro_tc_register_user'
 
 
-#class A1(models.Model):
-#    id = models.TextField(blank=True, null=True, primary_key=True)  # This field type is a guess.
-#    name = models.TextField(blank=True, null=True)  # This field type is a guess.
-#
-#    class Meta:
-#        managed = False
-#        db_table = 'a1'
-#
-#
-#class A2(models.Model):
-#    id = models.TextField(blank=True, null=True, primary_key=True)  # This field type is a guess.
-#    name = models.TextField(blank=True, null=True)  # This field type is a guess.
-#
-#    class Meta:
-#        managed = False
-#        db_table = 'a2'
-#
-#
-#class A3(models.Model):
-#    id = models.TextField(blank=True, null=True, primary_key=True)  # This field type is a guess.
-#    name = models.TextField(blank=True, null=True)  # This field type is a guess.
-#
-#    class Meta:
-#        managed = False
-#        db_table = 'a3'
+class A1(models.Model):
+    id = models.TextField(blank=True, null=True)  # This field type is a guess.
+    name = models.TextField(blank=True, null=True)  # This field type is a guess.
+
+    class Meta:
+        managed = False
+        db_table = 'a1'
+
+
+class A2(models.Model):
+    id = models.TextField(blank=True, null=True)  # This field type is a guess.
+    name = models.TextField(blank=True, null=True)  # This field type is a guess.
+
+    class Meta:
+        managed = False
+        db_table = 'a2'
+
+
+class A3(models.Model):
+    id = models.TextField(blank=True, null=True)  # This field type is a guess.
+    name = models.TextField(blank=True, null=True)  # This field type is a guess.
+
+    class Meta:
+        managed = False
+        db_table = 'a3'
 
 
 class A4(models.Model):
@@ -145,7 +145,7 @@ class AchievementProjectInfoTemp(models.Model):
 
 
 class AnimalSelection(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     org_name = models.TextField(db_column='ORG_NAME', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     grant_license = models.TextField(db_column='GRANT_LICENSE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     grant_org = models.TextField(db_column='GRANT_ORG', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -178,7 +178,7 @@ class AnimalSelection(models.Model):
 
 
 class AnimalSelectionResult(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     org_name = models.TextField(db_column='ORG_NAME', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     grant_license = models.TextField(db_column='GRANT_LICENSE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     grant_org = models.TextField(db_column='GRANT_ORG', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -360,6 +360,78 @@ class ApplySubmitView(models.Model):
         db_table = 'apply_submit_view'
 
 
+class AuthGroup(models.Model):
+    id = models.IntegerField(primary_key=True)  # AutoField?
+    name = models.CharField(unique=True, max_length=80)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_group'
+
+
+class AuthGroupPermissions(models.Model):
+    id = models.IntegerField(primary_key=True)  # AutoField?
+    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
+    permission = models.ForeignKey('AuthPermission', models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_group_permissions'
+        unique_together = (('group', 'permission'),)
+
+
+class AuthPermission(models.Model):
+    id = models.IntegerField(primary_key=True)  # AutoField?
+    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING)
+    codename = models.CharField(max_length=100)
+    name = models.CharField(max_length=255)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_permission'
+        unique_together = (('content_type', 'codename'),)
+
+
+class AuthUser(models.Model):
+    id = models.IntegerField(primary_key=True)  # AutoField?
+    password = models.CharField(max_length=128)
+    last_login = models.DateTimeField(blank=True, null=True)
+    is_superuser = models.BooleanField()
+    username = models.CharField(unique=True, max_length=150)
+    first_name = models.CharField(max_length=30)
+    email = models.CharField(max_length=254)
+    is_staff = models.BooleanField()
+    is_active = models.BooleanField()
+    date_joined = models.DateTimeField()
+    last_name = models.CharField(max_length=150)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_user'
+
+
+class AuthUserGroups(models.Model):
+    id = models.IntegerField(primary_key=True)  # AutoField?
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_user_groups'
+        unique_together = (('user', 'group'),)
+
+
+class AuthUserUserPermissions(models.Model):
+    id = models.IntegerField(primary_key=True)  # AutoField?
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    permission = models.ForeignKey(AuthPermission, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_user_user_permissions'
+        unique_together = (('user', 'permission'),)
+
+
 class Buyerinfo(models.Model):
     buyerno = models.TextField(unique=True)  # This field type is a guess.
     buyername = models.TextField(blank=True, null=True)  # This field type is a guess.
@@ -472,7 +544,7 @@ class CompanyBaseInfoTemp(models.Model):
 
 
 class Comparedtemp(models.Model):
-    id = models.TextField(unique=True, primary_key=True)  # This field type is a guess.
+    id = models.TextField(unique=True)  # This field type is a guess.
     name = models.TextField(blank=True, null=True)  # This field type is a guess.
     number = models.TextField(blank=True, null=True)  # This field type is a guess.
     senddate = models.TextField(blank=True, null=True)  # This field type is a guess.
@@ -511,7 +583,7 @@ class Contractbuyerrcv(models.Model):
 
 
 class Contractregisterinfo(models.Model):
-    id = models.TextField(unique=True, primary_key=True)  # This field type is a guess.
+    id = models.TextField(unique=True)  # This field type is a guess.
     contractno = models.TextField(blank=True, null=True)  # This field type is a guess.
     projectname = models.TextField(db_column='ProjectName', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     isseller = models.TextField(db_column='IsSeller')  # Field name made lowercase. This field type is a guess.
@@ -650,7 +722,7 @@ class DataImportAchievementsPropertyInfo(models.Model):
 
 
 class DataImportBookmaking(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     id_expert_bookmaking = models.TextField(db_column='ID_EXPERT_BOOKMAKING')  # Field name made lowercase. This field type is a guess.
     thesis_name = models.TextField(db_column='THESIS_NAME', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     thesis_domain = models.TextField(db_column='THESIS_DOMAIN', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -701,7 +773,7 @@ class DataImportCompanyInfoChange(models.Model):
 
 
 class DataImportExpertAccount(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     account_id = models.TextField(db_column='ACCOUNT_ID')  # Field name made lowercase. This field type is a guess.
     name = models.TextField(db_column='NAME', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     createdate = models.TextField(db_column='CREATEDATE', blank=True, null=True)  # Field name made lowercase.
@@ -725,7 +797,7 @@ class DataImportExpertAccount(models.Model):
 
 
 class DataImportExpertAchievement(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     id_expert_achievement = models.TextField(db_column='ID_EXPERT_ACHIEVEMENT')  # Field name made lowercase. This field type is a guess.
     project_name = models.TextField(db_column='PROJECT_NAME', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     workdomain = models.TextField(db_column='WORKDOMAIN', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -742,7 +814,7 @@ class DataImportExpertAchievement(models.Model):
 
 
 class DataImportExpertAttendIndividualInfo(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     id_expert_attend_individual = models.TextField(db_column='ID_EXPERT_ATTEND_INDIVIDUAL')  # Field name made lowercase. This field type is a guess.
     id_expert_base = models.TextField(db_column='ID_EXPERT_BASE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     individual_year = models.TextField(db_column='INDIVIDUAL_YEAR', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -756,7 +828,7 @@ class DataImportExpertAttendIndividualInfo(models.Model):
 
 
 class DataImportExpertAuditLog(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     id_expert_audit_log = models.TextField(db_column='ID_EXPERT_AUDIT_LOG')  # Field name made lowercase. This field type is a guess.
     id_expert_base = models.TextField(db_column='ID_EXPERT_BASE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     auditperson = models.TextField(db_column='AUDITPERSON', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -770,7 +842,7 @@ class DataImportExpertAuditLog(models.Model):
 
 
 class DataImportExpertBaseInfo(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     id_expert_base = models.TextField(db_column='ID_EXPERT_BASE')  # Field name made lowercase. This field type is a guess.
     name = models.TextField(db_column='NAME', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     photo = models.TextField(db_column='PHOTO', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -839,7 +911,7 @@ class DataImportExpertBaseInfo(models.Model):
 
 
 class DataImportExpertBaseLog(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     id_expert_base_log = models.TextField(db_column='ID_EXPERT_BASE_LOG')  # Field name made lowercase. This field type is a guess.
     id_expert_base = models.TextField(db_column='ID_EXPERT_BASE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     name = models.TextField(db_column='NAME', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -853,7 +925,7 @@ class DataImportExpertBaseLog(models.Model):
 
 
 class DataImportExpertCheckList(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     id_expertcheck_list = models.TextField(db_column='ID_EXPERTCHECK_LIST')  # Field name made lowercase. This field type is a guess.
     source = models.TextField(db_column='SOURCE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     projectgroupid = models.TextField(db_column='PROJECTGROUPID', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -872,7 +944,7 @@ class DataImportExpertCheckList(models.Model):
 
 
 class DataImportExpertCheckState(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     id_expert_base = models.TextField(db_column='ID_EXPERT_BASE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     state = models.TextField(db_column='STATE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     currentgroupnum = models.TextField(db_column='CURRENTGROUPNUM', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -888,7 +960,7 @@ class DataImportExpertCheckState(models.Model):
 
 
 class DataImportExpertDesuetudeLog(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     id_expert_desuetude_log = models.TextField(db_column='ID_EXPERT_DESUETUDE_LOG')  # Field name made lowercase. This field type is a guess.
     id_expert_base = models.TextField(db_column='ID_EXPERT_BASE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     person = models.TextField(db_column='PERSON', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -902,7 +974,7 @@ class DataImportExpertDesuetudeLog(models.Model):
 
 
 class DataImportExpertFile(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     id_expert_file = models.TextField(db_column='ID_EXPERT_FILE')  # Field name made lowercase. This field type is a guess.
     rel_id = models.TextField(db_column='REL_ID', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     path = models.TextField(db_column='PATH', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -916,7 +988,7 @@ class DataImportExpertFile(models.Model):
 
 
 class DataImportExpertGrade(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     id_expert_grade = models.TextField(db_column='ID_EXPERT_GRADE')  # Field name made lowercase. This field type is a guess.
     appraisal_date = models.TextField(db_column='APPRAISAL_DATE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     ability_point = models.TextField(db_column='ABILITY_POINT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -928,7 +1000,7 @@ class DataImportExpertGrade(models.Model):
 
 
 class DataImportExpertOperationThanLog(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     id_expert_operation_log = models.TextField(db_column='ID_EXPERT_OPERATION_LOG')  # Field name made lowercase. This field type is a guess.
     name = models.TextField(db_column='NAME', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     time = models.TextField(db_column='TIME', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -940,7 +1012,7 @@ class DataImportExpertOperationThanLog(models.Model):
 
 
 class DataImportExpertPatent(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     id_expert_patent = models.TextField(db_column='ID_EXPERT_PATENT')  # Field name made lowercase. This field type is a guess.
     patent_name = models.TextField(db_column='PATENT_NAME', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     patent_domain = models.TextField(db_column='PATENT_DOMAIN', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -958,7 +1030,7 @@ class DataImportExpertPatent(models.Model):
 
 
 class DataImportExpertSendLog(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     id_expert_send_log = models.TextField(db_column='ID_EXPERT_SEND_LOG')  # Field name made lowercase. This field type is a guess.
     sendname = models.TextField(db_column='SENDNAME', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     sendmailinfo = models.TextField(db_column='SENDMAILINFO', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -1037,7 +1109,7 @@ class DataImportJshtZfjgExpert(models.Model):
 
 
 class DataImportTask(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     id_expert_task = models.TextField(db_column='ID_EXPERT_TASK')  # Field name made lowercase. This field type is a guess.
     project_name = models.TextField(db_column='PROJECT_NAME', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     start_date = models.TextField(db_column='START_DATE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -1063,6 +1135,53 @@ class Department(models.Model):
         db_table = 'department'
 
 
+class DjangoAdminLog(models.Model):
+    id = models.IntegerField(primary_key=True)  # AutoField?
+    action_time = models.DateTimeField()
+    object_id = models.TextField(blank=True, null=True)
+    object_repr = models.CharField(max_length=200)
+    change_message = models.TextField()
+    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING, blank=True, null=True)
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    action_flag = models.PositiveSmallIntegerField()
+
+    class Meta:
+        managed = False
+        db_table = 'django_admin_log'
+
+
+class DjangoContentType(models.Model):
+    id = models.IntegerField(primary_key=True)  # AutoField?
+    app_label = models.CharField(max_length=100)
+    model = models.CharField(max_length=100)
+
+    class Meta:
+        managed = False
+        db_table = 'django_content_type'
+        unique_together = (('app_label', 'model'),)
+
+
+class DjangoMigrations(models.Model):
+    id = models.IntegerField(primary_key=True)  # AutoField?
+    app = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
+    applied = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'django_migrations'
+
+
+class DjangoSession(models.Model):
+    session_key = models.CharField(primary_key=True, max_length=40)
+    session_data = models.TextField()
+    expire_date = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'django_session'
+
+
 class Downloadinfoconstract(models.Model):
     id = models.IntegerField(primary_key=True)  # AutoField?
     info = models.TextField(db_column='Info')  # Field name made lowercase.
@@ -1075,7 +1194,7 @@ class Downloadinfoconstract(models.Model):
 
 
 class EnvAduitAccountTable(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     audit_id = models.TextField(db_column='AUDIT_ID', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     account_year = models.TextField(db_column='ACCOUNT_YEAR', blank=True, null=True)  # Field name made lowercase.
     account_money = models.TextField(db_column='ACCOUNT_MONEY', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -1086,7 +1205,7 @@ class EnvAduitAccountTable(models.Model):
 
 
 class EnvAllHistorySupport(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     history_year = models.TextField(db_column='HISTORY_YEAR', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     doumcment_num = models.TextField(db_column='DOUMCMENT_NUM', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     case_type = models.TextField(db_column='CASE_TYPE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -1125,7 +1244,7 @@ class EnvAnimalReviewTable(models.Model):
 
 
 class EnvApprovalCollectInfo(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     approval_id = models.TextField(db_column='APPROVAL_ID')  # Field name made lowercase. This field type is a guess.
     project_id = models.TextField(db_column='PROJECT_ID')  # Field name made lowercase. This field type is a guess.
     project_name = models.TextField(db_column='PROJECT_NAME', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -1142,7 +1261,7 @@ class EnvApprovalCollectInfo(models.Model):
 
 
 class EnvApprovalTable(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     undertake_opinion = models.TextField(db_column='UNDERTAKE_OPINION', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     first_undertake_opinion = models.TextField(db_column='FIRST_UNDERTAKE_OPINION', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     second_undertake_opinion = models.TextField(db_column='SECOND_UNDERTAKE_OPINION', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -1228,7 +1347,7 @@ class EnvApprovalTable(models.Model):
 
 
 class EnvAuditTable(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     project_id = models.TextField(db_column='PROJECT_ID', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     audit_user_id = models.TextField(db_column='AUDIT_USER_ID', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     review_type = models.TextField(db_column='REVIEW_TYPE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -1415,7 +1534,7 @@ class EnvBusinessReviewTable(models.Model):
 
 
 class EnvCertificateFinishTable(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     project_id = models.TextField(db_column='PROJECT_ID', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     result = models.TextField(db_column='RESULT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     certificate_name = models.TextField(db_column='CERTIFICATE_NAME', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -1439,7 +1558,7 @@ class EnvCollectExpertInfo(models.Model):
     unitandduty = models.TextField(db_column='UNITANDDUTY', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     phone = models.TextField(db_column='PHONE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     add_time = models.TextField(db_column='ADD_TIME', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
 
     class Meta:
         managed = False
@@ -1459,7 +1578,7 @@ class EnvCollectInfo(models.Model):
 
 
 class EnvCompanyAccessoryInfo(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     company_base_info_id = models.TextField(db_column='COMPANY_BASE_INFO_ID')  # Field name made lowercase. This field type is a guess.
     type = models.TextField(db_column='TYPE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     file_id = models.TextField(db_column='FILE_ID', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -1471,7 +1590,7 @@ class EnvCompanyAccessoryInfo(models.Model):
 
 
 class EnvCompanyAccessoryInfoCopy(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     company_base_info_id = models.TextField(db_column='COMPANY_BASE_INFO_ID')  # Field name made lowercase. This field type is a guess.
     type = models.TextField(db_column='TYPE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     file_id = models.TextField(db_column='FILE_ID', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -1483,7 +1602,7 @@ class EnvCompanyAccessoryInfoCopy(models.Model):
 
 
 class EnvCompanyBaseInfo(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     company_id = models.TextField(db_column='COMPANY_ID', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     year = models.TextField(db_column='YEAR')  # Field name made lowercase. This field type is a guess.
     company_name = models.TextField(db_column='COMPANY_NAME', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -1573,7 +1692,7 @@ class EnvCompanyBaseInfo(models.Model):
 
 
 class EnvCompanyEployeeInfo(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     company_base_info_id = models.TextField(db_column='COMPANY_BASE_INFO_ID', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     name = models.TextField(db_column='NAME', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     title = models.TextField(db_column='TITLE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -1661,7 +1780,7 @@ class EnvCompanyFinanceInfo(models.Model):
 
 
 class EnvCompanyFundHistory(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     company_id = models.TextField(db_column='COMPANY_ID', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     project_name = models.TextField(db_column='PROJECT_NAME')  # Field name made lowercase. This field type is a guess.
     sponsor = models.TextField(db_column='SPONSOR', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -1676,7 +1795,7 @@ class EnvCompanyFundHistory(models.Model):
 
 
 class EnvCompanyMonthlyReport(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     group_id = models.TextField(db_column='GROUP_ID', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     total_income = models.TextField(db_column='TOTAL_INCOME', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     main_income = models.TextField(db_column='MAIN_INCOME', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -1708,7 +1827,7 @@ class EnvCompanyMonthlyReport(models.Model):
 
 
 class EnvCompanyMonthlyReportAddtionalInfo(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     group_id = models.TextField(db_column='GROUP_ID', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     informant = models.TextField(db_column='INFORMANT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     informant_mobile = models.TextField(db_column='INFORMANT_MOBILE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -1722,7 +1841,7 @@ class EnvCompanyMonthlyReportAddtionalInfo(models.Model):
 
 
 class EnvCompanyMonthlyReportFilter(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     group_id = models.TextField(db_column='GROUP_ID')  # Field name made lowercase. This field type is a guess.
     item_year = models.TextField(db_column='ITEM_YEAR')  # Field name made lowercase. This field type is a guess.
     index_value_jan = models.TextField(db_column='INDEX_VALUE_JAN', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -1788,7 +1907,7 @@ class EnvCompanyRdInfo(models.Model):
 
 
 class EnvCompanyStockholderInfo(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     company_base_info_id = models.TextField(db_column='COMPANY_BASE_INFO_ID', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     name = models.TextField(db_column='NAME', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     invest_amount = models.TextField(db_column='INVEST_AMOUNT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -1803,7 +1922,7 @@ class EnvCompanyStockholderInfo(models.Model):
 
 
 class EnvContractBaseInfo(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     project_id = models.TextField(db_column='PROJECT_ID')  # Field name made lowercase. This field type is a guess.
     company_base_info_id = models.TextField(db_column='COMPANY_BASE_INFO_ID')  # Field name made lowercase. This field type is a guess.
     contract_num = models.TextField(db_column='CONTRACT_NUM', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -1913,7 +2032,7 @@ class EnvContractBaseInfo(models.Model):
 
 
 class EnvContractEquipmentInfo(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     contract_id = models.TextField(db_column='CONTRACT_ID', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     name = models.TextField(db_column='NAME')  # Field name made lowercase. This field type is a guess.
     equipment_type = models.TextField(db_column='EQUIPMENT_TYPE')  # Field name made lowercase. This field type is a guess.
@@ -1951,7 +2070,7 @@ class EnvContractFund(models.Model):
     water_gas_expense = models.TextField(db_column='WATER_GAS_EXPENSE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     management_expense = models.TextField(db_column='MANAGEMENT_EXPENSE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     performance_reword = models.TextField(db_column='PERFORMANCE_REWORD', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     region_trial_expense = models.TextField(db_column='REGION_TRIAL_EXPENSE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     other_description = models.TextField(db_column='OTHER_DESCRIPTION', blank=True, null=True)  # Field name made lowercase.
     enginerring_expense = models.TextField(db_column='ENGINERRING_EXPENSE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -1986,7 +2105,7 @@ class EnvContractFundRemark(models.Model):
     water_gas_expense = models.TextField(db_column='WATER_GAS_EXPENSE', blank=True, null=True)  # Field name made lowercase.
     management_expense = models.TextField(db_column='MANAGEMENT_EXPENSE', blank=True, null=True)  # Field name made lowercase.
     performance_reword = models.TextField(db_column='PERFORMANCE_REWORD', blank=True, null=True)  # Field name made lowercase.
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     region_trial_expense = models.TextField(db_column='REGION_TRIAL_EXPENSE', blank=True, null=True)  # Field name made lowercase.
     other_description = models.TextField(db_column='OTHER_DESCRIPTION', blank=True, null=True)  # Field name made lowercase.
     enginerring_expense = models.TextField(db_column='ENGINERRING_EXPENSE', blank=True, null=True)  # Field name made lowercase.
@@ -1999,7 +2118,7 @@ class EnvContractFundRemark(models.Model):
 
 
 class EnvContractMemberInfo(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     contract_id = models.TextField(db_column='CONTRACT_ID')  # Field name made lowercase. This field type is a guess.
     member_name = models.TextField(db_column='MEMBER_NAME', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     role = models.TextField(db_column='ROLE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -2030,7 +2149,7 @@ class EnvContractMemberInfo(models.Model):
 
 
 class EnvContractSchedule(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     project_id = models.TextField(db_column='PROJECT_ID', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     contract_id = models.TextField(db_column='CONTRACT_ID', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     phase = models.TextField(db_column='PHASE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -2048,7 +2167,7 @@ class EnvContractSchedule(models.Model):
 
 
 class EnvFounderProjectFund(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     project_id = models.TextField(db_column='PROJECT_ID', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     sponsor = models.TextField(db_column='SPONSOR')  # Field name made lowercase. This field type is a guess.
     total_expense = models.TextField(db_column='TOTAL_EXPENSE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -2106,7 +2225,7 @@ class EnvIncubatorInfo(models.Model):
 
 
 class EnvInvitationSystemMapping(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     item_id = models.TextField(db_column='ITEM_ID', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     guide = models.TextField(db_column='GUIDE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     contact_person = models.TextField(db_column='CONTACT_PERSON', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -2119,7 +2238,7 @@ class EnvInvitationSystemMapping(models.Model):
 
 
 class EnvPecialdays(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     start_end = models.TextField(db_column='START_END')  # Field name made lowercase.
     end_end = models.TextField(db_column='END_END')  # Field name made lowercase.
     type = models.TextField(db_column='TYPE')  # Field name made lowercase. This field type is a guess.
@@ -2130,7 +2249,7 @@ class EnvPecialdays(models.Model):
 
 
 class EnvProjectAccessoryInfo(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     project_id = models.TextField(db_column='PROJECT_ID')  # Field name made lowercase. This field type is a guess.
     type = models.TextField(db_column='TYPE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     file_id = models.TextField(db_column='FILE_ID', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -2142,7 +2261,7 @@ class EnvProjectAccessoryInfo(models.Model):
 
 
 class EnvProjectAccountFirmInfo(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     application_type = models.TextField(db_column='APPLICATION_TYPE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     certificate_number = models.TextField(db_column='CERTIFICATE_NUMBER', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     declare_batch = models.TextField(db_column='DECLARE_BATCH', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -2212,7 +2331,7 @@ class EnvProjectAchievement(models.Model):
 
 
 class EnvProjectActivityInfo(models.Model):
-    id = models.TextField(db_column='ID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    id = models.TextField(db_column='ID', unique=True)  # Field name made lowercase. This field type is a guess.
     project_id = models.TextField(db_column='PROJECT_ID', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     activity_name = models.TextField(db_column='ACTIVITY_NAME', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     organizer_num = models.TextField(db_column='ORGANIZER_NUM', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -2250,8 +2369,69 @@ class EnvProjectActivityInfo(models.Model):
         db_table = 'env_project_activity_info'
 
 
+class ZfjcCompanyBaseInfoDist(models.Model):
+    id = models.TextField(db_column='ID')  # Field name made lowercase. This field type is a guess.
+    company_id = models.TextField(db_column='COMPANY_ID', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    year = models.TextField(db_column='YEAR')  # Field name made lowercase. This field type is a guess.
+    company_name = models.TextField(db_column='COMPANY_NAME', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    company_address = models.TextField(db_column='COMPANY_ADDRESS', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    register_capital = models.TextField(db_column='REGISTER_CAPITAL', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    register_date = models.TextField(db_column='REGISTER_DATE', blank=True, null=True)  # Field name made lowercase.
+    register_region = models.TextField(db_column='REGISTER_REGION', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    register_street = models.TextField(db_column='REGISTER_STREET', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    office_region = models.TextField(db_column='OFFICE_REGION', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    factory_region = models.TextField(db_column='FACTORY_REGION', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    business_scope = models.TextField(db_column='BUSINESS_SCOPE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    principal_product = models.TextField(db_column='PRINCIPAL_PRODUCT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    industry_type = models.TextField(db_column='INDUSTRY_TYPE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    industry_category = models.TextField(db_column='INDUSTRY_CATEGORY', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    industry_kind = models.TextField(db_column='INDUSTRY_KIND', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    industry_small_kind = models.TextField(db_column='INDUSTRY_SMALL_KIND', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    high_tech_field = models.TextField(db_column='HIGH_TECH_FIELD', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    high_tech_subfield = models.TextField(db_column='HIGH_TECH_SUBFIELD', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    research_office_space = models.TextField(db_column='RESEARCH_OFFICE_SPACE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    factory_space = models.TextField(db_column='FACTORY_SPACE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    offshore_sales_unit_count = models.TextField(db_column='OFFSHORE_SALES_UNIT_COUNT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    offshore_resarch_unit_count = models.TextField(db_column='OFFSHORE_RESARCH_UNIT_COUNT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    year_power_consumption = models.TextField(db_column='YEAR_POWER_CONSUMPTION', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    year_water_consumption = models.TextField(db_column='YEAR_WATER_CONSUMPTION', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    total_eployee_count = models.TextField(db_column='TOTAL_EPLOYEE_COUNT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    male_eployee_count = models.TextField(db_column='MALE_EPLOYEE_COUNT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    female_eployee_count = models.TextField(db_column='FEMALE_EPLOYEE_COUNT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    social_insurance_eployee_count = models.TextField(db_column='SOCIAL_INSURANCE_EPLOYEE_COUNT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    returned_student_count = models.TextField(db_column='RETURNED_STUDENT_COUNT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    foreign_expert_count = models.TextField(db_column='FOREIGN_EXPERT_COUNT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    graduate_count = models.TextField(db_column='GRADUATE_COUNT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    hr_eployee_count = models.TextField(db_column='HR_EPLOYEE_COUNT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    sales_eployee_count = models.TextField(db_column='SALES_EPLOYEE_COUNT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    rd_eployee_count = models.TextField(db_column='RD_EPLOYEE_COUNT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    manufacture_eployee_count = models.TextField(db_column='MANUFACTURE_EPLOYEE_COUNT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    other_job_count = models.TextField(db_column='OTHER_JOB_COUNT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    doctor_eployee_count = models.TextField(db_column='DOCTOR_EPLOYEE_COUNT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    master_eployee_count = models.TextField(db_column='MASTER_EPLOYEE_COUNT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    undergraduate_eployee_count = models.TextField(db_column='UNDERGRADUATE_EPLOYEE_COUNT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    junior_college_eployee_count = models.TextField(db_column='JUNIOR_COLLEGE_EPLOYEE_COUNT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    otehr_degree_eployee_count = models.TextField(db_column='OTEHR_DEGREE_EPLOYEE_COUNT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    sinior_eployee_professor = models.TextField(db_column='SINIOR_EPLOYEE_PROFESSOR', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    midium_eployee_professor = models.TextField(db_column='MIDIUM_EPLOYEE_PROFESSOR', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    junior_eployee_professor = models.TextField(db_column='JUNIOR_EPLOYEE_PROFESSOR', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    other_title_eployee_professor = models.TextField(db_column='OTHER_TITLE_EPLOYEE_PROFESSOR', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    total_net_cashflow = models.TextField(db_column='TOTAL_NET_CASHFLOW', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    operation_net_cashflow = models.TextField(db_column='OPERATION_NET_CASHFLOW', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    sales_income = models.TextField(db_column='SALES_INCOME', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    promotion_expense = models.TextField(db_column='PROMOTION_EXPENSE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    governmnet_loan = models.TextField(db_column='GOVERNMNET_LOAN', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    matured_governmnet_loan = models.TextField(db_column='MATURED_GOVERNMNET_LOAN', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    submitdate = models.TextField(db_column='SUBMITDATE', blank=True, null=True)  # Field name made lowercase.
+    region = models.TextField(db_column='REGION', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+
+    class Meta:
+        managed = False
+        db_table = 'zfjc_company_base_info_dist'
+
+
 class ZfjcCompanyBaseInfoRegionDist(models.Model):
-    id = models.TextField(db_column='myID', unique=True, primary_key=True)  # Field name made lowercase. This field type is a guess.
+    myid = models.TextField(db_column='myID', unique=True)  # Field name made lowercase. This field type is a guess.
     region = models.TextField(db_column='REGION', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     industry_type = models.TextField(db_column='INDUSTRY_TYPE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     year = models.TextField(db_column='YEAR', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -2353,68 +2533,9 @@ class ZfjcCompanyBaseInfoRegionDist(models.Model):
         managed = False
         db_table = 'zfjc_company_base_info_region_dist'
 
-class ZfjcCompanyBaseInfoDist(models.Model):
-    id = models.TextField(db_column='ID', primary_key=True)  # Field name made lowercase. This field type is a guess.
-    company_id = models.TextField(db_column='COMPANY_ID', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    year = models.TextField(db_column='YEAR')  # Field name made lowercase. This field type is a guess.
-    company_name = models.TextField(db_column='COMPANY_NAME', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    company_address = models.TextField(db_column='COMPANY_ADDRESS', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    register_capital = models.TextField(db_column='REGISTER_CAPITAL', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    register_date = models.TextField(db_column='REGISTER_DATE', blank=True, null=True)  # Field name made lowercase.
-    register_region = models.TextField(db_column='REGISTER_REGION', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    register_street = models.TextField(db_column='REGISTER_STREET', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    office_region = models.TextField(db_column='OFFICE_REGION', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    factory_region = models.TextField(db_column='FACTORY_REGION', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    business_scope = models.TextField(db_column='BUSINESS_SCOPE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    principal_product = models.TextField(db_column='PRINCIPAL_PRODUCT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    industry_type = models.TextField(db_column='INDUSTRY_TYPE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    industry_category = models.TextField(db_column='INDUSTRY_CATEGORY', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    industry_kind = models.TextField(db_column='INDUSTRY_KIND', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    industry_small_kind = models.TextField(db_column='INDUSTRY_SMALL_KIND', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    high_tech_field = models.TextField(db_column='HIGH_TECH_FIELD', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    high_tech_subfield = models.TextField(db_column='HIGH_TECH_SUBFIELD', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    research_office_space = models.TextField(db_column='RESEARCH_OFFICE_SPACE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    factory_space = models.TextField(db_column='FACTORY_SPACE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    offshore_sales_unit_count = models.TextField(db_column='OFFSHORE_SALES_UNIT_COUNT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    offshore_resarch_unit_count = models.TextField(db_column='OFFSHORE_RESARCH_UNIT_COUNT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    year_power_consumption = models.TextField(db_column='YEAR_POWER_CONSUMPTION', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    year_water_consumption = models.TextField(db_column='YEAR_WATER_CONSUMPTION', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    total_eployee_count = models.TextField(db_column='TOTAL_EPLOYEE_COUNT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    male_eployee_count = models.TextField(db_column='MALE_EPLOYEE_COUNT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    female_eployee_count = models.TextField(db_column='FEMALE_EPLOYEE_COUNT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    social_insurance_eployee_count = models.TextField(db_column='SOCIAL_INSURANCE_EPLOYEE_COUNT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    returned_student_count = models.TextField(db_column='RETURNED_STUDENT_COUNT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    foreign_expert_count = models.TextField(db_column='FOREIGN_EXPERT_COUNT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    graduate_count = models.TextField(db_column='GRADUATE_COUNT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    hr_eployee_count = models.TextField(db_column='HR_EPLOYEE_COUNT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    sales_eployee_count = models.TextField(db_column='SALES_EPLOYEE_COUNT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    rd_eployee_count = models.TextField(db_column='RD_EPLOYEE_COUNT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    manufacture_eployee_count = models.TextField(db_column='MANUFACTURE_EPLOYEE_COUNT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    other_job_count = models.TextField(db_column='OTHER_JOB_COUNT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    doctor_eployee_count = models.TextField(db_column='DOCTOR_EPLOYEE_COUNT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    master_eployee_count = models.TextField(db_column='MASTER_EPLOYEE_COUNT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    undergraduate_eployee_count = models.TextField(db_column='UNDERGRADUATE_EPLOYEE_COUNT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    junior_college_eployee_count = models.TextField(db_column='JUNIOR_COLLEGE_EPLOYEE_COUNT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    otehr_degree_eployee_count = models.TextField(db_column='OTEHR_DEGREE_EPLOYEE_COUNT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    sinior_eployee_professor = models.TextField(db_column='SINIOR_EPLOYEE_PROFESSOR', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    midium_eployee_professor = models.TextField(db_column='MIDIUM_EPLOYEE_PROFESSOR', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    junior_eployee_professor = models.TextField(db_column='JUNIOR_EPLOYEE_PROFESSOR', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    other_title_eployee_professor = models.TextField(db_column='OTHER_TITLE_EPLOYEE_PROFESSOR', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    total_net_cashflow = models.TextField(db_column='TOTAL_NET_CASHFLOW', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    operation_net_cashflow = models.TextField(db_column='OPERATION_NET_CASHFLOW', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    sales_income = models.TextField(db_column='SALES_INCOME', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    promotion_expense = models.TextField(db_column='PROMOTION_EXPENSE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    governmnet_loan = models.TextField(db_column='GOVERNMNET_LOAN', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    matured_governmnet_loan = models.TextField(db_column='MATURED_GOVERNMNET_LOAN', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    submitdate = models.TextField(db_column='SUBMITDATE', blank=True, null=True)  # Field name made lowercase.
-    region = models.TextField(db_column='REGION', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-
-    class Meta:
-        managed = False
-        db_table = 'zfjc_company_base_info_dist'
 
 class ZfjcCompanyFinanceInfo(models.Model):
-    id = models.TextField(db_column='COMPANY_BASE_INFO_ID', primary_key=True)  # Field name made lowercase. This field type is a guess.
+    company_base_info_id = models.TextField(db_column='COMPANY_BASE_INFO_ID')  # Field name made lowercase. This field type is a guess.
     total_income = models.TextField(db_column='TOTAL_INCOME', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     main_income = models.TextField(db_column='MAIN_INCOME', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     high_tech_product_income = models.TextField(db_column='HIGH_TECH_PRODUCT_INCOME', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -2455,7 +2576,7 @@ class ZfjcCompanyFinanceInfo(models.Model):
     company_income_tax = models.TextField(db_column='COMPANY_INCOME_TAX', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     region = models.TextField(db_column='REGION', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     industry_type = models.TextField(db_column='INDUSTRY_TYPE', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    myid = models.TextField(db_column='myID')  # Field name made lowercase. This field type is a guess.
+    myid = models.TextField(db_column='myID', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
 
     class Meta:
         managed = False

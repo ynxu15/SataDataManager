@@ -319,15 +319,10 @@ option = {
     ]
 };
 
-
 	// 使用刚指定的配置项和数据显示图表。
     myChart.setOption(option);
 	
 }
-
-
-
-
 
 $(function(){
 	//setChart1();
@@ -338,3 +333,269 @@ $(function(){
     setChart6();
 
 });
+
+function queryButton(){
+ //alert('ok');
+ regionPicker = document.getElementById('regionClassPicker');
+ industPicker = document.getElementById('industryClassPicker');
+ timePicker = document.getElementById('timeClassPicker');
+ searchCom = document.getElementById('comName');
+ selectRegion = regionPicker.options[regionPicker.selectedIndex].value;
+ selectTime = timePicker.options[timePicker.selectedIndex].value;
+ selectIndust = industPicker.options[industPicker.selectedIndex].value;
+ searchComName = searchCom.value;
+ //alert(searchComName);
+
+$.post("govPolicyMicroCom/comInfo", {'region':selectRegion, 'time':selectTime, 'industType':selectIndust,'searchComName': searchComName}, function(ret){
+
+	//alert('okkkk')
+	comInfo = ret['comInfo']
+	var tab1=document.getElementById('queryTab');
+	alert(tab1.rows.length)
+
+	// 清空表格
+	elemNum = tab1.rows.length-1
+	for (i=0;i< elemNum; i++)
+	{
+		tab1.deleteRow(1)
+	}
+
+	// 添加元素
+	for (i=0;i<comInfo.length ;i++ )
+	{
+		com = comInfo[i]
+		var tradd=tab1.insertRow(1)
+        tradd.innerHTML='<td>'+com[0]+'</td><td>'+com[1]+'</td><td>'+com[2]+'</td><td><button type="button" class="btn btn-secondary" onclick="addButton(this)">添加</button></td>'   
+	}
+
+});
+
+}
+
+function addButton(elem){
+		col = elem.parentNode;
+		r = col.parentNode;
+		alert(r.rowIndex);
+		rIndex = r.rowIndex;
+		rContent = r.innerHTML;
+		cells = r.cells
+		//alert(r.cells.length)
+	    //alert(cells[1].innerHTML)
+		comID = cells[0].innerHTML
+		comName = cells[1].innerHTML
+		comRegion = cells[2].innerHTML
+
+        var tab2=document.getElementById('compareTab');
+        var tradd=tab2.insertRow(1)
+        tradd.innerHTML='<td>'+comID+'</td><td>'+comName+'</td><td>'+comRegion+'</td><td><button type="button" class="btn btn-secondary" onclick="deleteButton(this)">删除</button></td>'   
+};
+
+function deleteButton(elem){
+		col = elem.parentNode;
+		r = col.parentNode;
+		alert(r.rowIndex)
+		rIndex = r.rowIndex
+		tab2=document.getElementById("compareTab")
+		tab2.deleteRow(rIndex) 
+};
+
+function refreshButton(){
+
+	var timeSelectMin = document.getElementById('timeMin');
+	timeMin = timeSelectMin.options[timeSelectMin.selectedIndex].value
+	var timeSelectMax = document.getElementById('timeMax');
+	timeMax = timeSelectMax.options[timeSelectMax.selectedIndex].value
+	if (timeMin>timeMax)
+	{
+		alert("起始时间要晚于终止时间");
+		return false;
+	}
+	var tab2=document.getElementById('compareTab');
+	rows = tab2.rows
+	elemNum = rows.length-1
+	comIdList = []
+	for (i=1;i< elemNum+1; i++)
+	{
+		comId = rows[i].cells[0].innerHTML;
+		comIdList.push(comId);
+	}
+
+	
+	if (comIdList.length==0)
+	{
+		return false;
+	}
+	//alert(comIdList);
+	
+	$.post("govPolicyMicroCom/comFinance", {'timeMin':timeMin, 'timeMax':timeMax, 'comIdList':JSON.stringify(comIdList)}, function(ret){
+		//alert('get com finance info');
+
+		comNameList = ret['comNameList'];
+		yearList = ret['yearList'];
+		totalIncomeData = ret['totalIncomeData'];
+		totalReliefData = ret['totalReliefData'];
+		totalIncreaseData = ret['totalIncreaseData']
+
+		// set chart 4
+		// 基于准备好的dom，初始化echarts实例
+
+				sData = []
+		for (i=0;i<totalReliefData.length ; i++ )
+		{
+			d={
+            name:comNameList[i],
+            type:'line',
+            stack: comNameList[i],
+            data:totalReliefData[i]
+			}
+			sData.push(d)
+		}
+     var myChart = echarts.init(document.getElementById('chart4'));//.clear()
+
+    // 指定图表的配置项和数据
+
+	option = {
+    //title: {
+    //    text: '企业接受资助情况'
+    //},
+    tooltip: {
+        trigger: 'axis'
+    },
+    legend: {
+        data:comNameList
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+//    toolbox: {
+//        feature: {
+//            saveAsImage: {}
+//        }
+//    },
+    xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: yearList
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: sData
+};
+	// 使用刚指定的配置项和数据显示图表。true是说重新绘制
+    myChart.setOption(option,true);
+
+
+		// set chart 5
+		// 基于准备好的dom，初始化echarts实例
+
+				sData = []
+		for (i=0;i<totalIncomeData.length ; i++ )
+		{
+			d={
+            name:comNameList[i],
+            type:'line',
+            stack: comNameList[i],
+            data:totalIncomeData[i]
+			}
+			sData.push(d)
+		}
+		//$("#chart5").empty();
+     var myChart = echarts.init(document.getElementById('chart5'));//.clear()
+
+    // 指定图表的配置项和数据
+
+	option = {
+    //title: {
+    //    text: '企业接受资助情况'
+    //},
+    tooltip: {
+        trigger: 'axis'
+    },
+    legend: {
+        data:comNameList
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+//    toolbox: {
+//        feature: {
+//            saveAsImage: {}
+//        }
+//    },
+    xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: yearList
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: sData
+};
+	// 使用刚指定的配置项和数据显示图表。true是说重新绘制
+    myChart.setOption(option,true);
+
+
+		// set chart 6
+		// 基于准备好的dom，初始化echarts实例
+
+				sData = []
+		for (i=0;i<totalIncreaseData.length ; i++ )
+		{
+			d={
+            name:comNameList[i],
+            type:'line',
+            stack: comNameList[i],
+            data:totalIncreaseData[i]
+			}
+			sData.push(d)
+		}
+		//$("#chart5").empty();
+     var myChart = echarts.init(document.getElementById('chart6'));//.clear()
+
+    // 指定图表的配置项和数据
+
+	option = {
+    //title: {
+    //    text: '企业接受资助情况'
+    //},
+    tooltip: {
+        trigger: 'axis'
+    },
+    legend: {
+        data:comNameList
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+//    toolbox: {
+//        feature: {
+//            saveAsImage: {}
+//        }
+//    },
+    xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: yearList
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: sData
+};
+	// 使用刚指定的配置项和数据显示图表。true是说重新绘制
+    myChart.setOption(option,true);
+
+
+	})// end of post
+};

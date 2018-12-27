@@ -162,7 +162,7 @@ var itemStyle = {
         shadowBlur: 10,
         shadowOffsetX: 0,
         shadowOffsetY: 0,
-        shadowColor: 'rgba(0,0,0,0.5)'
+        shadowColor: 'rgba(0,0,0,0.5)' 
     }
 };
 
@@ -2183,16 +2183,16 @@ function setStackChart(myChart, legendData, yAxisData, seriesData){
 
 };
 
-function initChart1(){
+function initChart1(selectRegion, selectTime, selectIndust){
 	// set chart 1
 	//$('#testDiv').html("hello");
 
-	$.post("govPolicyMacroRegion/comNum", {'region':'0'}, function(ret){
+	$.post("govPolicyMacroRegion/comNum", {'region':selectRegion, 'industType':selectIndust,'time':selectTime}, function(ret){
             //$('#testDiv').html(ret['legendData']);
 			legendData = ret['legendData']
 			yAxisData = ret['yAxisData']
 			seriesData = ret['seriesData']
-			//alert(seriesData)
+			alert(legendData)
 			sData = []
 			for (i=0; i<seriesData.length ;i++ )
 			{
@@ -2793,194 +2793,66 @@ option = {
 function changeChart1(selectRegion, selectTime, selectIndust){
 	$.post("govPolicyMacroRegion/comNum", {'region':selectRegion, 'time':selectTime, 'industType':selectIndust }, function(ret){
             //$('#testDiv').html(ret['legendData']);
-//			legendData = ret['legendData']
-//			yAxisData = ret['yAxisData']
-//			seriesData = ret['seriesData']
-//			//alert(seriesData)
-//			sData = []
-//			for (i=0; i<seriesData.length ;i++ )
-//			{
-//				d = {
-//						name: legendData[i],
-//						type: 'bar',
-//						stack: '总量',
-////						label: {
-////							normal: {
-////								show: true,
-////								position: 'insideRight'
-////							}
-////						},
-//						data: seriesData[i]
-//					}
-//				sData.push(d)
-//
-//			}
-//			var myChart = echarts.init(document.getElementById('chart1'));
-//			setStackChart(myChart, legendData, yAxisData, sData)
+			legendData = ret['legendData']
+			yAxisData = ret['yAxisData']
+			seriesData = ret['seriesData']
+			sData = []
+			alert(seriesData)
+			for (i=0; i<seriesData.length ;i++ )
+			{
+				d = {
+						name: legendData[i],
+						type: 'bar',
+						barGap: 0,
+						stack: legendData[i],
+//						label: {
+//							normal: {
+//								show: true,
+//								position: 'insideRight'
+//							}
+//						},
+						data: seriesData[i]
+					}
+				sData.push(d);
+			}
+
+			var myChart = echarts.init(document.getElementById('chart1')).clear();
+
+			option = {
+				tooltip : {
+					trigger: 'axis',
+					axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+						type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+					}
+				},
+				legend: {
+					data: legendData
+				},
+				grid: {
+					left: '3%',
+					right: '4%',
+					bottom: '3%',
+					containLabel: true
+				},
+				xAxis:  {
+					type: 'value'
+				},
+				yAxis: {
+					type: 'category',
+					data: yAxisData
+				},
+				series: sData
+			};
 
 
 		// 基于准备好的dom，初始化echarts实例
      var myChart = echarts.init(document.getElementById('chart1'));
-
-        // 指定图表的配置项和数据
-
-var weatherIcons = {
-    'Sunny': './data/asset/img/weather/sunny_128.png',
-    'Cloudy': './data/asset/img/weather/cloudy_128.png',
-    'Showers': './data/asset/img/weather/showers_128.png'
-};
-
-var seriesLabel = {
-    normal: {
-        show: true,
-        textBorderColor: '#333',
-        textBorderWidth: 2
-    }
-}
-
-option = {
-    //title: {
-    //    text: 'Wheater Statistics'
-    //},
-    tooltip: {
-        trigger: 'axis',
-        axisPointer: {
-            type: 'shadow'
-        }
-    },
-    //legend: {
-    //    data: ['City Alpha', 'City Beta', 'City Gamma']
-    //},
-    grid: {
-        left: 40
-    },
-    toolbox: {
-        show: true,
-        feature: {
-            saveAsImage: {}
-        }
-    },
-    xAxis: {
-        type: 'value',
-        name: '家',
-        axisLabel: {
-            formatter: '{value}'
-        }
-    },
-    yAxis: {
-        type: 'category',
-        inverse: true,
-        data: ['徐家汇', '闵行区', '松江区'],
-        axisLabel: {
-            //formatter: function (value) {
-            //    return '{' + value + '| }\n{value|' + value + '}';
-            //},
-            margin: 5,
-            rich: {
-                value: {
-                    lineHeight: 10,
-                    align: 'center'
-                },
-                Sunny: {
-                    height: 20,
-                    align: 'center',
-                    backgroundColor: {
-                        image: weatherIcons.Sunny
-                    }
-                },
-                Cloudy: {
-                    height: 20,
-                    align: 'center',
-                    backgroundColor: {
-                        image: weatherIcons.Cloudy
-                    }
-                },
-                Showers: {
-                    height: 20,
-                    align: 'center',
-                    backgroundColor: {
-                        image: weatherIcons.Showers
-                    }
-                }
-            }
-        }
-    },
-    series: [
-        {
-            name: '互联网行业',
-            type: 'bar',
-            data: [165, 170, 30],
-            label: seriesLabel,
-            markPoint: {
-                symbolSize: 1,
-                symbolOffset: [0, '50%'],
-                label: {
-                   normal: {
-                        formatter: '{a|{a}\n}{b|{b} }{c|{c}}',
-                        backgroundColor: 'rgb(242,242,242)',
-                        borderColor: '#aaa',
-                        borderWidth: 1,
-                        borderRadius: 4,
-                        padding: [4, 10],
-                        lineHeight: 26,
-                        // shadowBlur: 5,
-                        // shadowColor: '#000',
-                        // shadowOffsetX: 0,
-                        // shadowOffsetY: 1,
-                        position: 'right',
-                        distance: 20,
-                        rich: {
-                            a: {
-                                align: 'center',
-                                color: '#fff',
-                                fontSize: 10,
-                                textShadowBlur: 2,
-                                textShadowColor: '#000',
-                                textShadowOffsetX: 0,
-                                textShadowOffsetY: 2,
-                                textBorderColor: '#333',
-                                textBorderWidth: 2
-                            },
-                            b: {
-                                 color: '#333'
-                            },
-                            c: {
-                                color: '#ff8811',
-                                textBorderColor: '#000',
-                                textBorderWidth: 1,
-                                fontSize: 10
-                            }
-                        }
-                   }
-                },
-                data: [
-                    {type: 'max', name: '最多数量：'},
-                    {type: 'min', name: '最少数量: '}
-                ]
-            }
-        },
-        {
-            name: '机械制造业',
-            type: 'bar',
-            label: seriesLabel,
-            data: [150, 105, 110]
-        },
-        {
-            name: '加工业',
-            type: 'bar',
-            label: seriesLabel,
-            data: [220, 82, 63]
-        }
-    ]
-};
-
-        // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
-
+		//alert(sData.length)
+			myChart.setOption(option);
     });
 }
 
-function selectRegion(){
+function regionChange(){
 
  alert("change region");
  regionPicker = document.getElementById('regionClassPicker');
@@ -2992,13 +2864,21 @@ function selectRegion(){
 // alert(selectRegion)
 // alert(selectTime)
 // alert(selectIndust)
-changeChart1(selectRegion, selectTime, selectIndust);
+if (selectRegion==0)
+{
+	initChart1(selectRegion, selectTime, selectIndust);
+}
+else{
+	changeChart1(selectRegion, selectTime, selectIndust);
+}
+
+
 }
 
 
 $(function(){
 
-	initChart1();
+	initChart1('0', '2018', '0');
 	initChart3();
 
 	initChart4();
