@@ -25,7 +25,19 @@
 </div><!-- /.row -->
 
 <script type="text/javascript">
-
+    var li = {{ li|safe }};
+    var data = new Array();         //先声明一维
+       for(var i=0;i<5;i++){          //一维长度为5
+          data[i]=new Array(i);    //在声明二维
+          for(var j=0;j<16;j++){      //二维长度为16
+             data[i][j]=i;
+       }
+}
+    for(var i=0;i<16;i++){
+        for(var j=0;j<5;j++){
+            data[j][i] = li[i*5+j]
+        }
+    }
     var dom = document.getElementById("container");
     var myChart = echarts.init(dom);
     var app = {};
@@ -41,7 +53,7 @@
             }
         },
         legend: {
-            data: ['互联网', '医疗', '车辆制造', '服装生产', '芯片']
+            data: ['畜牧业','食品制造业','纺织业','医药制造业','金属制品业']
         },
         grid: {
             left: '3%',
@@ -58,7 +70,7 @@
         },
         series: [
             {
-                name: '互联网',
+                name: '畜牧业',
                 type: 'bar',
                 stack: '总量',
                 label: {
@@ -67,10 +79,10 @@
                         position: 'insideRight'
                     }
                 },
-                data: [320, 302, 301, 334, 390, 330, 320, 320, 302, 301, 334, 390, 330, 320, 330, 320]
+                data: data[0]
             },
             {
-                name: '医疗',
+                name: '食品制造业',
                 type: 'bar',
                 stack: '总量',
                 label: {
@@ -79,10 +91,10 @@
                         position: 'insideRight'
                     }
                 },
-                data: [120, 132, 101, 134, 90, 230, 210, 120, 132, 101, 134, 90, 230, 210, 230, 210]
+                data: data[1]
             },
             {
-                name: '车辆制造',
+                name: '纺织业',
                 type: 'bar',
                 stack: '总量',
                 label: {
@@ -91,10 +103,10 @@
                         position: 'insideRight'
                     }
                 },
-                data: [220, 182, 191, 234, 290, 330, 310, 220, 182, 191, 234, 290, 330, 310, 330, 310]
+                data: data[2]
             },
             {
-                name: '服装生产',
+                name: '医药制造业',
                 type: 'bar',
                 stack: '总量',
                 label: {
@@ -103,10 +115,10 @@
                         position: 'insideRight'
                     }
                 },
-                data: [150, 212, 201, 154, 190, 330, 410, 150, 212, 201, 154, 190, 330, 410, 330, 410]
+                data: data[3]
             },
             {
-                name: '芯片',
+                name: '金属制品业',
                 type: 'bar',
                 stack: '总量',
                 label: {
@@ -115,12 +127,18 @@
                         position: 'insideRight'
                     }
                 },
-                data: [820, 832, 901, 934, 1290, 1330, 1320, 820, 832, 901, 934, 1290, 1330, 1320, 1330, 1320]
+                data: data[4]
             }
         ]
     };
-    if (option && typeof option === "object") {
-        myChart.setOption(option, true);
-    }
+
+    myChart.setOption(option, true);
+    myChart.on('click', function (params) {
+        // window.open('https://www.baidu.com/s?wd=' + encodeURIComponent(params.name))
+        window.location.href='predictPart?region='+encodeURIComponent(params.name)+'&type=全部'
+    });
+    myChart.on('legendselectchanged', function (params) {
+        window.location.href='predictPart?retion=全部&type='+encodeURIComponent(params.name)
+    });
 </script>
 {% endblock content%}

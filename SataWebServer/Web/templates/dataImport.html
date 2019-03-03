@@ -2,25 +2,38 @@
 {% load static %}
 {% block title %}数据导入{% endblock title%}
 {% block content%}
+<!-- <script>
+    $('.step2').hide();
+</script> -->
 <div class="row">
     <!-- <div class="col-lg-1"></div> -->
     <div class="col-lg-12">
-        
-
-                <div class="form-group">
-                    <label><h3>选择要导入的数据库表</h3></label>
-                    <select class="form-control">
-                        <option>数据库表名</option>
-                        <option value="table1">绩效分析</option>
-                <option value="table2">企业画像</option>
-                <option value="table3">成长预测</option>
-                    </select>
-                </div>
-
-            <script>
-                // $('#form-control')
-            </script>
-            <div class="import" style="">
+        <div class="step1">
+            <div class="form-group">
+                <label><h3>选择要导入的数据库表</h3></label>
+                <select class="form-control select1">
+                    <option disabled selected>数据库表名</option>
+                    <option value="table1">绩效分析</option>
+                    <option value="table2">企业画像</option>
+                    <option value="table3">成长预测</option>
+                </select>
+            </div>
+        </div>
+        <!-- <div class="test">
+            <form action="" enctype="multipart/form-data"  method="post">
+            <input type="file" name="" value="上传">
+            <input type="submit" value="Submit">
+            </form>
+        </div> -->
+        <script>
+            $('.select1').selectric().on('change',function(){
+                var i = $(this).find('option:selected').index()-1;
+                $('div.step2').children().eq(i).siblings().slideUp();
+                $('div.step2').children().eq(i).slideDown();
+            })
+        </script>
+        <div class="step2">
+            <div class="step21">
                 <div>
                     <label><h3>数据库表结构</h3></label>
                     <table class="table table-bordered">
@@ -41,6 +54,56 @@
                     </table>
                 </div>
                 <div>
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="file" name="myfile">
+                        <button type="submit">Upload</button>
+                    </form>
+                    <input id="excelFile" multiple type="file" class="file" data-allowed-file-extensions='["xls", "xlsx"]'>
+                    <!-- <input type="file" name="txt_file" id="txt_file" multiple class="file-loading" /> -->
+                    <script type="text/javascript">
+                    // initialize with defaults
+                    // $("#txt_file").fileinput();
+                    // with plugin options
+                    $("#excelFile").fileinput({
+                        language: 'zh', //设置语言
+                        theme: 'fa',
+                        uploadUrl: 'dataImport', //上传的地址
+                        allowedFileExtensions: ['xls', 'xlsx'], //接收的文件后缀
+                        previewFileType: 'any'
+                    });
+                    </script>
+                </div>
+            </div>
+            <div class="step22" style="display: none">
+                <div>
+                    <label><h3>数据库表结构</h3></label>
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>公司名称</td>
+                            <td>第一季度盈利</td>
+                            <td>第二季度盈利</td>
+                            <td>第三季度盈利</td>
+                            <td>第四季度盈利</td>
+                            <td>第一季度盈利</td>
+                            <td>第二季度盈利</td>
+                            <td>第三季度盈利</td>
+                            <td>第四季度盈利</td>
+                        </tr>
+                        <tr>
+                            <td>Char</td>
+                            <td>Float</td>
+                            <td>Float</td>
+                            <td>Float</td>
+                            <td>Float</td>
+                            <td>Float</td>
+                            <td>Float</td>
+                            <td>Float</td>
+                            <td>Float</td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
                     <input id="excelFile" type="file" class="file" data-preview-file-type="text" data-theme="fa">
                     <script type="text/javascript">
                     // initialize with defaults
@@ -50,8 +113,47 @@
                     </script>
                 </div>
             </div>
-
+            <div class="step23" style="display: none">
+                <div>
+                    <label><h3>数据库表结构</h3></label>
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>公司名称</td>
+                            <td>第一季度盈利</td>
+                            <td>第二季度盈利</td>
+                            <td>第三季度盈利</td>
+                            <td>第四季度盈利</td>
+                            <td>第一季度盈利</td>
+                            <td>第二季度盈利</td>
+                            <td>第三季度盈利</td>
+                            <td>第四季度盈利</td>
+                        </tr>
+                        <tr>
+                            <td>Char</td>
+                            <td>Float</td>
+                            <td>Float</td>
+                            <td>Float</td>
+                            <td>Float</td>
+                            <td>Float</td>
+                            <td>Float</td>
+                            <td>Float</td>
+                            <td>Float</td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <input id="excelFile" type="file" class="file" data-preview-file-type="text" data-theme="fa">
+                    <script type="text/javascript">
+                    // initialize with defaults
+                    $("#excelFile").fileinput();
+                    // with plugin options
+                    $("#excelFile").fileinput({ 'showUpload': false, 'previewFileType': 'any' });
+                    </script>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 <!-- <div class="col-lg-1"></div> -->
 </div><!-- /.row -->
 {% endblock content%}

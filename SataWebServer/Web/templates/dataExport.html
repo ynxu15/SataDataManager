@@ -8,7 +8,7 @@
             <div class="form-group">
                 <label><h3>选择要导出的数据库表</h3></label>
                 <select class="form-control">
-                    <option>数据库表名</option>
+                    <option disabled selected>数据库表名</option>
                     <option>绩效分析</option>
                     <option>企业画像</option>
                     <option>成长预测</option>
@@ -18,22 +18,117 @@
         <div>
             <hr>
             <div class="form-group">
-                <label><h3>选择要导出的类型</h3></label>
+                <label><h3>选择要导出的文件类型</h3></label>
                 <select class="form-control">
-                    <option>数据类型</option>
+                    <option disabled selected>数据类型</option>
                     <option>sql</option>
                     <option>excel</option>
                     <option>sqlite</option>
                     <option>csv</option>
                 </select>
-                <div>&nbsp </div>
+            </div>
+        </div>
+        <div>
+            <div class="form-group">
+                <label><h3>选择导出数据规模</h3></label>
+                <select class="form-control">
+                    <option disabled selected>导出规模</option>
+                    <option>全部导出</option>
+                    <option>部分导出</option>
+                </select>
+            </div>
+            <div>&nbsp </div>
                 <button type="button" class="btn btn-primary">导出</button>
                 <div>&nbsp </div>
                 <div class="progress">
-                <div class="progress-bar" style="width: 60%;"></div>
-              </div>
+                    <div class="progress-bar" style="width: 60%;"></div>
+                </div>
+        </div>
+        <div>
+            <div class="form-group">
+                <label><h3>查询SQL语句</h3></label>
+                <textarea class="form-control" rows="3"></textarea>
+                <div>&nbsp </div>
+                <button type="button" class="btn btn-primary search">查询</button>
             </div>
         </div>
+        <div class="step3">
+            <div class="form-group">
+                <label><h3>查询结果</h3></label>
+                <table id="tb_order" class="table table-bordered">
+                    <tr>
+                        <td><input type="checkbox" value=""></td>
+                        <td><input type="checkbox" value=""></td>
+                        <td><input type="checkbox" value=""></td>
+                        <td><input type="checkbox" value=""></td>
+                        <td><input type="checkbox" value=""></td>
+                        <td><input type="checkbox" value=""></td>
+                        <td><input type="checkbox" value=""></td>
+                        <td><input type="checkbox" value=""></td>
+                        <td><input type="checkbox" value=""></td>
+                        <td><input type="checkbox" value=""></td>
+                        <td><input type="checkbox" value=""></td>
+                        <td><input type="checkbox" value=""></td>
+                        <td><input type="checkbox" value=""></td>
+                        <td><input type="checkbox" value=""></td>
+                        <td><input type="checkbox" value=""></td>
+                        <td><input type="checkbox" value=""></td>
+                        <td><input type="checkbox" value=""></td>
+                        <td><input type="checkbox" value=""></td>
+                        <td><input type="checkbox" value=""></td>
+                    </tr>
+                    <tr>
+                        <th><input type="checkbox" value=""></th>
+                        <th>com_id</th>
+                        <th>com_name</th>
+                        <th>bf_141</th>
+                        <th>bf_142</th>
+                        <th>bf_143</th>
+                        <th>bf_144</th>
+                        <th>bf_151</th>
+                        <th>bf_152</th>
+                        <th>bf_153</th>
+                        <th>bf_154</th>
+                        <th>bf_161</th>
+                        <th>bf_162</th>
+                        <th>bf_163</th>
+                        <th>bf_164</th>
+                        <th>bf_171</th>
+                        <th>bf_172</th>
+                        <th>bf_173</th>
+                        <th>bf_174</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="checkbox" value=""></td>
+                        <td>727298</td>
+                        <td>上海朗脉洁净技术股份有限公司</td>
+                        <td>117.30</td>
+                        <td>178.43</td>
+                        <td>65.33</td>
+                        <td>175.50</td>
+                        <td>124.50</td>
+                        <td>131.84</td>
+                        <td>187.08</td>
+                        <td>NULL</td>
+                        <td>117.30</td>
+                        <td>178.43</td>
+                        <td>65.33</td>
+                        <td>175.50</td>
+                        <td>124.50</td>
+                        <td>131.84</td>
+                        <td>187.08</td>
+                        <td>NULL</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div>&nbsp </div>
+                <button type="button" class="btn btn-primary">导出</button>
+                <div>&nbsp </div>
+                <div class="progress">
+                    <div class="progress-bar" style="width: 60%;"></div>
+                </div>
     </div>
 </div><!-- /.row -->
 {% endblock content%}

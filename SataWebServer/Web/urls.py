@@ -21,6 +21,7 @@ from . import comSupportView
 from . import talentCultivationView
 from . import proIntroView
 from . import devPredictionView
+from . import testView
 
 urlpatterns = [
     url(r'^$', indexView.indexView, name='index'),
@@ -38,5 +39,10 @@ urlpatterns = [
     url('dataImport', devPredictionView.dataImport),
     url('dataExport', devPredictionView.dataExport),
     url('dataClean', devPredictionView.dataClean),
-    url('dataUpdate', devPredictionView.dataUpdate)
+    url('dataUpdate', devPredictionView.dataUpdate),
+    url('dataSearch', devPredictionView.dataSearch),
+    url('test', devPredictionView.test),
+    url('myget', testView.myget),
+    url(r'^ajax_list/$', testView.ajax_list),
+    url(r'^ajax_dict/$', testView.ajax_dict),
 ]
