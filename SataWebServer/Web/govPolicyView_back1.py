@@ -13,12 +13,6 @@ from Web.models import EnvCompanyBaseInfo
 
 regionCode = {'浦东':'01', '黄浦':'02', '静安':'03', '徐汇':'04', '长宁':'05', '普陀':'06', '虹口':'07', '杨浦':'08', '宝山':'09', '闵行':'10',
             '嘉定':'11', '金山':'12', '松江':'13','青浦':'14','奉贤':'15','崇明':'16'}
-region2Code = {'浦东': '01', '黄浦': '02', '静安': '03', '徐汇': '04', '长宁': '05', '普陀': '06', '虹口': '07', '杨浦': '08',
-               '宝山': '09', '闵行': '10', '嘉定': '11', '金山': '12', '松江': '13', '青浦': '14', '奉贤': '15', '崇明': '16'}
-regionList = ['浦东', '黄浦', '静安', '徐汇', '长宁', '普陀', '虹口', '杨浦',
-              '宝山', '闵行', '嘉定', '金山', '松江', '青浦', '奉贤', '崇明']
-regionCodeList = ['01', '02', '03', '04', '05', '06', '07', '08',
-                  '09', '10', '11', '12', '13', '14', '15', '16']
 
  
 def govPolicyView(request):
@@ -33,143 +27,10 @@ def govPolicyRegionView(request):
     context['hello'] = 'Hello World!'
     return render(request, 'govPolicyMacroRegion.html', context)
 
-def govPolicyRegionComInfo(request):
-    selectRegion = request.POST.get('region')
-    selectTime = request.POST.get('time')
-    selectIndust = request.POST.get('industType')
-    print('region', selectRegion)
-    print('type', selectIndust)
-    if selectIndust == None:
-        selectIndust = '0'
-    if selectTime == None:
-        selectTime = '2017'
-    regionCode = {'浦东': '01', '黄浦': '02', '静安': '03', '徐汇': '04', '长宁': '05', '普陀': '06', '虹口': '07', '杨浦': '08',
-                  '宝山': '09', '闵行': '10', '嘉定': '11', '金山': '12', '松江': '13', '青浦': '14', '奉贤': '15', '崇明': '16'}
-    region2Code = {'浦东': '01', '黄浦': '02', '静安': '03', '徐汇': '04', '长宁': '05', '普陀': '06', '虹口': '07', '杨浦': '08',
-                   '宝山': '09', '闵行': '10', '嘉定': '11', '金山': '12', '松江': '13', '青浦': '14', '奉贤': '15', '崇明': '16'}
-    code2Region = {}
-    for r in regionCode:
-        code2Region[regionCode[r]] = r
-    regionList = ['浦东', '黄浦', '静安', '徐汇', '长宁', '普陀', '虹口', '杨浦',
-                  '宝山', '闵行', '嘉定', '金山', '松江', '青浦', '奉贤', '崇明']
-    regionCodeList = ['01', '02', '03', '04', '05', '06', '07', '08',
-                      '09', '10', '11', '12', '13', '14', '15', '16']
-
-    regionFilter = []
-    industFilter = []
-    legendData = []
-    xAxisData = []
-
-    if selectRegion == '0':
-        xAxisData = regionList
-        regionFilter = copy.deepcopy(regionCodeList)
-        for i in range(len(regionFilter)):
-            regionFilter[i] = 'shsqjd,' + regionFilter[i] + ','
-    else:
-        xAxisData = [code2Region[selectRegion]]
-        regionFilter = ['shsqjd,' + selectRegion + ',']
-
-    if selectIndust == '0':
-        legendData = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']  # , 'K','L','M', 'N', 'O', 'P', 'Q', 'R', 'S']
-        industFilter = copy.deepcopy(legendData)
-        for i in range(len(industFilter)):
-            industFilter[i] = 'gjjjhyfl,' + industFilter[i] + ','
-    else:
-        legendData = [selectIndust]
-        industFilter = ['gjjjhyfl,' + selectIndust + ',']
-
-    regionInfo = ZfjcCompanyBaseInfoRegionDist.objects.filter(region__in=regionFilter)
-    #print('filter result ', len(regionInfo))
-    regionInfo = regionInfo.filter(industry_type__in=industFilter).filter(year=selectTime)
-    #print('filter result 1', len(regionInfo1))
-
-    comNumSData = [[0.0] * len(regionFilter) for i in range(len(industFilter))]
-    comCapitalSData = [[0.0] * len(regionFilter) for i in range(len(industFilter))]
-    taxReliefSData = [[0.0] * len(regionFilter) for i in range(len(industFilter))]
-    comIncomeSData = [[0.0] * len(regionFilter) for i in range(len(industFilter))]
-    comIncreaseSData = [[0.0] * len(regionFilter) for i in range(len(industFilter))]
-
-    taxReliefRegionSum = [0.0] * len(regionFilter)
-    comIncomeRegionSum = [0.0] * len(regionFilter)
-
-    for r in regionInfo:
-        regionId = r.region
-        industryType = r.industry_type
-        companyNum = r.company_num
-        capital = r.register_capital
-        total_incom = r.total_income
-        tax_relief = r.total_relief_tax
-
-        index2 = regionFilter.index(regionId)
-        index1 = industFilter.index(industryType)
-        comNumSData[index1][index2] = companyNum
-        comCapitalSData[index1][index2] = capital / 10000.0
-        taxReliefRegionSum[index2] += tax_relief/ 10000
-        taxReliefSData[index1][index2] = tax_relief/ 10000
-        comIncomeRegionSum[index2] += total_incom/ 10000
-        comIncomeSData[index1][index2] = total_incom/ 10000
-
-
-    # increase
-    timeMax = int(selectTime)
-    timeMin = timeMax -1
-    regionInfo = ZfjcCompanyBaseInfoRegionDist.objects.filter(region__in=regionFilter)
-    regionInfo = regionInfo.filter(industry_type__in=industFilter).filter( year__in=[timeMin, timeMax])
-
-    seriesData1 = [[0.0] * len(regionFilter) for i in range(len(industFilter))]
-    regionSum1 = [0.0] * len(regionFilter)
-
-    seriesData2 = [[0.0] * len(regionFilter) for i in range(len(industFilter))]
-    regionSum2 = [0.0] * len(regionFilter)
-
-    for r in regionInfo:
-        regionId = r.region
-        industryType = r.industry_type
-        total_incom = r.total_income
-        yearTime = r.year
-        index2 = regionFilter.index(regionId)
-        index1 = industFilter.index(industryType)
-        if yearTime == str(timeMin) or yearTime == timeMin:
-            regionSum1[index2] += total_incom
-            seriesData1[index1][index2] = total_incom
-        else:
-            regionSum2[index2] += total_incom
-            seriesData2[index1][index2] = total_incom
-
-    increaseSData = [[0.0] * len(regionFilter) for i in range(len(industFilter))]
-    increaseRegionSum = [0.0] * len(regionFilter)
-
-    for i in range(len(regionFilter)):
-        if regionSum1[i] > 0 and regionSum2[i] > 0:
-            increaseRegionSum[i] = (regionSum1[i] - regionSum1[i]) / regionSum1[i]
-        else:
-            increaseRegionSum[i] = 0.0
-        for j in range(len(industFilter)):
-            if seriesData1[j][i] > 0 and seriesData2[j][i] > 0:
-                increaseSData[j][i] = (seriesData2[j][i] - seriesData1[j][i]) / seriesData1[j][i]
-            else:
-                increaseSData[j][i] = 0.0
-
-    increaseRegionSumMin = [0.0] * len(regionFilter)
-    increaseRegionSumMax = [0.0] * len(regionFilter)
-    for i in range(len(regionFilter)):
-        for j in range(len(industFilter)):
-            if increaseSData[j][i] > increaseRegionSumMax[i]:
-                increaseRegionSumMax[i] = increaseSData[j][i]
-            if increaseSData[j][i] < increaseRegionSumMin[i]:
-                increaseRegionSumMin[i] = increaseSData[j][i]
-
-    d = {'legendData': legendData, 'xAxisData': xAxisData,
-         'increaseRegionSum':increaseRegionSum,'increaseSData':increaseSData, 'increaseRegionSumMin':increaseRegionSumMin,'increaseRegionSumMax':increaseRegionSumMax,
-         'comNumSData': comNumSData,'comCapitalSData':comCapitalSData,'taxReliefSData':taxReliefSData,
-         'comIncomeSData':comIncomeSData,'taxReliefRegionSum':taxReliefRegionSum,'comIncomeRegionSum':comIncomeRegionSum }
-    #print(seriesData)
-    print('legendData', legendData)
-    print('xaxis', xAxisData)
-
-    return HttpResponse(json.dumps(d), content_type='application/json')
-
 def comNum(request):
+    #import copy
+    #from Web.models import ZfjcCompanyBaseInfoRegionDist
+    #print('aaaaa', request.POST.get('a'))
     region = request.POST.get('region') 
     selectRegion = request.POST.get('region')
     selectTime = request.POST.get('time')
@@ -385,6 +246,9 @@ def govPolicyRegionComIncom(request):
             regionSum[index2] += total_incom
             seriesData[index1][index2] = total_incom
 
+        #print('series data capital', seriesData)
+        #print('regionSum', regionSum)
+
         d = {'legendData': legendData, 'yAxisData': yAxisData,
              'seriesData': seriesData, 'regionSum': regionSum, 'test':'a'}
         return HttpResponse(json.dumps(d), content_type='application/json')
@@ -472,6 +336,11 @@ def govPolicyTimeView(request):
     return render(request, 'govPolicyMacroTime.html', context)
 
 def govPolicyTimeRegionInfoQuery(request):
+    # import copy
+    # from Web.models import ZfjcCompanyBaseInfoDist
+    # from Web.models import ZfjcCompanyFinanceInfo
+    # from Web.models import EnvCompanyBaseInfo
+
     region2Code = {'浦东': '01', '黄浦': '02', '静安': '03', '徐汇': '04', '长宁': '05', '普陀': '06', '虹口': '07', '杨浦': '08',
                    '宝山': '09', '闵行': '10', '嘉定': '11', '金山': '12', '松江': '13', '青浦': '14', '奉贤': '15', '崇明': '16'}
     code2Region = {}
@@ -494,7 +363,7 @@ def govPolicyTimeRegionInfoQuery(request):
             regionFilter[i] = 'shsqjd,' + regionFilter[i] + ','
     else:
         xAxisData = [code2Region[selectRegion]]
-        regionFilter = ['shsqjd,' + selectRegion +',']
+        regionFilter = ['shsqjd,' + region +',']
 
     if selectIndust == '0':
         legendData = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I','J']  # , 'K','L','M', 'N', 'O', 'P', 'Q', 'R', 'S']
@@ -616,6 +485,10 @@ def govPolicyComView(request):
     return render(request, 'govPolicyMicroCom.html', context)
 
 def govPolicyComInfo(request):
+    # import copy
+    # from Web.models import ZfjcCompanyBaseInfoDist
+    # from Web.models import ZfjcCompanyFinanceInfo
+
     region2Code = {'浦东': '01', '黄浦': '02', '静安': '03', '徐汇': '04', '长宁': '05', '普陀': '06', '虹口': '07', '杨浦': '08',
                  '宝山': '09', '闵行': '10', '嘉定': '11', '金山': '12', '松江': '13', '青浦': '14', '奉贤': '15', '崇明': '16'}
     code2Region = {}
@@ -656,6 +529,11 @@ def govPolicyComInfo(request):
     return HttpResponse(json.dumps(d), content_type='application/json')
 
 def govPolicyComFinance(request):
+    # import copy
+    # from Web.models import ZfjcCompanyBaseInfoDist
+    # from Web.models import ZfjcCompanyFinanceInfo
+    # from Web.models import EnvCompanyBaseInfo
+
     region2Code = {'浦东': '01', '黄浦': '02', '静安': '03', '徐汇': '04', '长宁': '05', '普陀': '06', '虹口': '07', '杨浦': '08',
                    '宝山': '09', '闵行': '10', '嘉定': '11', '金山': '12', '松江': '13', '青浦': '14', '奉贤': '15', '崇明': '16'}
     code2Region = {}

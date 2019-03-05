@@ -51,6 +51,7 @@ urlpatterns = [
     url(r'^ajax_dict/$', testView.ajax_dict),
     url(r'testCelery$', testView.testCelery),
     url(r'testCeleryRe', testView.testCeleryRe),
+    url(r'govPolicyMacroRegion/comInfo$', govPolicyView.govPolicyRegionComInfo),
     url(r'govPolicyMacroRegion/comNum$', govPolicyView.comNum),
     url(r'govPolicyMacroRegion/comCapital$', govPolicyView.govPolicyRegionComCapital),
     url(r'govPolicyMacroRegion/comTaxRelief$', govPolicyView.govPolicyRegionComTaxRelief),

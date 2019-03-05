@@ -11,25 +11,40 @@
 <h3>上海市企业发展状况预测分析</h3>
 
 <!-- 首行选择框 -->
- <div class="row">
+<div class="row">
 	<div class="col-md-2">
 	<p>地区：</p>
 	<div class="form-group">
-			<select class="selectpicker">
-				<option>徐家汇</option>
-				<option>闵行</option>
-				<option>浦东</option>
+			<select class="selectpicker" id="regionClassPicker">
+					<option value="0">所有区域</option>
+					<option value="01">浦东区</option>
+					<option value="02">黄浦区</option>
+					<option value="03">静安区</option>
+					<option value="04">徐汇区</option>
+					<option value="05">长宁区</option>
+					<option value="06">普陀区</option>
+					<option value="07">虹口区</option>
+					<option value="08">杨浦区</option>
+					<option value="09">宝山区</option>
+					<option value="10">闵行区</option>
+					<option value="11">嘉定区</option>
+					<option value="12">金山区</option>
+					<option value="13">松江区</option>
+					<option value="14">青浦区</option>
+					<option value="15">奉贤区</option>
+					<option value="16">崇明区</option>
 			</select>
 	</div>
 	</div>
 
 	<div class="col-md-2">
-	<p>时间：</p>
-	<div class="form-group">
-			<select class="selectpicker">
-				<option>2018</option>
-				<option>2017</option>
-				<option>2016</option>
+	<p>注册时间：</p>
+	<div class="form-group" >
+			<select class="selectpicker" id="timeClassPicker">
+				<option value="0">不限</option>
+				<option value="2018">2018</option>
+				<option value="2017">2017</option>
+				<option value="2016">2016</option>
 			</select>
 	</div>
 	</div>
@@ -37,18 +52,89 @@
 	<div class="col-md-2">
 	<p>行业：</p>
 	<div class="form-group">
-			<select class="selectpicker">
-				<option>互联网</option>
-				<option>医疗</option>
-				<option>物流</option>
+			<select class="selectpicker" id="industryClassPicker">
+				<option value="0">所有行业</option>
+				<option value="A">A</option>
+				<option value="B">B</option>
+				<option value="C">C</option>
+				<option value="D">D</option>
+				<option value="E">E</option>
+				<option value="F">F</option>
+				<option value="G">G</option>
+				<option value="H">H</option>
+				<option value="I">I</option>
+				<option value="J">J</option>
+				<option value="K">K</option>
+				<option value="L">L</option>
+				<option value="M">M</option>
+				<option value="N">N</option>
+				<option value="O">O</option>
+				<option value="P">P</option>
+				<option value="Q">Q</option>
+				<option value="R">R</option>
+				<option value="S">S</option>
 			</select>
 	</div>
 	</div>
 
 	<div class="col-md-2">
-		<button type="button" class="btn btn-secondary">查询</button>
+		<p>公司名称：</p>
+		<input type="text" id="comName" style="text-align:left;">
 	</div>
 	<div class="col-md-2">
+		<p></p>
+		<button type="button" class="btn btn-secondary" onclick="queryButton();">查询</button>
+	</div>
+	<div class="col-md-2">
+	</div>
+</div>
+
+
+<!-- 第二行修改数据框 -->
+<div class="row">
+	<div class="col-md-2">
+	<p>需要修改的图：</p>
+	<div class="form-group">
+			<select class="selectpicker" id="regionClassPicker">
+				<option value="0">企业受资助情况</option>
+				<option value="01">高新技术企业</option>
+				<option value="02">税收减免</option>
+				<option value="03">项目审批</option>
+			</select>
+	</div>
+	</div>
+
+	<div class="col-md-2">
+	<p>坐标横轴：</p>
+	<div class="form-group" >
+			<select class="selectpicker" id="timeClassPicker">
+				<option value="2018">2018</option>
+				<option value="2017">2017</option>
+				<option value="2016">2016</option>
+			</select>
+	</div>
+	</div>
+
+	<div class="col-md-2">
+	<p>企业：</p>
+	<div class="form-group">
+			<select class="selectpicker" id="industryClassPicker">
+				<option value="0">腾讯</option>
+				<option value="A">阿里</option>
+				<option value="B">百度</option>
+				<option value="C">今日头条</option>
+				<option value="D">大众点评</option>
+			</select>
+	</div>
+	</div>
+
+	<div class="col-md-2">
+		<p>修改值：</p>
+		<input type="text" id="comName" style="text-align:left;">
+	</div>
+	<div class="col-md-2">
+		<p></p>
+		<button type="button" class="btn btn-secondary" onclick="queryButton();">修改</button>
 	</div>
 	<div class="col-md-2">
 	</div>
@@ -59,15 +145,15 @@
 <div class="row">
 
 <div class="col-md-4">
-	<p> 企业接受资助随时间变化情况 </p>
+	<p> 企业营收情况 </p>
 	<div id="chart1" style="width: 300px;height:300px;"></div>	
 </div>
 <div class="col-md-4">
-	<p> 企业营收随时间变化状况 </p>
+	<p> 企业受资助情况 </p>
 	<div id="chart2" style="width: 300px;height:300px;"></div>
 </div>
 <div class="col-md-4">
-	<p> 企业营收增长率随时间变化状况 </p>
+	<p> 企业营收预测变化 </p>
 	<div id="chart3" style="width: 300px;height:300px;"></div>
 </div>
 </div>
