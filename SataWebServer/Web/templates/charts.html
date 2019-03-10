@@ -1,0 +1,337 @@
+{% extends '_base.html' %}
+{% load static %}
+{% block title %}一些图表{% endblock title%}
+{% block content%}
+<div class="row">
+    <div class="col-lg-2">
+
+    </div>
+    <div class="col-lg-8">
+        <div id="chart1" style="height:300px"></div>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div><!-- /.row -->
+<div class="row">
+    <div class="col-lg-2">
+
+    </div>
+    <div class="col-lg-8">
+        <div id="chart2" style="height:300px"></div>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div><!-- /.row -->
+
+<script>
+    var dom = document.getElementById("chart1");
+    var myChart1 = echarts.init(dom);
+    option1 = null;
+    var xData = function () {
+        var data = [];
+        for (var i = 1; i < 13; i++) {
+            data.push(i + "月份");
+        }
+        return data;
+    }();
+
+    option1 = {
+        backgroundColor: "#344b58",
+        "title": {
+            "text": "本年商场顾客男女人数统计",
+            "subtext": "BY Wang Dingding",
+            x: "4%",
+
+            textStyle: {
+                color: '#fff',
+                fontSize: '22'
+            },
+            subtextStyle: {
+                color: '#90979c',
+                fontSize: '16',
+
+            },
+        },
+        "tooltip": {
+            "trigger": "axis",
+            "axisPointer": {
+                "type": "shadow",
+                textStyle: {
+                    color: "#fff"
+                }
+
+            },
+        },
+        "grid": {
+            "borderWidth": 0,
+            "top": 110,
+            "bottom": 95,
+            textStyle: {
+                color: "#fff"
+            }
+        },
+        "legend": {
+            x: '4%',
+            top: '11%',
+            textStyle: {
+                color: '#90979c',
+            },
+            "data": ['女', '男', '平均']
+        },
+
+
+        "calculable": true,
+        "xAxis": [{
+            "type": "category",
+            "axisLine": {
+                lineStyle: {
+                    color: '#90979c'
+                }
+            },
+            "splitLine": {
+                "show": false
+            },
+            "axisTick": {
+                "show": false
+            },
+            "splitArea": {
+                "show": false
+            },
+            "axisLabel": {
+                "interval": 0,
+
+            },
+            "data": xData,
+        }],
+        "yAxis": [{
+            "type": "value",
+            "splitLine": {
+                "show": false
+            },
+            "axisLine": {
+                lineStyle: {
+                    color: '#90979c'
+                }
+            },
+            "axisTick": {
+                "show": false
+            },
+            "axisLabel": {
+                "interval": 0,
+
+            },
+            "splitArea": {
+                "show": false
+            },
+
+        }],
+        "dataZoom": [{
+            "show": true,
+            "height": 30,
+            "xAxisIndex": [
+                0
+            ],
+            bottom: 30,
+            "start": 10,
+            "end": 80,
+            handleIcon: 'path://M306.1,413c0,2.2-1.8,4-4,4h-59.8c-2.2,0-4-1.8-4-4V200.8c0-2.2,1.8-4,4-4h59.8c2.2,0,4,1.8,4,4V413z',
+            handleSize: '110%',
+            handleStyle: {
+                color: "#d3dee5",
+
+            },
+            textStyle: {
+                color: "#fff"
+            },
+            borderColor: "#90979c"
+
+
+        }, {
+            "type": "inside",
+            "show": true,
+            "height": 15,
+            "start": 1,
+            "end": 35
+        }],
+        "series": [{
+                "name": "女",
+                "type": "bar",
+                "stack": "总量",
+                "barMaxWidth": 35,
+                "barGap": "10%",
+                "itemStyle": {
+                    "normal": {
+                        "color": "rgba(255,144,128,1)",
+                        "label": {
+                            "show": true,
+                            "textStyle": {
+                                "color": "#fff"
+                            },
+                            "position": "insideTop",
+                            formatter: function (p) {
+                                return p.value > 0 ? (p.value) : '';
+                            }
+                        }
+                    }
+                },
+                "data": [
+                    709,
+                    1917,
+                    2455,
+                    2610,
+                    1719,
+                    1433,
+                    1544,
+                    3285,
+                    5208,
+                    3372,
+                    2484,
+                    4078
+                ],
+            },
+
+            {
+                "name": "男",
+                "type": "bar",
+                "stack": "总量",
+                "itemStyle": {
+                    "normal": {
+                        "color": "rgba(0,191,183,1)",
+                        "barBorderRadius": 0,
+                        "label": {
+                            "show": true,
+                            "position": "top",
+                            formatter: function (p) {
+                                return p.value > 0 ? (p.value) : '';
+                            }
+                        }
+                    }
+                },
+                "data": [
+                    327,
+                    1776,
+                    507,
+                    1200,
+                    800,
+                    482,
+                    204,
+                    1390,
+                    1001,
+                    951,
+                    381,
+                    220
+                ]
+            }, {
+                "name": "总数",
+                "type": "line",
+                "stack": "总量",
+                symbolSize: 10,
+                symbol: 'circle',
+                "itemStyle": {
+                    "normal": {
+                        "color": "rgba(252,230,48,1)",
+                        "barBorderRadius": 0,
+                        "label": {
+                            "show": true,
+                            "position": "top",
+                            formatter: function (p) {
+                                return p.value > 0 ? (p.value) : '';
+                            }
+                        }
+                    }
+                },
+                "data": [
+                    1036,
+                    3693,
+                    2962,
+                    3810,
+                    2519,
+                    1915,
+                    1748,
+                    4675,
+                    6209,
+                    4323,
+                    2865,
+                    4298
+                ]
+            },
+        ]
+    }
+    myChart1.setOption(option1, true);
+</script>
+
+<script>
+
+var dom = document.getElementById("chart1");
+    var myChart2 = echarts.init(dom);
+    var app = {};
+    option2 = null;
+
+
+    var data = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 313065408.0, -612934592.0, -766934592.0, -1691836480.0, -816967296.0, -1273934592.0, -1919967296.0, 1708032704.0, 1823032704.0, -763934592.0, 1027065408.0, 818065408.0, 1623065408.0, -769934592.0, -1680934592.0, 96065408.0, -622934592.0, 694032704.0, -524967296.0, 1630000000.0, 1329032704.0, -271967296.0, 2092967296.0, -688967296.0, 1493065408.0, 1872032704.0, -1074934592.0, 589000000.0, -1353934592.0, -1674901888.0, 579065408.0, 194032704.0, -575901888.0, 2047130816.0, -1919967296.0, 853000000.0, 987032704.0, 899032704.0, -1129967296.0, 1354032704.0, 1863032704.0, 1824032704.0, 1740098112.0, 1193032704.0, 704098112.0, -1343967296.0, -785967296.0]
+
+option2 = {
+    title: {
+        text: '净利润预测',
+        left: 0
+    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'line'
+        }
+    },
+    grid: {
+        left: '10%',
+        right: '10%',
+        bottom: '15%'
+    },
+    xAxis: {
+        type: 'category',
+        data: function() {
+                var list = [];
+                for (var i = 2000; i <= 2018; i++) {
+                    for (var j = 1; j <= 4; j++) {
+                        if (i == 2018 && j == 4) break
+                        list.push(i + '年.' + j);
+                    }
+                }
+                return list;
+            }(),
+    },
+    yAxis: {
+        scale: true,
+        splitArea: {
+            show: true
+        }
+    },
+    dataZoom: [
+
+        {
+            show: true,
+            type: 'slider',
+            y: '90%',
+            start: 50,
+            end: 100
+        }
+    ],
+    series: [
+        {
+            name: '净利润',
+            type: 'line',
+            data: data,
+            smooth: true,
+            lineStyle: {
+                normal: {opacity: 0.5}
+            }
+        },
+
+    ]
+};
+myChart2.setOption(option2, true);
+
+</script>
+
+{% endblock content%}

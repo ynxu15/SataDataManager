@@ -134,11 +134,11 @@
 
     myChart.setOption(option, true);
     myChart.on('click', function (params) {
-        // window.open('https://www.baidu.com/s?wd=' + encodeURIComponent(params.name))
+        // window.open('https://www.baidu.com/s?wd=' + encodeURIComponent(params.name
         window.location.href='predictPart?region='+encodeURIComponent(params.name)+'&type=全部'
     });
-    myChart.on('legendselectchanged', function (params) {
-        window.location.href='predictPart?retion=全部&type='+encodeURIComponent(params.name)
-    });
+    // myChart.on('legendselectchanged', function (params) {
+    //     window.location.href='predictPart?region=全部&type='+encodeURIComponent(params.name)
+    // });
 </script>
 {% endblock content%}

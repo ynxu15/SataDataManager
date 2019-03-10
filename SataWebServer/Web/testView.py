@@ -114,6 +114,7 @@ from django.shortcuts import render_to_response
 
 
 import json
+from django.shortcuts import render
 
 def ajax_list(request):
     a = list(range(100))

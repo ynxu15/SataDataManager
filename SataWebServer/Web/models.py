@@ -251,3 +251,6 @@ class Jsy(models.Model):
 	pf_181 = models.DecimalField(u'净收益（2018年第1季度）',max_digits=15,decimal_places=2)
 	pf_182 = models.DecimalField(u'净收益（2018年第2季度）',max_digits=15,decimal_places=2)
 	pf_183 = models.DecimalField(u'净收益（2018年第3季度）',max_digits=15,decimal_places=2)
+	
+	def __unicode__(self):
+		return self.com_name
