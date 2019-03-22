@@ -254,3 +254,18 @@ class Jsy(models.Model):
 	
 	def __unicode__(self):
 		return self.com_name
+
+class Info(models.Model):
+	com_name = models.CharField(u'公司名称',max_length=25,null=True)
+	com_region = models.CharField(u'地区',max_length=10,null=True)
+	com_type = models.CharField(u'行业',max_length=10,null=True)
+	com_date = models.CharField(u'成立日期',max_length=10,null=True)
+	com_capital = models.DecimalField(u'注册资本',max_digits=15,decimal_places=2,null=True)
+	com_scale = models.CharField(u'组织形式',max_length=10,null=True)
+	com_stuffnumber = models.IntegerField(u'员工人数（截止目前）',null=True)
+	com_bussiness = models.TextField(u'主营业务',null=True)
+	com_scope = models.TextField(u'经营范围',null=True)
+	com_introduce = models.TextField(u'公司简介',null=True)
+
+	# def __unicode__(self):
+	# 	return self.com_name

@@ -2,351 +2,451 @@
 {% load static %}
 {% block title %}{{title}}{% endblock title%}
 {% block content%}
+
+<style>
+        .title{
+        background-color:rgb(248,248,248);
+        border:2px solid rgb(240,240,240);
+        height: 42px;
+        text-align: center;
+        line-height: 42px;
+    }
+    </style>
+
 <div class="row">
     <div class="col-lg-12">
         <ol class="breadcrumb">
-            <li><a href="predictPart"><i class="fa fa-dashboard"></i> 上海市</a></li>
-            <li><a href="predictCom"><i class="fa fa-dashboard"></i> 某区某行业</a></li>
+            <li><a href="predictMain"><i class="fa fa-dashboard"></i> 上海市</a></li>
+            <li><i class="fa fa-dashboard"></i> <span class="region_select">{{region_select}}</span>区域<span class="type_select">{{type_select}}</span>行业</li>
             <!-- <li href="predictCom"><i class="fa fa-table"></i> 某区某行业</li> -->
         </ol>
     </div>
 </div><!-- /.row -->
 <div class="row">
-    <div class="col-lg-2" id="ss">
+    <div class="col-lg-1">
         <!-- {{data_region}} -->
     </div>
-    <div class="col-lg-4">
+    <div class="col-lg-5">
         <div id="region_pie" style="height: 300px"></div>
     </div>
-    <div class="col-lg-4">
+    <div class="col-lg-5">
         <div id="type_pie" style="height: 300px"></div>
     </div>
-    <div class="col-lg-2">
+    <div class="col-lg-1">
     </div>
 </div><!-- /.row -->
 <div class="row">
-    <div class="col-lg-2">
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-10">
+            <h3 class="title"><span class="region_select">{{region_select}}</span>区域<span class="type_select">{{type_select}}</span>行业</h3>
+        </div>
+        </div>
+        <div class="col-lg-1">
+        </div>
+    </div><!-- /.row -->
+<div class="row">
+    <div class="col-lg-1">
     </div>
-    <div class="col-lg-4">
-        <div id="Eps1" style="height:400px"></div>
+    <div class="col-lg-5">
+        <div id="Eps1" style="height:500px"></div>
     </div>
-    <div class="col-lg-4">
-        <div id="Eps2" style="height:400px"></div>
+    <div class="col-lg-5">
+        <div id="Eps2" style="height:500px"></div>
     </div>
-    <div class="col-lg-2">
+    <div class="col-lg-1">
     </div>
 </div><!-- /.row -->
 <div class="row">
-    <div class="col-lg-2">
+    <div class="col-lg-1">
     </div>
-    <div class="col-lg-4">
-        <div id="Jlr1" style="height:400px"></div>
+    <div class="col-lg-5">
+        <div id="Jlr1" style="height:500px"></div>
     </div>
-    <div class="col-lg-4">
-        <div id="Jlr2" style="height:400px"></div>
+    <div class="col-lg-5">
+        <div id="Jlr2" style="height:500px"></div>
     </div>
-    <div class="col-lg-2">
+    <div class="col-lg-1">
     </div>
 </div><!-- /.row -->
 <div class="row">
-    <div class="col-lg-2">
+    <div class="col-lg-1">
     </div>
-    <div class="col-lg-4">
-        <div id="Jsy1" style="height:400px"></div>
+    <div class="col-lg-5">
+        <div id="Jsy1" style="height:500px"></div>
     </div>
-    <div class="col-lg-4">
-        <div id="Jsy2" style="height:400px"></div>
+    <div class="col-lg-5">
+        <div id="Jsy2" style="height:500px"></div>
     </div>
-    <div class="col-lg-2">
+    <div class="col-lg-1">
     </div>
 </div><!-- /.row -->
-<!-- <div class="row">
-        <div class="col-lg-2">
-        </div>
-        <div class="col-lg-4">
-            <div id="Eps3" style="height:400px"></div>
-        </div>
-        <div class="col-lg-4">
-            <div id="Eps4" style="height:400px"></div>
-        </div>
-        <div class="col-lg-2">
-        </div>
-    </div> -->
-    <!-- /.row -->
-<!-- 饼图-区域 -->
-<script type="text/javascript">
-var region_pie = {{region|safe}};
-var type_pie = {{type|safe}};
-
-
-
-var dom1 = document.getElementById("region_pie");
-var myChart1 = echarts.init(dom1);
-option1 = null;
-option1 = {
-
-    tooltip: {
-        trigger: 'item',
-        formatter: "{a} <br/>{b} : {c} ({d}%)"
-    },
-
-    series: [{
-        name: '区域',
-        type: 'pie',
-        radius: '55%',
-        selectedMode: 'single',
-        center: ['50%', '60%'],
-        data: region_pie,
-        itemStyle: {
-            emphasis: {
-                shadowBlur: 10,
-                shadowOffsetX: 0,
-                shadowColor: 'rgba(0, 0, 0, 0.5)'
-            }
-        }
-    }]
-};
-if (option1 && typeof option1 === "object") {
-    myChart1.setOption(option1, true);
-}
-
-var dom2 = document.getElementById("type_pie");
-var myChart2 = echarts.init(dom2);
-option2 = null;
-option2 = {
-
-    tooltip: {
-        trigger: 'item',
-        formatter: "{a} <br/>{b} : {c} ({d}%)"
-    },
-    series: [{
-        name: '类型',
-        type: 'pie',
-        radius: '55%',
-        selectedMode: 'single',
-        center: ['50%', '60%'],
-        data: type_pie,
-        itemStyle: {
-            emphasis: {
-                shadowBlur: 10,
-                shadowOffsetX: 0,
-                shadowColor: 'rgba(0, 0, 0, 0.5)'
-            }
-        }
-    }]
-};;
-if (option2 && typeof option2 === "object") {
-    myChart2.setOption(option2, true);
-}
-
-myChart1.on('click', function(params) {
-    var region = params.name;
-    $.getJSON("/getByRegion/",{'region':region}, function(ret){
-        myChart3.setOption({                              
-                series:[
-                    {    
-                        data:ret['data'][0]
-                    }
-                ]
-            });
-            myChart4.setOption({                              
-                series:[
-                    {    
-                        data:ret['data'][1]
-                    }
-                ]
-            });
-            myChart5.setOption({                              
-                series:[
-                    {    
-                        data:ret['data'][2]
-                    }
-                ]
-            });
-        myChart31.setOption({                              
-                series:[
-                    {    
-                        data:ret['changeToBar'][0][0]
-                    },
-                    {    
-                        data:ret['changeToBar'][0][1]
-                    },
-                ]
-            });
-            myChart41.setOption({                              
-                series:[
-                    {    
-                        data:ret['changeToBar'][1][0]
-                    },
-                    {    
-                        data:ret['changeToBar'][1][1]
-                    },
-                ]
-            });
-            myChart51.setOption({                              
-                series:[
-                    {    
-                        data:ret['changeToBar'][2][0]
-                    },
-                    {    
-                        data:ret['changeToBar'][2][1]
-                    },
-                ]
-            });
-        })
-});
-
-</script>
-<script>
-myChart2.on('click', function(params) {
-    var type = params.name;
-    $.getJSON("/getByType/",{'type':type}, function(ret){
-        myChart3.setOption({                              
-                series:[
-                    {    
-                        data:ret['data'][0]
-                    }
-                ]
-            });
-            myChart4.setOption({                              
-                series:[
-                    {    
-                        data:ret['data'][1]
-                    }
-                ]
-            });
-            myChart5.setOption({                              
-                series:[
-                    {    
-                        data:ret['data'][2]
-                    }
-                ]
-            });
-        myChart31.setOption({                              
-                series:[
-                    {    
-                        data:ret['changeToBar'][0][0]
-                    },
-                    {    
-                        data:ret['changeToBar'][0][1]
-                    },
-                ]
-            });
-            myChart41.setOption({                              
-                series:[
-                    {    
-                        data:ret['changeToBar'][1][0]
-                    },
-                    {    
-                        data:ret['changeToBar'][1][1]
-                    },
-                ]
-            });
-            myChart51.setOption({                              
-                series:[
-                    {    
-                        data:ret['changeToBar'][2][0]
-                    },
-                    {    
-                        data:ret['changeToBar'][2][1]
-                    },
-                ]
-            });
-        })
+<div class="row">
+        <div class="col-lg-1">
     
-});
+        </div>
+        <div class="col-lg-10">
+                <table id="myTable" class="tablesorter table table-hover"> 
+                        <thead> 
+                        <tr> 
+                            <th>公司名称</th> 
+                            <th>成立日期</th> 
+                            <th>组织形式</th> 
+                            <th>员工总数</th> 
+                            <th>主营业务</th> 
+                        </tr> 
+                        </thead> 
+                        <tbody class="info"> 
+                        </tbody> 
+                        </table> 
+        </div>
+        <div class="col-lg-1">
+    
+        </div>
+    </div><!-- /.row -->
+
+
+
+<!-- 饼图 -->
+<script type="text/javascript">
+    var region_pie = {{region|safe}};
+    var type_pie = {{type|safe}};
+
+    var dom1 = document.getElementById("region_pie");
+    var myChart1 = echarts.init(dom1);
+    option1 = null;
+    option1 = {
+        title: {
+            text: '上海市各区域企业分布情况',
+            textStyle: {
+                fontSize: 26
+            },
+            subtext: '(点击查看对应区域发展情况)',
+            subtextStyle: {
+                fontSize: 16
+            },
+            left: 'center'
+        },
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        series: [{
+            name: '区域',
+            type: 'pie',
+            radius: '45%',
+            selectedMode: 'single',
+            center: ['50%', '60%'],
+            data: region_pie,
+            itemStyle: {
+                emphasis: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
+        }]
+    };
+
+    var dom2 = document.getElementById("type_pie");
+    var myChart2 = echarts.init(dom2);
+    option2 = null;
+    option2 = {
+        title: {
+            text: '上海市各行业企业分布情况',
+            textStyle: {
+                fontSize: 26
+            },
+            subtext: '(点击查看对应行业发展情况)',
+            subtextStyle: {
+                fontSize: 16
+            },
+            left: 'center'
+        },
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        series: [{
+            name: '类型',
+            type: 'pie',
+            radius: '45%',
+            selectedMode: 'single',
+            center: ['50%', '60%'],
+            data: type_pie,
+            itemStyle: {
+                emphasis: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
+        }]
+    };
+
+    
+</script>
+
+<!-- 点击事件 -->
+<script>
+    myChart1.on('click', function (params) {
+        var region_select = params.name;
+        if($('.region_select').html()==region_select){
+            region_select = '全部';
+        }
+        $('.region_select').html(region_select);
+        var type_select = $('.type_select').html();
+        // $(".info").empty();
+        $.getJSON("/flushPart/", {
+            'com_region': region_select,
+            'com_type': type_select
+        }, function (ret) {
+            myChart3.setOption({
+                series: [{
+                    data: ret['data'][0]
+                }]
+            });
+            myChart4.setOption({
+                series: [{
+                    data: ret['data'][1]
+                }]
+            });
+            myChart5.setOption({
+                series: [{
+                    data: ret['data'][2]
+                }]
+            });
+            myChart31.setOption({
+                series: [{
+                        data: ret['change'][0]
+                    }
+                ]
+            });
+            myChart41.setOption({
+                series: [{
+                        data: ret['change'][1]
+                    }
+                ]
+            });
+            myChart51.setOption({
+                series: [{
+                        data: ret['change'][2]
+                    }
+                ]
+            });
+            $(".info").empty();
+            for(var i=0;i<10;i++){
+                $('.info').append("<tr><td><a href='predictCom?name="+ret['info'][i]['name']+"'>"+ret['info'][i]['name']+"</a></td><td>"+ret['info'][i]['date']+"</td><td>"+ret['info'][i]['scale']+"</td><td>"+ret['info'][i]['stuffnumber']+"</td><td>"+ret['info'][i]['bussiness']+"</td></tr>");
+            }
+            $("#myTable").trigger("update");
+        })
+    });
+
+    myChart2.on('click', function (params) {
+        var type_select = params.name;
+        if($('.type_select').html()==type_select){
+            type_select = '全部';
+        }
+        $('.type_select').html(type_select);
+        var region_select = $('.region_select').html();
+        $.getJSON("/flushPart/", {
+            'com_region': region_select,
+            'com_type': type_select
+        }, function (ret) {
+            myChart3.setOption({
+                series: [{
+                    data: ret['data'][0]
+                }]
+            });
+            myChart4.setOption({
+                series: [{
+                    data: ret['data'][1]
+                }]
+            });
+            myChart5.setOption({
+                series: [{
+                    data: ret['data'][2]
+                }]
+            });
+            myChart31.setOption({
+                series: [{
+                        data: ret['change'][0]
+                    }
+                ]
+            });
+            myChart41.setOption({
+                series: [{
+                        data: ret['change'][1]
+                    }
+                ]
+            });
+            myChart51.setOption({
+                series: [{
+                        data: ret['change'][2]
+                    }
+                ]
+            });
+            $(".info").empty();
+            $("#myTable").trigger("update");
+            for(var i=0;i<10;i++){
+                $('.info').append("<tr><td><a href='predictCom?name="+ret['info'][i]['name']+"'>"+ret['info'][i]['name']+"</a></td><td>"+ret['info'][i]['date']+"</td><td>"+ret['info'][i]['scale']+"</td><td>"+ret['info'][i]['stuffnumber']+"</td><td>"+ret['info'][i]['bussiness']+"</td></tr>");
+            }
+        })
+    });
 </script>
 
 <!-- Eps -->
 <script type="text/javascript">
-var dom1 = document.getElementById("Eps1");
-var dom2 = document.getElementById("Eps2");
-var myChart3 = echarts.init(dom1);
-var myChart31 = echarts.init(dom2);
-var app = {};
-option = null;
-option1 = null;
-option = {
-    title: {
-            text: 'EPS（每股收益）',
-        },
-    grid: {
-        left: '13%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true
-    },
-    xAxis: {
-        type: 'category',
-        data: function() {
-            var list = [];
-            for (var i = 2000; i <= 2018; i++) {
-                for (var j = 1; j <= 4; j++) {
-                    if (i == 2018 && j == 4) break
-                    list.push(i + '年.' + j);
-                }
-            }
-            return list;
-        }()
-    },
-    yAxis: {
-        type: 'value'
-    },
-    series: [{
-        data: [],
-        type: 'line'
-    }]
-};
-option1 = {
+    var dom3 = document.getElementById("Eps1");
+    var dom31 = document.getElementById("Eps2");
+    var myChart3 = echarts.init(dom3);
+    var myChart31 = echarts.init(dom31);
+    option3 = null;
+    option31 = null;
+    option3 = {
         title: {
-            text: 'EPS较上季度变化情况',
+            text: '平均EPS（每股收益）',
         },
         tooltip: {
             trigger: 'axis',
-            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            axisPointer: {
+                type: 'line'
             },
             formatter: function (params) {
-                var tar;
-                if (params[1].value != '-') {
-                    tar = params[1];
-                }
-                else {
-                    tar = params[0];
-                }
-                return tar.name + '<br/>' + tar.seriesName + ' : ' + tar.value;
+                var v = params[0].value;
+                var s = params[0].name;
+                return s+'<br>平均EPS(每股收益)为'+v;
             }
         },
-        // legend: {
-        //     data:['支出','收入']
+        // tooltip: {
+        //     formatter: function (params) {
+        //         var v = params[0].value;
+        //         var s = params[0].name;
+        //         return s+'EPS(每股收益)为'+v;
+        //     }
         // },
         grid: {
-            left: '3%',
+            left: '11%',
             right: '4%',
-            bottom: '3%',
+            bottom: '25%',
             containLabel: true
         },
         xAxis: {
             type: 'category',
-            splitLine: {show: false},
+            axisLabel: {
+						interval: 2,    //强制文字产生间隔
+                        rotate: 90, 
+            },
+            boundaryGap: false,
             data: function () {
                 var list = [];
-                    for (var i = 2000; i <= 2018; i++) {
-                        for (var j = 1; j <= 4; j++) {
-                            if (i == 2018 && j == 4) break
-                            list.push(i + '年第' + j+'季度');
-                        }
+                for (var i = 2000; i <= 2018; i++) {
+                    for (var j = 1; j <= 4; j++) {
+                        if (i == 2018 && j == 4) break
+                        list.push(i + '年第' + j + '季度');
                     }
-                    return list.splice(1,list.length-1);
+                }
+                return list;
             }()
         },
         yAxis: {
             type: 'value'
         },
-        series: [
+        dataZoom: [
+
             {
+                show: true,
+                type: 'slider',
+                y: '90%',
+                start: 50,
+                end: 100
+            }
+        ],
+        series: [{
+            data: [],
+            type: 'line'
+        }]
+    };
+
+
+    option31 = {
+        title: {
+            text: '较上季度变化情况',
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+            },
+            formatter: function (params) {
+                var v = params[0].value;
+                var s = params[0].name;
+                if(v>=0){
+                    return s+'<br/>较上季度增加了'+v;
+                }else{
+                    return s+'<br/>较上季度减少了'+Math.abs(v);
+                }
+            }
+        },
+        grid: {
+            left: '11%',
+            right: '4%',
+            bottom: '25%',
+            containLabel: true
+        },
+        xAxis: {
+            type: 'category',
+            axisLabel: {
+						interval: 2,    //强制文字产生间隔
+                        rotate: 90, 
+            },
+            splitLine: {
+                show: false
+            },
+            data: function () {
+                var list = [];
+                for (var i = 2000; i <= 2018; i++) {
+                    for (var j = 1; j <= 4; j++) {
+                        if (i == 2018 && j == 4) break
+                        list.push(i + '年第' + j + '季度');
+                    }
+                }
+                return list.splice(1, list.length - 1);
+            }()
+        },
+        yAxis: {
+            type: 'value'
+        },
+        dataZoom: [
+            {
+                show: true,
+                type: 'slider',
+                y: '90%',
+                start: 50,
+                end: 100
+            }
+        ],
+        visualMap: [{
+            show: false,
+            // type: 'piecewise',
+            pieces: [{
+                gt: 0,
+                color: 'rgb(179,64,56)'
+            }, {
+                lt: 0,
+                color: 'rgb(111,159,167)'
+            }]
+        }],
+        series: [{
                 name: '较上季度增长',
                 type: 'bar',
+                stack: '总量',
+                barCategoryGap: 0,
+                // itemStyle: {
+                //     normal: {
+                //         opacity: 0.7
+                //     }
+                // },
                 // label: {
                 //     normal: {
                 //         show: true,
@@ -354,57 +454,52 @@ option1 = {
                 //     }
                 // },
                 data: []
-            },
-            {
-                name: '较上季度减少',
-                type: 'bar',
-                stack: '总量',
-                // label: {
-                //     normal: {
-                //         show: true,
-                //         position: 'bottom'
-                //     }
-                // },
-                data:[]
             }
         ]
     };
-
-if (option && typeof option === "object") {
-    myChart3.setOption(option, true);
-}
-if (option1 && typeof option1 === "object") {
-    myChart31.setOption(option1, true);
-}
 </script>
 
 <!-- 净利润 -->
 <script type="text/javascript">
-    var dom1 = document.getElementById("Jlr1");
-    var dom2 = document.getElementById("Jlr2");
-    var myChart4 = echarts.init(dom1);
-    var myChart41 = echarts.init(dom2);
-    var app = {};
-    option = null;
-    option1 = null;
-    option = {
+    var dom4 = document.getElementById("Jlr1");
+    var dom41 = document.getElementById("Jlr2");
+    var myChart4 = echarts.init(dom4);
+    var myChart41 = echarts.init(dom41);
+    option4 = null;
+    option41 = null;
+    option4 = {
         title: {
-            text: '公司净利润',
+            text: '平均净利润',
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'line'
+            },
+            formatter: function (params) {
+                var v = params[0].value;
+                var s = params[0].name;
+                return s+'<br/>平均净利润为'+v+'元';
+            }
         },
         grid: {
             left: '3%',
             right: '4%',
-            bottom: '3%',
+            bottom: '25%',
             containLabel: true
         },
         xAxis: {
             type: 'category',
-            data: function() {
+            axisLabel: {
+						interval: 2,    //强制文字产生间隔
+                        rotate: 90, 
+            },
+            data: function () {
                 var list = [];
                 for (var i = 2000; i <= 2018; i++) {
                     for (var j = 1; j <= 4; j++) {
                         if (i == 2018 && j == 4) break
-                        list.push(i + '年.' + j);
+                        list.push(i + '年第' + j + '季度');
                     }
                 }
                 return list;
@@ -413,29 +508,38 @@ if (option1 && typeof option1 === "object") {
         yAxis: {
             type: 'value'
         },
+        dataZoom: [
+
+            {
+                show: true,
+                type: 'slider',
+                y: '90%',
+                start: 50,
+                end: 100
+            }
+        ],
         series: [{
             data: [],
             type: 'line'
         }]
     };
-    option1 = {
+    option41 = {
         title: {
             text: '较上季度变化情况',
         },
         tooltip: {
             trigger: 'axis',
-            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
             },
             formatter: function (params) {
-                var tar;
-                if (params[1].value != '-') {
-                    tar = params[1];
+                var v = params[0].value;
+                var s = params[0].name;
+                if(v>=0){
+                    return s+'<br/>较上季度增加了'+v+'元';
+                }else{
+                    return s+'<br/>较上季度减少了'+Math.abs(v)+'元';
                 }
-                else {
-                    tar = params[0];
-                }
-                return tar.name + '<br/>' + tar.seriesName + ' : ' + tar.value;
             }
         },
         // legend: {
@@ -444,30 +548,58 @@ if (option1 && typeof option1 === "object") {
         grid: {
             left: '3%',
             right: '4%',
-            bottom: '3%',
+            bottom: '25%',
             containLabel: true
         },
         xAxis: {
             type: 'category',
-            splitLine: {show: false},
+            axisLabel: {
+						interval: 2,    //强制文字产生间隔
+                        rotate: 90, 
+            },
+            splitLine: {
+                show: false
+            },
             data: function () {
                 var list = [];
-                    for (var i = 2000; i <= 2018; i++) {
-                        for (var j = 1; j <= 4; j++) {
-                            if (i == 2018 && j == 4) break
-                            list.push(i + '年第' + j+'季度');
-                        }
+                for (var i = 2000; i <= 2018; i++) {
+                    for (var j = 1; j <= 4; j++) {
+                        if (i == 2018 && j == 4) break
+                        list.push(i + '年第' + j + '季度');
                     }
-                    return list.splice(1,list.length-1);
+                }
+                return list.splice(1, list.length - 1);
             }()
         },
         yAxis: {
             type: 'value'
         },
-        series: [
+        visualMap: [{
+            show: false,
+            // type: 'piecewise',
+            pieces: [{
+                gt: 0,
+                color: 'rgb(179,64,56)'
+            }, {
+                lt: 0,
+                color: 'rgb(111,159,167)'
+            }]
+        }],
+        dataZoom: [
+
             {
+                show: true,
+                type: 'slider',
+                y: '90%',
+                start: 50,
+                end: 100
+            }
+        ],
+        series: [{
                 name: '较上季度增长',
                 type: 'bar',
+                stack: '总量',
+                barCategoryGap: 0,
                 // label: {
                 //     normal: {
                 //         show: true,
@@ -475,57 +607,52 @@ if (option1 && typeof option1 === "object") {
                 //     }
                 // },
                 data: []
-            },
-            {
-                name: '较上季度减少',
-                type: 'bar',
-                stack: '总量',
-                // label: {
-                //     normal: {
-                //         show: true,
-                //         position: 'bottom'
-                //     }
-                // },
-                data:[]
             }
         ]
     };
-
-    if (option && typeof option === "object") {
-        myChart4.setOption(option, true);
-    }
-    if (option1 && typeof option1 === "object") {
-    myChart41.setOption(option1, true);
-}
-    </script>
+</script>
 
 <!-- 净收益 -->
 <script type="text/javascript">
-    var dom1 = document.getElementById("Jsy1");
-    var dom2 = document.getElementById("Jsy2");
-    var myChart5 = echarts.init(dom1);
-    var myChart51 = echarts.init(dom2);
-    var app = {};
-    option = null;
-    option1 = null;
-    option = {
+    var dom5 = document.getElementById("Jsy1");
+    var dom51 = document.getElementById("Jsy2");
+    var myChart5 = echarts.init(dom5);
+    var myChart51 = echarts.init(dom51);
+    option5 = null;
+    option51 = null;
+    option5 = {
         title: {
-            text: '公司净收益',
+            text: '平均净收益',
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'line'
+            },
+            formatter: function (params) {
+                var v = params[0].value;
+                var s = params[0].name;
+                return s+'<br/>平均净收益为'+v+'元';
+            }
         },
         grid: {
             left: '3%',
             right: '4%',
-            bottom: '3%',
+            bottom: '25%',
             containLabel: true
         },
         xAxis: {
             type: 'category',
-            data: function() {
+            axisLabel: {
+						interval: 2,    //强制文字产生间隔
+                        rotate: 90, 
+            },
+            data: function () {
                 var list = [];
                 for (var i = 2000; i <= 2018; i++) {
                     for (var j = 1; j <= 4; j++) {
                         if (i == 2018 && j == 4) break
-                        list.push(i + '年.' + j);
+                        list.push(i + '年第' + j + '季度');
                     }
                 }
                 return list;
@@ -534,29 +661,38 @@ if (option1 && typeof option1 === "object") {
         yAxis: {
             type: 'value'
         },
+        dataZoom: [
+
+            {
+                show: true,
+                type: 'slider',
+                y: '90%',
+                start: 50,
+                end: 100
+            }
+        ],
         series: [{
             data: [],
             type: 'line'
         }]
     };
-    option1 = {
+    option51 = {
         title: {
             text: '较上季度变化情况',
         },
         tooltip: {
             trigger: 'axis',
-            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
             },
             formatter: function (params) {
-                var tar;
-                if (params[1].value != '-') {
-                    tar = params[1];
+                var v = params[0].value;
+                var s = params[0].name;
+                if(v>=0){
+                    return s+'<br/>较上季度增加了'+v+'元';
+                }else{
+                    return s+'<br/>较上季度减少了'+Math.abs(v)+'元';
                 }
-                else {
-                    tar = params[0];
-                }
-                return tar.name + '<br/>' + tar.seriesName + ' : ' + tar.value;
             }
         },
         // legend: {
@@ -565,30 +701,58 @@ if (option1 && typeof option1 === "object") {
         grid: {
             left: '3%',
             right: '4%',
-            bottom: '3%',
+            bottom: '25%',
             containLabel: true
         },
         xAxis: {
             type: 'category',
-            splitLine: {show: false},
+            axisLabel: {
+						interval: 2,    //强制文字产生间隔
+                        rotate: 90, 
+            },
+            splitLine: {
+                show: false
+            },
             data: function () {
                 var list = [];
-                    for (var i = 2000; i <= 2018; i++) {
-                        for (var j = 1; j <= 4; j++) {
-                            if (i == 2018 && j == 4) break
-                            list.push(i + '年第' + j+'季度');
-                        }
+                for (var i = 2000; i <= 2018; i++) {
+                    for (var j = 1; j <= 4; j++) {
+                        if (i == 2018 && j == 4) break
+                        list.push(i + '年第' + j + '季度');
                     }
-                    return list.splice(1,list.length-1);
+                }
+                return list.splice(1, list.length - 1);
             }()
         },
         yAxis: {
             type: 'value'
         },
-        series: [
+        visualMap: [{
+            show: false,
+            // type: 'piecewise',
+            pieces: [{
+                gt: 0,
+                color: 'rgb(179,64,56)'
+            }, {
+                lt: 0,
+                color: 'rgb(111,159,167)'
+            }]
+        }],
+        dataZoom: [
+
             {
+                show: true,
+                type: 'slider',
+                y: '90%',
+                start: 50,
+                end: 100
+            }
+        ],
+        series: [{
                 name: '较上季度增长',
                 type: 'bar',
+                stack: '总量',
+                barCategoryGap: 0,
                 // label: {
                 //     normal: {
                 //         show: true,
@@ -596,115 +760,69 @@ if (option1 && typeof option1 === "object") {
                 //     }
                 // },
                 data: []
-            },
-            {
-                name: '较上季度减少',
-                type: 'bar',
-                stack: '总量',
-                // label: {
-                //     normal: {
-                //         show: true,
-                //         position: 'bottom'
-                //     }
-                // },
-                data:[]
             }
         ]
     };
+</script>
 
-    if (option && typeof option === "object") {
-        myChart5.setOption(option, true);
-        myChart51.setOption(option, true);
-    }
-    if (option1 && typeof option1 === "object") {
-    myChart51.setOption(option1, true);
-}
-    </script>
 
-<script type="text/javascript">
-    var dom1 = document.getElementById("Eps3");
-    var dom2 = document.getElementById("Eps4");
-    var myChart6 = echarts.init(dom1);
-    var myChart61 = echarts.init(dom2);
-    var app = {};
-    option = null;
-    option = {
-        title: {
-            text: '较上季度变化情况',
-        },
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-            },
-            formatter: function (params) {
-                var tar;
-                if (params[1].value != '-') {
-                    tar = params[1];
-                }
-                else {
-                    tar = params[0];
-                }
-                return tar.name + '<br/>' + tar.seriesName + ' : ' + tar.value;
-            }
-        },
-        // legend: {
-        //     data:['支出','收入']
-        // },
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
-        xAxis: {
-            type: 'category',
-            splitLine: {show: false},
-            data: function () {
-                var list = [];
-                    for (var i = 2000; i <= 2018; i++) {
-                        for (var j = 1; j <= 4; j++) {
-                            if (i == 2018 && j == 4) break
-                            list.push(i + '年第' + j+'季度');
-                        }
+
+
+<script>
+    $(document).ready(function(){
+        myChart1.setOption(option1, true);
+        myChart2.setOption(option2, true);
+        myChart3.setOption(option3, true);
+        myChart31.setOption(option31, true);
+        myChart4.setOption(option4, true);
+        myChart41.setOption(option41, true);
+        myChart5.setOption(option5, true);
+        myChart51.setOption(option51, true);
+        var region_select = '{{region_select|safe}}';
+        var type_select = '{{type_select|safe}}';
+        $.getJSON("/flushPart/", {
+            'com_region': region_select,
+            'com_type':type_select
+        }, function (ret) {
+            myChart3.setOption({
+                series: [{
+                    data: ret['data'][0]
+                }]
+            });
+            myChart4.setOption({
+                series: [{
+                    data: ret['data'][1]
+                }]
+            });
+            myChart5.setOption({
+                series: [{
+                    data: ret['data'][2]
+                }]
+            });
+            myChart31.setOption({
+                series: [{
+                        data: ret['change'][0]
                     }
-                    return list.splice(1,list.length-1);
-            }()
-        },
-        yAxis: {
-            type: 'value'
-        },
-        series: [
-            {
-                name: '较上季度增长',
-                type: 'bar',
-                // label: {
-                //     normal: {
-                //         show: true,
-                //         position: 'top'
-                //     }
-                // },
-                data: []
-            },
-            {
-                name: '较上季度减少',
-                type: 'bar',
-                stack: '总量',
-                // label: {
-                //     normal: {
-                //         show: true,
-                //         position: 'bottom'
-                //     }
-                // },
-                data:[]
+                ]
+            });
+            myChart41.setOption({
+                series: [{
+                        data: ret['change'][1]
+                    }
+                ]
+            });
+            myChart51.setOption({
+                series: [{
+                        data: ret['change'][2]
+                    }
+                ]
+            });
+            $("#myTable").tablesorter(); 
+            for(var i=0;i<10;i++){
+                $('.info').append("<tr><td><a href='predictCom?name="+ret['info'][i]['name']+"'>"+ret['info'][i]['name']+"</a></td><td>"+ret['info'][i]['date']+"</td><td>"+ret['info'][i]['scale']+"</td><td>"+ret['info'][i]['stuffnumber']+"</td><td>"+ret['info'][i]['bussiness']+"</td></tr>");
             }
-        ]
-    };
-
-    if (option && typeof option === "object") {
-        myChart6.setOption(option, true);
-        myChart61.setOption(option, true);
-    }
-
-</script> -->
+            $("#myTable").trigger("update");
+        })
+    });
+</script>
 {% endblock content%}

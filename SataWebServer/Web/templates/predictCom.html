@@ -1,256 +1,257 @@
 {% extends '_base.html' %}
 {% load static %}
-
-{% block title %}某公司{% endblock title%}
-
+{% block title %}{{title}}{% endblock title%}
 {% block content%}
-<div class="row">
-    <div class="col-lg-12">
-        <ol class="breadcrumb">
-            <li><a href="predictPart"><i class="fa fa-dashboard"></i> 上海市</a></li>
-            <li href="predictCom"><i class="fa fa-table"></i> 某区某行业</li>
-            <li class="active"><i class="fa fa-table"></i> 某公司</li>
-        </ol>
-    </div>
-</div><!-- /.row -->
+
+<style>
+    .title{
+    background-color:rgb(248,248,248);
+    border-top:2px solid rgb(240,240,240);
+    border-right:2px solid rgb(240,240,240);
+    border-left:2px solid rgb(240,240,240);
+    height: 42px;
+    text-align: center;
+    line-height: 42px;
+}
+</style>
+
 
 <div class="row">
-    <div class="col-lg-3">
-
-    </div>
-    <div class="col-lg-6">
-        <div class="form-group">
-            <input type="text" id="ComName" name="ComName" class="form-control">
+        <div class="col-lg-12">
+            <ol class="breadcrumb">
+                <li><a href="predictMain"><i class="fa fa-dashboard"></i> 上海市</a></li>
+                <li><a href="predictPart?region={{region}}&type={{type}}"><i class="fa fa-table"></i> {{region}}区域{{type}}行业</a></li>
+                <li class="active"><i class="fa fa-table"></i> {{title}}</li>
+            </ol>
         </div>
-        <button type="button" id='ComSearch' class="btn btn-default">查找</button>
+    </div><!-- /.row -->
 
+<div class="row">
+    <!-- <div class="col-lg-1">
+    
+        </div> -->
+    <div class="col-lg-12">
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="com_name">{{title}}</h1>
+                <p style="line-height:25px;margin-top:40px"><b>公司介绍：</b>{{introduce}}</p>
+                <p class="text-right"><a class="btn btn-primary btn-lg show_predict" role="button">查看公司成长分析及预测</a></p>
+            </div>
+        </div>
     </div>
-    <div class="col-lg-3">
-
-    </div>
-</div>
-
-<script>
-    $("#ComSearch").click(function () {
-        var ComName = $("#ComName").val();
-        $.get("getByComName", {
-            'name': ComName
+    <!-- <script>
+            $(".show_predict").click(function(){
+                $(".predict").show();
+                var com_name = $(".com_name").html();
+        $.getJSON("/flushCom/", {
+            'name': com_name
         }, function (ret) {
-            myChart3.setOption({
-                series: [{
-                    data: ret['data'][0]
-                }]
-            });
-            myChart4.setOption({
-                series: [{
-                    data: ret['data'][1]
-                }]
-            });
-            myChart5.setOption({
-                series: [{
-                    data: ret['data'][2]
-                }]
-            });
-            myChart31.setOption({
-                series: [{
-                        data: ret['changeToBar'][0][0]
-                    },
-                    {
-                        data: ret['changeToBar'][0][1]
-                    },
-                ]
-            });
-            myChart41.setOption({
-                series: [{
-                        data: ret['changeToBar'][1][0]
-                    },
-                    {
-                        data: ret['changeToBar'][1][1]
-                    },
-                ]
-            });
-            myChart51.setOption({
-                series: [{
-                        data: ret['changeToBar'][2][0]
-                    },
-                    {
-                        data: ret['changeToBar'][2][1]
-                    },
-                ]
-            });
-            // alert(Math.max.apply(null,ret['radar'][1]));
             myChart1.setOption({
-                    radar: {
-                        // shape: 'circle',
-                        indicator: [{
-                                name: '每股收益',
-                                max: Math.max.apply(null, ret['radar'][0])
-                            },
-                            {
-                                name: '销售净利润',
-                                max: Math.max.apply(null, ret['radar'][1])
-                            },
-                            {
-                                name: '经营活动净收益',
-                                max: Math.max.apply(null, ret['radar'][2])
-                            },
-                            {
-                                name: '净资产收益率',
-                                max: 6500
-                            },
-                            {
-                                name: '经营活动净收益',
-                                max: 6500
-                            },
-                            {
-                                name: '营业总收入',
-                                max: 16000
-                            },
-                            {
-                                name: '成本费用利润率',
-                                max: 30000
-                            },
-                            {
-                                name: '总资产净利率',
-                                max: 38000
-                            },
-                            {
-                                name: '销售费用',
-                                max: 52000
-                            }
-                            // {name: '管理费用', max: 25000}
-                        ]
+                series:[
+                    {
+                        data: ret['data'][1].concat(['-','-','-'])
                     },
-                    series: [{
-                        data: [{
-                                value: function () {
-                                    list = [];
-                                    // for(var i=0;i<2;i++){
-                                    for (var j = 0; j < 3; j++) {
-                                        list.push(ret['radar'][j][0])
-                                    }
-                                    // }
-                                    return list.concat([5000, 4300, 10000, 28000,
-                                        35000, 50000
-                                    ]);
-                                }(),
-                                name: '2017.4'
-                            },
-                            {
-                                value: function () {
-                                    list = [];
-                                    // for(var i=0;i<2;i++){
-                                    for (var j = 0; j < 3; j++) {
-                                        list.push(ret['radar'][j][1])
-                                    }
-                                    // }
-                                    return list.concat([5000, 4300, 10000, 28000,
-                                        35000, 50000
-                                    ]);
-                                }(),
-                                name: '2018.1'
-                            },
-                            {
-                                value: function () {
-                                    list = [];
-                                    // for(var i=0;i<2;i++){
-                                    for (var j = 0; j < 3; j++) {
-                                        list.push(ret['radar'][j][2])
-                                    }
-                                    // }
-                                    return list.concat([5000, 4300, 10000, 28000,
-                                        35000, 50000
-                                    ]);
-                                }(),
-                                name: '2018.2'
-                            },
-                            {
-                                value: function () {
-                                    list = [];
-                                    // for(var i=0;i<2;i++){
-                                    for (var j = 0; j < 3; j++) {
-                                        list.push(ret['radar'][j][3])
-                                    }
-                                    // }
-                                    return list.concat([5000, 4300, 10000, 28000,
-                                        35000, 50000
-                                    ]);
-                                }(),
-                                name: '2018.3'
+                    {
+                        data: function () {
+                            var list = [];
+                            for (var i = 2000; i <= 2018; i++) {
+                                for (var j = 1; j <= 4; j++) {
+                                    if (i == 2018 && (j == 4 || j == 3)) break
+                                    list.push('-');
+                                }
                             }
-                        ]
-                    }]
-                }
-
-
-            );
+                            return list.concat(ret['predict'][1]);
+                        }()
+                    }
+                ]
+            });
         })
     });
-</script>
-
-<div class="row">
-    <div class="col-lg-2">
-
-    </div>
-    <div class="col-lg-8">
-        <div id="radar" style="height: 500px" style=""></div>
-    </div>
-
-    <div class="col-lg-2">
-
-    </div>
+        </script> -->
+    <!-- <div class="col-lg-1">
+    
+        </div> -->
 </div><!-- /.row -->
-<div class="row">
-    <div class="col-lg-2">
+<div class="predict">
+    <div class="row">
+        <div class="col-lg-1">
+
+        </div>
+        <div class="col-lg-10">
+            <div id="radar" style="height: 500px"></div>
+        </div>
+        <div class="col-lg-1">
+
+        </div>
+    </div><!-- /.row -->
+
+
+    <div class="row">
+        <div class="col-lg-1">
 
     </div>
-    <div class="col-lg-4">
-        <div id="Eps1" style="height:400px"></div>
-    </div>
-    <div class="col-lg-4">
-        <div id="Eps2" style="height:400px"></div>
-    </div>
-    <div class="col-lg-2">
+        <div class="col-lg-10">
+            <h3 class="title">公司经济发展预测</h3>
+            <select class="form-control select1">
+                <option value="table1">营业利润</option>
+                <option value="table2">净收益</option>
+                <option value="table3">每股收益</option>
+            </select>
+            <script type="text/javascript">
+                $('.select1').selectric().on('change', function () {
+                    if ($(this).val() == 'table1') {
+                        myChart1.setOption(option11, true);
+                        var com_name = '{{title|safe}}';
+                        $.getJSON("/flushCom/", {
+                            'name': com_name
+                        }, function (ret) {
+                            myChart1.setOption({
+                                    series: [{
+                                            data: ret['data'][1].concat(['-', '-', '-'])
+                                        },
+                                        {
+                                            data: function () {
+                                                var list = [];
+                                                for (var i = 2000; i <= 2018; i++) {
+                                                    for (var j = 1; j <= 4; j++) {
+                                                        if (i == 2018 && (j == 4 || j == 3))
+                                                            break
+                                                        list.push('-');
+                                                    }
+                                                }
+                                                return list.concat(ret['predict'][1]);
+                                            }()
+                                        }
+                                    ]
+                                }
+
+                            );
+                        });
+                    } else if ($(this).val() == 'table2') {
+                        myChart1.setOption(option12, true);
+                        var com_name = '{{title|safe}}';
+                        $.getJSON("/flushCom/", {
+                            'name': com_name
+                        }, function (ret) {
+                            myChart1.setOption({
+                                    series: [{
+                                            data: ret['data'][2].concat(['-', '-', '-'])
+                                        },
+                                        {
+                                            data: function () {
+                                                var list = [];
+                                                for (var i = 2000; i <= 2018; i++) {
+                                                    for (var j = 1; j <= 4; j++) {
+                                                        if (i == 2018 && (j == 4 || j == 3))
+                                                            break
+                                                        list.push('-');
+                                                    }
+                                                }
+                                                return list.concat(ret['predict'][2]);
+                                            }()
+                                        }
+                                    ]
+                                }
+
+                            );
+                        });
+                    } else {
+                        myChart1.setOption(option13, true);
+                        var com_name = '{{title|safe}}';
+                        $.getJSON("/flushCom/", {
+                            'name': com_name
+                        }, function (ret) {
+                            myChart1.setOption({
+                                    series: [{
+                                            data: ret['data'][0].concat(['-', '-', '-'])
+                                        },
+                                        {
+                                            data: function () {
+                                                var list = [];
+                                                for (var i = 2000; i <= 2018; i++) {
+                                                    for (var j = 1; j <= 4; j++) {
+                                                        if (i == 2018 && (j == 4 || j == 3))
+                                                            break
+                                                        list.push('-');
+                                                    }
+                                                }
+                                                return list.concat(ret['predict'][0]);
+                                            }()
+                                        }
+                                    ]
+                                }
+
+                            );
+                        });
+                    }
+                });
+            </script>
+            <div id="chart1" style="height:500px"></div>
+        </div>
+        <div class="col-lg-1">
 
     </div>
-</div><!-- /.row -->
-<div class="row">
-    <div class="col-lg-2">
+    </div><!-- /.row -->
 
-    </div>
-    <div class="col-lg-4">
-        <div id="Jlr1" style="height:400px"></div>
-    </div>
-    <div class="col-lg-4">
-        <div id="Jlr2" style="height:400px"></div>
-    </div>
-    <div class="col-lg-2">
 
-    </div>
-</div><!-- /.row -->
-<div class="row">
-    <div class="col-lg-2">
 
-    </div>
-    <div class="col-lg-4">
-        <div id="Jsy1" style="height:400px"></div>
-    </div>
-    <div class="col-lg-4">
-        <div id="Jsy2" style="height:400px"></div>
-    </div>
-    <div class="col-lg-2">
+    <div class="row">
+        <div class="col-lg-1">
 
-    </div>
-</div><!-- /.row -->
+        </div>
+        <div class="col-lg-10">
+            <h3 class="title">公司规模发展预测</h3>
+            <select class="form-control select2">
+                <option value="table1">员工数量</option>
+                <option value="table2">年用电量</option>
+                <option value="table3">年用水量</option>
+            </select>
+            <script type="text/javascript">
+                $('.select2').selectric().on('change', function () {});
+            </script>
+            <div id="chart2" style="height:500px"></div>
+        </div>
+        <div class="col-lg-1">
+
+        </div>
+    </div><!-- /.row -->
+
+
+
+    <div class="row">
+        <div class="col-lg-1">
+
+        </div>
+        <div class="col-lg-10">
+            <h3 class="title">公司科技发展预测</h3>
+            <select class="form-control select3">
+                <option value="table1">研发经费支出</option>
+                <option value="table2">论文数量</option>
+                <option value="table3">专利数量</option>
+            </select>
+            <script type="text/javascript">
+                $('.select3').selectric().on('change', function () {
+
+                });
+            </script>
+            <div id="chart3" style="height:500px"></div>
+        </div>
+        <div class="col-lg-1">
+
+        </div>
+    </div><!-- /.row -->
+
+</div>
+
+
+<!-- 雷达图 -->
 <script type="text/javascript">
     var dom = document.getElementById("radar");
-    var myChart1 = echarts.init(dom);
-    var app = {};
+    var myChart = echarts.init(dom);
     option = null;
-    app.title = '堆叠条形图';
     option = {
         title: {
-            // text: '基础雷达图'
+            text: '发展雷达图'
         },
         tooltip: {},
         legend: {
@@ -260,15 +261,15 @@
             shape: 'circle',
             indicator: [{
                     name: '每股收益',
-                    max: 0
+                    max: 2000
                 },
                 {
                     name: '销售净利润',
-                    max: 0
+                    max: 25000
                 },
                 {
                     name: '经营活动净收益',
-                    max: 0
+                    max: 25000
                 },
                 {
                     name: '净资产收益率',
@@ -301,467 +302,854 @@
             type: 'radar',
             // areaStyle: {normal: {}},
             data: [{
-                    value: [],
+                    value: [1200,19000,19000,4300, 4300,10000, 28000, 35000, 50000],
                     name: '2017.4'
                 },
                 {
-                    value: [],
+                    value: [1500, 21000, 21000,5000, 5000,14000, 28000, 31000, 42000],
                     name: '2018.1'
                 },
                 {
-                    value: [],
+                    value: [1700, 19000, 20000,2500,2500, 12000, 25000, 30000, 45000],
                     name: '2018.2'
                 },
                 {
-                    value: [],
+                    value: [1600, 20000, 20000,2500, 2500,11000, 27000, 37000, 50000],
                     name: '2018.3'
                 }
             ]
         }]
     };
-    if (option && typeof option === "object") {
-        myChart1.setOption(option, true);
-    }
 </script>
 
-<!-- Eps -->
-<script type="text/javascript">
-    var dom1 = document.getElementById("Eps1");
-    var dom2 = document.getElementById("Eps2");
-    var myChart3 = echarts.init(dom1);
-    var myChart31 = echarts.init(dom2);
-    var app = {};
-    option = null;
-    option1 = null;
-    option = {
+
+<!-- 1经济预测 -->
+<script>
+    var dom1 = document.getElementById("chart1");
+    var myChart1 = echarts.init(dom1);
+    option11 = null;
+    option12 = null;
+    option13 = null;
+
+    option11 = {
         title: {
-            text: 'EPS（每股收益）',
+            text: '营业利润预测',
+            left: 0
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'line'
+            }
         },
         grid: {
-            left: '13%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
+            left: '10%',
+            right: '10%',
+            bottom: '15%'
         },
         xAxis: {
             type: 'category',
+            boundaryGap: false,
             data: function () {
                 var list = [];
-                for (var i = 2000; i <= 2018; i++) {
+                for (var i = 2000; i <= 2025; i++) {
                     for (var j = 1; j <= 4; j++) {
-                        if (i == 2018 && j == 4) break
-                        list.push(i + '年.' + j);
+                        list.push(i + '年第' + j + '季度');
                     }
                 }
                 return list;
             }()
         },
         yAxis: {
-            type: 'value'
+            type: 'value',
+            scale: true,
+            splitArea: {
+                show: true
+            }
         },
+        dataZoom: [{
+            show: true,
+            type: 'slider',
+            y: '90%',
+            start: 50,
+            end: 100
+        }],
+        visualMap: [{
+            show: false,
+            pieces: [{
+                gt: 0,
+                color: 'red'
+            }, {
+                lt: 0,
+                color: 'blue'
+            }]
+        }],
         series: [{
-            data: [],
-            type: 'line'
-        }]
+                name: '净利润',
+                type: 'line',
+                data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 287100417.65, 399387398.84, 147702664.56, 118105526.91, 244702850.78,
+                    88507384.8, 163820016.04, 244114886.07, 194450865.55, 48636158.63, 157529982.36,
+                    78294837.43, 112397408.16, '-', '-', '-'
+                ],
+                smooth: true,
+                lineStyle: {
+                    normal: {
+                        opacity: 0.5
+                    }
+                }
+            },
+            {
+                name: '预测',
+                type: 'line',
+                itemStyle: {
+                    normal: {
+                        lineStyle: {
+                            width: 2,
+                            type: 'dotted'
+                        }
+                    }
+                },
+                data: ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
+                    '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
+                    '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
+                    '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
+                    '-', '-', '-', '-', '-', 112397408.16, 88507384.8, 163820016.04, 244114886.07
+                ],
+                smooth: true,
+                lineStyle: {
+                    normal: {
+                        opacity: 0.5
+                    }
+                },
+                markArea: {
+                    data: [
+                        [{
+                                name: '预测',
+                                xAxis: 19 * 4 - 2
+                            },
+                            {
+                                name: '预测',
+                                xAxis: 19 * 4 + 1
+                            }
+                        ]
+                    ]
+                }
+            },
+        ]
     };
-    option1 = {
+    option12 = {
         title: {
-            text: 'EPS较上季度变化情况',
+            text: '净收益预测',
+            left: 0
         },
         tooltip: {
             trigger: 'axis',
-            axisPointer: { // 坐标轴指示器，坐标轴触发有效
-                type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-            },
-            formatter: function (params) {
-                var tar;
-                if (params[1].value != '-') {
-                    tar = params[1];
-                } else {
-                    tar = params[0];
-                }
-                return tar.name + '<br/>' + tar.seriesName + ' : ' + tar.value;
+            axisPointer: {
+                type: 'line'
             }
         },
-        // legend: {
-        //     data:['支出','收入']
-        // },
         grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
+            left: '10%',
+            right: '10%',
+            bottom: '15%'
         },
         xAxis: {
             type: 'category',
-            splitLine: {
-                show: false
-            },
+            boundaryGap: false,
             data: function () {
                 var list = [];
-                for (var i = 2000; i <= 2018; i++) {
+                for (var i = 2000; i <= 2025; i++) {
                     for (var j = 1; j <= 4; j++) {
-                        if (i == 2018 && j == 4) break
                         list.push(i + '年第' + j + '季度');
-                    }
-                }
-                return list.splice(1, list.length - 1);
-            }()
-        },
-        yAxis: {
-            type: 'value'
-        },
-        series: [{
-                name: '较上季度增长',
-                type: 'bar',
-                // label: {
-                //     normal: {
-                //         show: true,
-                //         position: 'top'
-                //     }
-                // },
-                data: []
-            },
-            {
-                name: '较上季度减少',
-                type: 'bar',
-                stack: '总量',
-                // label: {
-                //     normal: {
-                //         show: true,
-                //         position: 'bottom'
-                //     }
-                // },
-                data: []
-            }
-        ]
-    };
-
-    if (option && typeof option === "object") {
-        myChart3.setOption(option, true);
-    }
-    if (option1 && typeof option1 === "object") {
-        myChart31.setOption(option1, true);
-    }
-</script>
-
-<!-- 净利润 -->
-<script type="text/javascript">
-    var dom1 = document.getElementById("Jlr1");
-    var dom2 = document.getElementById("Jlr2");
-    var myChart4 = echarts.init(dom1);
-    var myChart41 = echarts.init(dom2);
-    var app = {};
-    option = null;
-    option1 = null;
-    option = {
-        title: {
-            text: '公司净利润',
-        },
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
-        xAxis: {
-            type: 'category',
-            data: function () {
-                var list = [];
-                for (var i = 2000; i <= 2018; i++) {
-                    for (var j = 1; j <= 4; j++) {
-                        if (i == 2018 && j == 4) break
-                        list.push(i + '年.' + j);
                     }
                 }
                 return list;
             }()
         },
         yAxis: {
-            type: 'value'
+            type: 'value',
+            scale: true,
+            splitArea: {
+                show: true
+            }
         },
+        dataZoom: [{
+            show: true,
+            type: 'slider',
+            y: '90%',
+            start: 50,
+            end: 100
+        }],
+        visualMap: [{
+            show: false,
+            pieces: [{
+                gt: 0,
+                color: 'red'
+            }, {
+                lt: 0,
+                color: 'blue'
+            }]
+        }],
         series: [{
-            data: [],
-            type: 'line'
-        }]
+                name: '净收益',
+                type: 'line',
+                data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 287100417.65, 399387398.84, 147702664.56, 118105526.91, 244702850.78,
+                    88507384.8, 163820016.04, 244114886.07, 194450865.55, 48636158.63, 157529982.36,
+                    78294837.43, 112397408.16, '-', '-', '-'
+                ],
+                smooth: true,
+                lineStyle: {
+                    normal: {
+                        opacity: 0.5
+                    }
+                }
+            },
+            {
+                name: '预测',
+                type: 'line',
+                itemStyle: {
+                    normal: {
+                        lineStyle: {
+                            width: 2,
+                            type: 'dotted'
+                        }
+                    }
+                },
+                data: ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
+                    '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
+                    '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
+                    '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
+                    '-', '-', '-', '-', '-', 112397408.16, 88507384.8, 163820016.04, 244114886.07
+                ],
+                smooth: true,
+                lineStyle: {
+                    normal: {
+                        opacity: 0.5
+                    }
+                },
+                markArea: {
+                    data: [
+                        [{
+                                name: '预测',
+                                xAxis: 19 * 4 - 2
+                            },
+                            {
+                                name: '预测',
+                                xAxis: 19 * 4 + 1
+                            }
+                        ]
+                    ]
+                }
+            },
+        ]
     };
-    option1 = {
+    option13 = {
         title: {
-            text: 'EPS较上季度变化情况',
+            text: '每股收益预测',
+            left: 0
         },
         tooltip: {
             trigger: 'axis',
-            axisPointer: { // 坐标轴指示器，坐标轴触发有效
-                type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-            },
-            formatter: function (params) {
-                var tar;
-                if (params[1].value != '-') {
-                    tar = params[1];
-                } else {
-                    tar = params[0];
-                }
-                return tar.name + '<br/>' + tar.seriesName + ' : ' + tar.value;
+            axisPointer: {
+                type: 'line'
             }
         },
-        // legend: {
-        //     data:['支出','收入']
-        // },
         grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
+            left: '10%',
+            right: '10%',
+            bottom: '15%'
         },
         xAxis: {
             type: 'category',
-            splitLine: {
-                show: false
-            },
+            boundaryGap: false,
             data: function () {
                 var list = [];
-                for (var i = 2000; i <= 2018; i++) {
+                for (var i = 2000; i <= 2025; i++) {
                     for (var j = 1; j <= 4; j++) {
-                        if (i == 2018 && j == 4) break
                         list.push(i + '年第' + j + '季度');
-                    }
-                }
-                return list.splice(1, list.length - 1);
-            }()
-        },
-        yAxis: {
-            type: 'value'
-        },
-        series: [{
-                name: '较上季度增长',
-                type: 'bar',
-                // label: {
-                //     normal: {
-                //         show: true,
-                //         position: 'top'
-                //     }
-                // },
-                data: []
-            },
-            {
-                name: '较上季度减少',
-                type: 'bar',
-                stack: '总量',
-                // label: {
-                //     normal: {
-                //         show: true,
-                //         position: 'bottom'
-                //     }
-                // },
-                data: []
-            }
-        ]
-    };
-
-    if (option && typeof option === "object") {
-        myChart4.setOption(option, true);
-    }
-    if (option1 && typeof option1 === "object") {
-        myChart41.setOption(option1, true);
-    }
-</script>
-
-<!-- 净收益 -->
-<script type="text/javascript">
-    var dom1 = document.getElementById("Jsy1");
-    var dom2 = document.getElementById("Jsy2");
-    var myChart5 = echarts.init(dom1);
-    var myChart51 = echarts.init(dom2);
-    var app = {};
-    option = null;
-    option1 = null;
-    option = {
-        title: {
-            text: '公司净收益',
-        },
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
-        xAxis: {
-            type: 'category',
-            data: function () {
-                var list = [];
-                for (var i = 2000; i <= 2018; i++) {
-                    for (var j = 1; j <= 4; j++) {
-                        if (i == 2018 && j == 4) break
-                        list.push(i + '年.' + j);
                     }
                 }
                 return list;
             }()
         },
         yAxis: {
-            type: 'value'
-        },
-        series: [{
-            data: [],
-            type: 'line'
-        }]
-    };
-    option1 = {
-        title: {
-            text: '较上季度变化情况',
-        },
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: { // 坐标轴指示器，坐标轴触发有效
-                type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-            },
-            formatter: function (params) {
-                var tar;
-                if (params[1].value != '-') {
-                    tar = params[1];
-                } else {
-                    tar = params[0];
-                }
-                return tar.name + '<br/>' + tar.seriesName + ' : ' + tar.value;
+            type: 'value',
+            scale: true,
+            splitArea: {
+                show: true
             }
         },
-        // legend: {
-        //     data:['支出','收入']
-        // },
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
+        dataZoom: [{
+            show: true,
+            type: 'slider',
+            y: '90%',
+            start: 50,
+            end: 100
+        }],
+        visualMap: [{
+            show: false,
+            pieces: [{
+                gt: 0,
+                color: 'red'
+            }, {
+                lt: 0,
+                color: 'blue'
+            }]
+        }],
+        series: [{
+                name: '每股收益',
+                type: 'line',
+                data: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.03, 0.0, 0.01, 0.01, 0.07, 0.0, 0.03, 0.02, -0.01,
+                    0.0, -0.0, 0.0, -0.1, -0.05, -0.02, -0.02, -0.47, -0.0, -0.11, -0.01, 0.15, -0.01, -
+                    0.02, -0.02, -0.14, 0.0, -0.01, 0.1, 0.02, 0.02, 0.02, 0.0, 0.0, -0.01, -0.01, 0.02,
+                    0.0, -0.02, -0.01, 0.03, 0.03, -0.01, -0.0, -0.02, 0.05, -0.03, 0.09, 0.0, -0.01, -0.01,
+                    -0.0, -0.01, -0.1, -0.0, 0.01, 0.0, 0.04, -0.04, 0.07, -0.01, 0.02, -0.03, -0.02, 0.07,
+                    -1.31, -0.06, -0.05, -0.13, '-', '-', '-'
+                ],
+                smooth: true,
+                lineStyle: {
+                    normal: {
+                        opacity: 0.5
+                    }
+                }
+            },
+            {
+                name: '预测',
+                type: 'line',
+                itemStyle: {
+                    normal: {
+                        lineStyle: {
+                            width: 2,
+                            type: 'dotted'
+                        }
+                    }
+                },
+                data: ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
+                    '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
+                    '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
+                    '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
+                    '-', '-', '-', '-', '-', -0.13, 0.02, -0.03, -0.02
+                ],
+                smooth: true,
+                lineStyle: {
+                    normal: {
+                        opacity: 0.5
+                    }
+                },
+                markArea: {
+                    data: [
+                        [{
+                                name: '预测',
+                                xAxis: 19 * 4 - 2
+                            },
+                            {
+                                name: '预测',
+                                xAxis: 19 * 4 + 1
+                            }
+                        ]
+                    ]
+                }
+            },
+        ]
+    };
+</script>
+
+<!-- 2规模预测 -->
+<script>
+    var dom2 = document.getElementById("chart2");
+    var myChart2 = echarts.init(dom2);
+    option21 = null;
+    option22 = null;
+    option23 = null;
+
+    data = [
+        [50, 47, 49, 56, 67, 73, 71, 84, 76, 99, 97, 88, 108, 106, 106, 122, 123, 123, 134],
+        [52, 50, 60, 67, 63, 65, 80, 97, 93, 92, 90, 109, 93, 107, 111, 113, 131, 125, 136],
+        [39, 53, 57, 67, 62, 56, 72, 64, 85, 99, 99, 93, 102, 112, 115, 113, 132, 127, 152],
+        [60, 49, 57, 59, 59, 72, 81, 88, 78, 76, 106, 98, 108, 106, 105, 113, 118, 142, 128]
+    ]
+    all_data = [201, 199, 223, 249, 251, 266, 304, 333, 332, 366, 392, 388, 411, 431, 437, 461, 504, 517, 550]
+
+
+    option21 = {
+        // backgroundColor: "#344b58",
+        title: {
+            x: "4%",
+
+            textStyle: {
+                color: '#fff',
+                fontSize: '22'
+            },
+            subtextStyle: {
+                color: '#90979c',
+                fontSize: '16',
+
+            },
         },
-        xAxis: {
-            type: 'category',
+        tooltip: {
+            trigger: "axis",
+            axisPointer: {
+                type: "shadow",
+                textStyle: {
+                    color: "#fff"
+                }
+
+            },
+        },
+        grid: {
+            borderWidth: 0,
+            top: 110,
+            bottom: 95,
+            textStyle: {
+                color: "#fff"
+            }
+        },
+        legend: {
+            x: '4%',
+            top: '11%',
+            textStyle: {
+                color: '#90979c',
+            },
+            data: ['本科生', '研究生', '博士生', '其他']
+        },
+
+
+        calculable: true,
+        xAxis: [{
+            type: "category",
+            axisLine: {
+                lineStyle: {
+                    color: '#90979c'
+                }
+            },
             splitLine: {
                 show: false
             },
+            axisTick: {
+                show: false
+            },
+            splitArea: {
+                show: false
+            },
+            axisLabel: {
+                interval: 0,
+
+            },
             data: function () {
                 var list = [];
-                for (var i = 2000; i <= 2018; i++) {
-                    for (var j = 1; j <= 4; j++) {
-                        if (i == 2018 && j == 4) break
-                        list.push(i + '年第' + j + '季度');
-                    }
-                }
-                return list.splice(1, list.length - 1);
-            }()
-        },
-        yAxis: {
-            type: 'value'
-        },
-        series: [{
-                name: '较上季度增长',
-                type: 'bar',
-                // label: {
-                //     normal: {
-                //         show: true,
-                //         position: 'top'
-                //     }
-                // },
-                data: []
-            },
-            {
-                name: '较上季度减少',
-                type: 'bar',
-                stack: '总量',
-                // label: {
-                //     normal: {
-                //         show: true,
-                //         position: 'bottom'
-                //     }
-                // },
-                data: []
-            }
-        ]
-    };
-
-    if (option && typeof option === "object") {
-        myChart5.setOption(option, true);
-        myChart51.setOption(option, true);
-    }
-    if (option1 && typeof option1 === "object") {
-        myChart51.setOption(option1, true);
-    }
-</script>
-
-
-
-<!-- <script type="text/javascript">
-    var dom1 = document.getElementById("benifit_bar1");
-    var dom2 = document.getElementById("benifit_bar2");
-    var myChart3 = echarts.init(dom1);
-    var myChart31 = echarts.init(dom2);
-    var app = {};
-    option = null;
-    option = {
-        title: {
-            text: '净利润',
-            // subtext: 'From ExcelHome',
-            // sublink: 'http://e.weibo.com/1341556070/Aj1J2x5a5'
-        },
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-            },
-            formatter: function (params) {
-                var tar;
-                if (params[1].value != '-') {
-                    tar = params[1];
-                }
-                else {
-                    tar = params[0];
-                }
-                return tar.name + '<br/>' + tar.seriesName + ' : ' + tar.value;
-            }
-        },
-        // legend: {
-        //     data:['支出','收入']
-        // },
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
-        xAxis: {
-            type: 'category',
-            splitLine: {show: false},
-            data: function () {
-                var list = [];
-                for (var i = 2006; i <= 2017; i++) {
+                for (var i = 2000; i <= 2025; i++) {
                     list.push(i + '年');
                 }
                 return list;
             }()
-        },
-        yAxis: {
-            type: 'value'
-        },
-        series: [
-            {
-                name: '辅助',
-                type: 'bar',
-                stack: '总量',
+        }],
+        yAxis: [{
+            type: "value",
+            splitLine: {
+                show: false
+            },
+            axisLine: {
+                lineStyle: {
+                    color: '#90979c'
+                }
+            },
+            axisTick: {
+                show: false
+            },
+            axisLabel: {
+                interval: 0,
+
+            },
+            splitArea: {
+                show: false
+            }
+        }],
+        dataZoom: [{
+            show: true,
+            type: 'slider',
+            height: 30,
+            xAxisIndex: [
+                0
+            ],
+            bottom: 30,
+            start: 50,
+            end: 100,
+
+
+        }],
+        series: [{
+                name: "本科生",
+                type: "bar",
+                stack: "总量",
+                barMaxWidth: 35,
+                barGap: "10%",
                 itemStyle: {
                     normal: {
-                        barBorderColor: 'rgba(0,0,0,0)',
-                        color: 'rgba(0,0,0,0)'
-                    },
-                    emphasis: {
-                        barBorderColor: 'rgba(0,0,0,0)',
-                        color: 'rgba(0,0,0,0)'
+                        // color: "rgba(255,144,128,1)",
+                        label: {
+                            show: true,
+                            textStyle: {
+                                color: "#fff"
+                            },
+                            position: "insideTop",
+                            formatter: function (p) {
+                                return p.value > 0 ? (p.value) : '';
+                            }
+                        }
                     }
                 },
-                data: [0, 900, 1245, 1530, 1376, 1376, 1511, 1689, 1856, 1495, 1292]
+                data: data[0].concat(['-', '-', '-']),
             },
             {
-                name: '收入',
+                name: "研究生",
+                type: "bar",
+                stack: "总量",
+                barMaxWidth: 35,
+                barGap: "10%",
+                itemStyle: {
+                    normal: {
+                        // color: "rgba(255,144,128,1)",
+                        label: {
+                            show: true,
+                            textStyle: {
+                                color: "#fff"
+                            },
+                            position: "insideTop",
+                            formatter: function (p) {
+                                return p.value > 0 ? (p.value) : '';
+                            }
+                        }
+                    }
+                },
+                data: data[1].concat(['-', '-', '-']),
+            },
+            {
+                name: "博士生",
+                type: "bar",
+                stack: "总量",
+                barMaxWidth: 35,
+                barGap: "10%",
+                itemStyle: {
+                    normal: {
+                        // color: "rgba(255,144,128,1)",
+                        label: {
+                            show: true,
+                            textStyle: {
+                                color: "#fff"
+                            },
+                            position: "insideTop",
+                            formatter: function (p) {
+                                return p.value > 0 ? (p.value) : '';
+                            }
+                        }
+                    }
+                },
+                data: data[2].concat(['-', '-', '-']),
+            },
+            {
+                name: "其他",
+                type: "bar",
+                stack: "总量",
+                barMaxWidth: 35,
+                barGap: "10%",
+                itemStyle: {
+                    normal: {
+                        // color: "rgba(255,144,128,1)",
+                        label: {
+                            show: true,
+                            textStyle: {
+                                color: "#fff"
+                            },
+                            position: "insideTop",
+                            formatter: function (p) {
+                                return p.value > 0 ? (p.value) : '';
+                            }
+                        }
+                    }
+                },
+                data: data[3].concat(['-', '-', '-'])
+            },
+            {
+                name: "总数",
+                type: "line",
+                smooth: true,
+                // stack: "总量",
+                symbolSize: 10,
+                symbol: 'circle',
+                itemStyle: {
+                    normal: {
+                        color: "rgba(252,230,48,1)",
+                        barBorderRadius: 0,
+                        label: {
+                            show: true,
+                            position: "top",
+                            formatter: function (p) {
+                                return p.value > 0 ? (p.value) : '';
+                            }
+                        }
+                    }
+                },
+                data: all_data.concat(['-', '-', '-'])
+            },
+            {
+                name: "本科生",
+                type: "bar",
+                stack: "总量",
+                barMaxWidth: 35,
+                barGap: "10%",
+                itemStyle: {
+                    normal: {
+                        opacity: 0.5,
+                        // color: "rgba(255,144,128,1)",
+                        label: {
+                            show: true,
+                            textStyle: {
+                                color: "#fff"
+                            },
+                            position: "insideTop",
+                            formatter: function (p) {
+                                return p.value > 0 ? (p.value) : '';
+                            }
+                        }
+                    }
+                },
+                data: function () {
+                    var list = [];
+                    for (var i = 2000; i <= 2018; i++) {
+                        list.push('-');
+                    }
+                    return list.concat([138, 142, 146]);
+                }()
+            },
+            {
+                name: "研究生",
+                type: "bar",
+                stack: "总量",
+                barMaxWidth: 35,
+                barGap: "10%",
+                itemStyle: {
+                    normal: {
+                        opacity: 0.5,
+                        // color: "rgba(255,144,128,1)",
+                        label: {
+                            show: true,
+                            textStyle: {
+                                color: "#fff"
+                            },
+                            position: "insideTop",
+                            formatter: function (p) {
+                                return p.value > 0 ? (p.value) : '';
+                            }
+                        }
+                    }
+                },
+                data: function () {
+                    var list = [];
+                    for (var i = 2000; i <= 2018; i++) {
+                        list.push('-');
+                    }
+                    return list.concat([140, 144, 148]);
+                }()
+            },
+            {
+                name: "博士生",
+                type: "bar",
+                stack: "总量",
+                barMaxWidth: 35,
+                barGap: "10%",
+                itemStyle: {
+                    normal: {
+                        opacity: 0.5,
+                        // color: "rgba(255,144,128,1)",
+                        label: {
+                            show: true,
+                            textStyle: {
+                                color: "#fff"
+                            },
+                            position: "insideTop",
+                            formatter: function (p) {
+                                return p.value > 0 ? (p.value) : '';
+                            }
+                        }
+                    }
+                },
+                data: function () {
+                    var list = [];
+                    for (var i = 2000; i <= 2018; i++) {
+                        list.push('-');
+                    }
+                    return list.concat([156, 160, 164]);
+                }()
+            },
+            {
+                name: "其他",
+                type: "bar",
+                stack: "总量",
+                barMaxWidth: 35,
+                barGap: "10%",
+                itemStyle: {
+                    normal: {
+                        opacity: 0.5,
+                        // color: "rgba(255,144,128,1)",
+                        label: {
+                            show: true,
+                            textStyle: {
+                                color: "#fff"
+                            },
+                            position: "insideTop",
+                            formatter: function (p) {
+                                return p.value > 0 ? (p.value) : '';
+                            }
+                        }
+                    }
+                },
+                data: function () {
+                    var list = [];
+                    for (var i = 2000; i <= 2018; i++) {
+                        list.push('-');
+                    }
+                    return list.concat([132, 136, 140]);
+                }()
+            },
+            {
+                name: "总数",
+                type: "line",
+                smooth: true,
+                // stack: "总量",
+                symbolSize: 10,
+                symbol: 'circle',
+                itemStyle: {
+                    normal: {
+                        lineStyle: {
+                            width: 2,
+                            type: 'dotted'
+                        },
+                        color: "rgba(252,230,48,1)",
+                        barBorderRadius: 0,
+                        label: {
+                            show: true,
+                            position: "top",
+                            formatter: function (p) {
+                                return p.value > 0 ? (p.value) : '';
+                            }
+                        }
+                    }
+                },
+                data: function () {
+                    var list = [];
+                    for (var i = 2000; i < 2018; i++) {
+                        list.push('-');
+                    }
+                    return list.concat([550, 566, 582, 598]);
+                }()
+            },
+        ]
+    }
+</script>
+
+<!-- 3科技预测 -->
+<script>
+    var dom3 = document.getElementById("chart3");
+    var myChart3 = echarts.init(dom3)
+    option31 = null;
+    option32 = null;
+    option33 = null;
+
+    option31 = {
+        title: {
+            // text: '2000-2016年中国汽车销量及增长率'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        // toolbox: {
+        //     feature: {
+        //         dataView: {
+        //             show: true,
+        //             readOnly: false
+        //         },
+        //         restore: {
+        //             show: true
+        //         },
+        //         saveAsImage: {
+        //             show: true
+        //         }
+        //     }
+        // },
+        grid: {
+            containLabel: true
+        },
+        legend: {
+            data: ['增速', '支出(万)']
+        },
+        dataZoom: [{
+            show: true,
+            type: 'slider',
+            y: '90%',
+            start: 50,
+            end: 100
+            // filterMode: 'empty'
+        }],
+        xAxis: [{
+            type: 'category',
+            axisTick: {
+                alignWithLabel: true
+            },
+            data: function () {
+                var list = [];
+                for (var i = 2000; i <= 2025; i++) {
+                    list.push(i + '年');
+                }
+                return list;
+            }()
+        }],
+        yAxis: [{
+            type: 'value',
+            name: '增速',
+            min: 0,
+            max: 50,
+            position: 'right',
+            axisLabel: {
+                formatter: '{value} %'
+            }
+        }, {
+            type: 'value',
+            name: '支出(万)',
+            min: 0,
+            // max: 3000,
+            position: 'left'
+        }],
+        series: [{
+                name: '增速',
+                type: 'line',
+                smooth: true,
+                // stack: '总量1',
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top',
+                    }
+                },
+                lineStyle: {
+                    normal: {
+                        width: 3,
+                        shadowColor: 'rgba(0,0,0,0.4)',
+                        shadowBlur: 10,
+                        shadowOffsetY: 10
+                    }
+                },
+                data: [1, 13, 37, 35, 15, 13, 25, 21, 6, 45, 32, 2, 4, 13, 6, 4, 11, 21, 6].concat(['-', '-',
+                    '-'
+                ])
+            },
+            {
+                name: '支出(万)',
                 type: 'bar',
+                yAxisIndex: 1,
                 stack: '总量',
                 label: {
                     normal: {
@@ -769,147 +1157,105 @@
                         position: 'top'
                     }
                 },
-                data: [900, 345, 393, '-', '-', 135, 178, 286, '-', '-', '-']
+                data: [209, 236, 325, 439, 507, 576, 722, 879, 938, 1364, 1806, 1851, 1931, 2198, 2349, 2460,
+                    2735, 3309, 3508
+                ].concat(['-', '-', '-'])
             },
             {
-                name: '支出',
+                name: '增速',
+                type: 'line',
+                smooth: true,
+                // stack: '总量1',
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top',
+                    }
+                },
+                lineStyle: {
+                    normal: {
+                        type: 'dotted',
+                        width: 3,
+                        shadowColor: 'rgba(0,0,0,0.4)',
+                        shadowBlur: 10,
+                        shadowOffsetY: 10
+                    }
+                },
+                data: function () {
+                    var list = [];
+                    for (var i = 2000; i < 2018; i++) {
+                        list.push('-');
+                    }
+                    return list.concat([6, 2, 4, 13]);
+                }()
+            },
+            {
+                name: '支出(万)',
                 type: 'bar',
+                yAxisIndex: 1,
                 stack: '总量',
                 label: {
                     normal: {
                         show: true,
-                        position: 'bottom'
+                        position: 'top',
                     }
                 },
-                data: ['-', '-', '-', 108, 154, '-', '-', '-', 119, 361, 203]
+                itemStyle: {
+                    normal: {
+                        opacity: 0.7,
+                        // color: "rgba(255,144,128,1)",
+
+                    }
+                },
+                data: function () {
+                    var list = [];
+                    for (var i = 2000; i <= 2018; i++) {
+                        list.push('-');
+                    }
+                    return list.concat([3578, 3721, 4205]);
+                }()
             }
         ]
     };
-    if (option && typeof option === "object") {
-        myChart3.setOption(option, true);
-        myChart31.setOption(option, true);
-    }
 </script>
 
-<script type="text/javascript">
-    var dom1 = document.getElementById("rate_bar1");
-    var dom2 = document.getElementById("rate_bar2");
-    var myChart4 = echarts.init(dom1);
-    var myChart41 = echarts.init(dom2);
-    var app = {};
-    option = null;
-    option = {
-        title: [
-            {
-                text: '增长率',
-                // left: 'center',
-                // top: 20,
-                // textStyle: {
-                //     color: 'blue',
-                //fontSize: '14',
-                // },
-            },
-            //     {
-            //         text: '实验室',
-            //         //borderColor: '#999',
-            //         //borderWidth: 1,
-            //         textStyle: {
-            //             fontSize: 14
-            //         },
-            //         left: 'center',
-            //         top: '88%'
-            //     },
-        ],
-        tooltip: {
-            trigger: 'axis',//坐标轴触发，主要在柱状图，折线图等会使用类目轴的图表中使用。
-            axisPointer: { // 坐标轴指示器，坐标轴触发有效
-                type: 'shadow' // 默认为直线，可选为：'line' | 'shadow' |'cross'
-            }
-        },
-        // legend: {
-        //     data: ['利润', '支出'],
-        //     //bottom: '0',
-        // },
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
-        xAxis: [{
-            type: 'category',
-            axisTick: { //坐标轴刻度相关设置。
-                show: false,
-            },
-            data: function () {
-                var list = [];
-                for (var i = 2006; i <= 2017; i++) {
-                    list.push(i + '年');
-                }
-                return list;
-            }(),
-//                      axisLine: {
-//                          //show: true, //是否显示坐标轴轴线。
-//                          //onZero:false,//X 轴或者 Y 轴的轴线是否在另一个轴的 0 刻度上，只有在另一个轴为数值轴且包含 0 刻度时有效。
-//                          //symbol:'arrow', //轴线两边的箭头
-////                            lineStyle: {
-////                                width: 2,
-////                                color: 'green',
-////                            },
-//                      },
-
-        }],
-        yAxis: [{
-            type: 'value',
-            // name: 'Z值',
-            nameLocation: 'center',
-            nameGap: 40
-        }],
-        series: [
-            // {
-            //     name: '利润',
-            //     type: 'bar',
-            //     label: { //图形上的文本标签，可用于说明图形的一些数据信息，比如值，名称等
-            //         normal: { //正常情况
-            //             show: true, //是否显示标签
-            //             position: 'inside', //标签的位置。
-            //             distance: 5, //距离图形元素的距离。当 position 为字符描述值（如 'top'、'insideRight'）时候有效。default: 5
-            //             rotate: 0, //标签旋转。从 -90 度到 90 度。正值是逆时针。
-
-            //         }
-            //     },
-            //     data: [200, ,170,0, 240, 0,244, 0,200]
-            // }
-            {
-                name: '收入',
-                type: 'bar',
-                stack: '总量', //数据堆叠，同个类目轴上系列配置相同的stack值可以堆叠放置。
-                label: {
-                    normal: {
-                        show: true, //是否显示标签
-                        position: 'inside', //标签的位置。
+<script>
+    myChart.setOption(option, true);
+    myChart1.setOption(option11, true);
+    myChart2.setOption(option21, true);
+    myChart3.setOption(option31, true);
+    $(document).ready(function () {
+        var com_name = '{{title|safe}}';
+        $.getJSON("/flushCom/", {
+                'name': com_name
+            }, function (ret) {
+                myChart1.setOption({
+                        series: [{
+                                data: ret['data'][1].concat(['-', '-', '-'])
+                            },
+                            {
+                                data: function () {
+                                    var list = [];
+                                    for (var i = 2000; i <= 2018; i++) {
+                                        for (var j = 1; j <= 4; j++) {
+                                            if (i == 2018 && (j == 4 || j == 3)) break
+                                            list.push('-');
+                                        }
+                                    }
+                                    return list.concat(ret['predict'][1]);
+                                }()
+                            }
+                        ]
                     }
-                },
-                data: [320, '-', 342, '-', 390, '-', 420, '-', 330]
-            },
-            {
-                name: '支出',
-                type: 'bar',
-                stack: '总量',
-                label: {
-                    normal: {//正常情况
-                        show: true, //是否显示标签
-                        position: 'inside'
-                    }
-                },
-                data: ['-', -120, '-', -132, '-', -102, '-', -134, 0]
-            }
-        ]
-    };
-    if (option && typeof option === "object") {
-        myChart4.setOption(option, true);
-        myChart41.setOption(option, true);
-    }
 
-</script> -->
+                );
+
+
+
+            }
+
+
+        )
+    });
+</script>
 {% endblock content%}

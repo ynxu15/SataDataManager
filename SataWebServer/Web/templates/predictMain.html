@@ -6,7 +6,7 @@
 <div class="row">
     <div class="col-lg-12">
         <ol class="breadcrumb">
-            <li><a href="predictPart"><i class="fa fa-dashboard"></i> 上海市</a></li>
+            <li><i class="fa fa-dashboard"></i> 上海市</li>
             <!-- <li class="active"><i class="fa fa-table"></i> Tables</li> -->
         </ol>
     </div>
@@ -38,14 +38,24 @@
             data[j][i] = li[i*5+j]
         }
     }
+
     var dom = document.getElementById("container");
     var myChart = echarts.init(dom);
-    var app = {};
+
     option = null;
-    app.title = '堆叠条形图';
-    // $("#container").css( 'width', $("#container").width());
-    // $("#container").css( 'height', $("#container").height());
+
     option = {
+        title: {
+            text: '上海市企业分布情况',
+            textStyle:{
+                fontSize:26
+            },
+            subtext:'(点击跳转至对应区域发展情况分析)',
+            subtextStyle:{
+                fontSize:16
+            },
+            left: 'center'
+        },
         tooltip: {
             trigger: 'axis',
             axisPointer: {            // 坐标轴指示器，坐标轴触发有效
@@ -53,12 +63,14 @@
             }
         },
         legend: {
+            top:'7%',
             data: ['畜牧业','食品制造业','纺织业','医药制造业','金属制品业']
         },
         grid: {
             left: '3%',
             right: '4%',
             bottom: '3%',
+            top: '10%',
             containLabel: true
         },
         xAxis: {
@@ -134,11 +146,7 @@
 
     myChart.setOption(option, true);
     myChart.on('click', function (params) {
-        // window.open('https://www.baidu.com/s?wd=' + encodeURIComponent(params.name
         window.location.href='predictPart?region='+encodeURIComponent(params.name)+'&type=全部'
     });
-    // myChart.on('legendselectchanged', function (params) {
-    //     window.location.href='predictPart?region=全部&type='+encodeURIComponent(params.name)
-    // });
 </script>
 {% endblock content%}

@@ -45,8 +45,11 @@ urlpatterns = [
     url('myget', testView.myget),
     url(r'^ajax_list/$', testView.ajax_list),
     url(r'^ajax_dict/$', testView.ajax_dict),
-    url('getByRegion',devPredictionView.getByRegion),
-    url('getByType',devPredictionView.getByType),
+    # url('getByRegionAndType',devPredictionView.getByRegionAndType),
+
+    # url('getByType',devPredictionView.getByType),
     url('getByComName',devPredictionView.getByComName),
-    url('charts',devPredictionView.charts)
+    url('charts',devPredictionView.charts),
+    url('flushPart',devPredictionView.flushPart),
+    url('flushCom',devPredictionView.flushCom)
 ]
