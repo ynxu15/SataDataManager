@@ -5,7 +5,7 @@
 {% block  contentTable %}
 
 <!-- 标题 -->
-<h2 align="center">上海市企业发展状况</h2>
+<h2 align="center">上海市企业发展状况对比分析</h2>
 <script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
 
 <!-- 首行选择框 -->
@@ -100,22 +100,10 @@
   </thead>
   <tbody id ="firstTab">
     <tr>
-      <td>745487</td>
-      <td>上海福网信息科技有限公司</td>
-      <td>松江</td>
+      <td>733542</td>
+      <td>韶远科技（上海）有限公司</td>
+      <td>浦东</td>
       <td><button type="button" class="btn btn-secondary" value="0" onclick="addButton(this);">添加</button></td>
-    </tr>
-    <tr>
-      <td>742843</td>
-      <td>上海福赛特机器人有限公司</td>
-      <td>浦东</td>
-      <td><button type="button" class="btn btn-secondary" value="1"  onclick="addButton(this);">添加</button></td>
-    </tr>
-    <tr>
-      <td>731426</td>
-      <td>上海福轩环保科技有限公司</td>
-      <td>浦东</td>
-      <td><button type="button" class="btn btn-secondary" value="2" onclick="addButton(this);">添加</button></td>
     </tr>
   </tbody>
 </table>
@@ -134,15 +122,27 @@
   </thead>
   <tbody id="secondTab">
     <tr>
-      <td>745487</td>
-      <td>上海福网信息科技有限公司</td>
-      <td>松江</td>
+      <td>739009</td>
+      <td>3M中国有限公司</td>
+      <td></td>
       <td><button type="button" class="btn btn-secondary" value="0" onclick="deleteButton(this)">删除</button></td>
     </tr>
     <tr id="tt">
-      <td>742843</td>
-      <td>上海福赛特机器人有限公司</td>
+      <td>733542</td>
+      <td>韶远科技（上海）有限公司</td>
       <td>浦东</td>
+      <td><button type="button" class="btn btn-secondary" value="1" onclick="deleteButton(this)">删除</button></td>
+    </tr>
+    <tr id="tt">
+      <td>740662</td>
+      <td>达疆网络科技（上海）有限公司</td>
+      <td>浦东</td>
+      <td><button type="button" class="btn btn-secondary" value="1" onclick="deleteButton(this)">删除</button></td>
+    </tr>
+    <tr id="tt">
+      <td>726428</td>
+      <td>上海与德通讯技术有限公司</td>
+      <td>徐汇</td>
       <td><button type="button" class="btn btn-secondary" value="1" onclick="deleteButton(this)">删除</button></td>
     </tr>
   </tbody>

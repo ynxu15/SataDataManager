@@ -6,6 +6,28 @@ function initChart3_4(){
 	var myChart = echarts.init(document.getElementById('3-chart4'));
     
 	// 指定图表的配置项和数据
+	legendData =['互联网企业','外贸','工程类','机械制造', '旅游业']
+	xAxisData = ['2015', '2016', '2017', '2018']
+	seriesData = [
+			[2411.60, 4631.78, 528.9, 728.9] ,
+			[99255.06, 310480.87, 348154.4, 398154.4] ,
+			[313563.94, 922.56, 546.63, 1022.56] ,
+			[3061.02, 7910.4, 5737.49, 6737] ,
+			[1555.5, 4704.4, 4462.0, 4862] ,
+		]
+
+	sData = []
+	for (i=0; i<seriesData.length ;i++ )
+	{
+		d = {
+			name:legendData[i],
+			type:'line',
+			stack: legendData[i],
+			data:seriesData[i]
+		}
+		sData.push(d)
+	}
+
 	option = {
 		//title: {
 		//    text: '企业接受资助情况'
@@ -14,7 +36,7 @@ function initChart3_4(){
 			trigger: 'axis'
 		},
 		legend: {
-			data:['互联网企业','机械制造','加工业','旅游业','外贸']
+			data:legendData
 		},
 		grid: {
 			left: '3%',
@@ -30,43 +52,13 @@ function initChart3_4(){
 		xAxis: {
 			type: 'category',
 			boundaryGap: false,
-			data: ['2014','2015','2016','2017','2018','2019','2020']
+			data: ['2015','2016','2017','2018']
 		},
 		yAxis: {
 			type: 'value'
 		},
-		series: [
-			{
-				name:'互联网企业',
-				type:'line',
-				stack: '总量',
-				data:[120, 132, 101, 134, 90, 230, 210]
-			},
-			{
-				name:'机械制造',
-				type:'line',
-				stack: '总量',
-				data:[220, 182, 191, 234, 290, 330, 310]
-			},
-			{
-				name:'加工业',
-				type:'line',
-				stack: '总量',
-				data:[150, 232, 201, 154, 190, 330, 410]
-			},
-			{
-				name:'旅游业',
-				type:'line',
-				stack: '总量',
-				data:[320, 332, 301, 334, 390, 330, 320]
-			},
-			{
-				name:'外贸',
-				type:'line',
-				stack: '总量',
-				data:[820, 932, 901, 934, 1290, 1330, 1320]
-			}
-		]
+			
+		series: sData
 	}; // end of option
 
 	// 使用刚指定的配置项和数据显示图表。
@@ -167,6 +159,29 @@ function setChart4(){
 	var myChart = echarts.init(document.getElementById('chart4'));
 
 	// 指定图表的配置项和数据
+
+	legendData =['互联网企业','外贸','工程类','机械制造', '旅游业']
+	xAxisData = ['2015', '2016', '2017', '2018']
+	seriesData = [
+		[4184165, 71598.8, 30052946, 31052946] ,
+		[7482145, 67323192, 34569593, 48569593] ,
+		[46928, 46664, 139347, 142347] ,
+		[4206831.2, 4273015.48, 22510135, 25510135] ,
+		[69832.88, 90942, 869139, 951194] ,
+		]
+
+	sData = []
+	for (i=0; i<seriesData.length ;i++ )
+	{
+		d = {
+			name:legendData[i],
+			type:'line',
+			stack: legendData[i],
+			data:seriesData[i]
+		}
+		sData.push(d)
+	}
+
 	option = {
 		//title: {
 		//    text: '企业接受资助情况'
@@ -175,7 +190,7 @@ function setChart4(){
 			trigger: 'axis'
 		},
 		legend: {
-			data:['互联网企业','机械制造','加工业','旅游业','外贸']
+			data:legendData
 		},
 		grid: {
 			left: '3%',
@@ -191,43 +206,13 @@ function setChart4(){
 		xAxis: {
 			type: 'category',
 			boundaryGap: false,
-			data: ['2014','2015','2016','2017','2018','2019','2020']
+			data: ['2015','2016','2017','2018']
 		},
 		yAxis: {
 			type: 'value'
 		},
-		series: [
-			{
-				name:'互联网企业',
-				type:'line',
-				stack: '总量',
-				data:[120, 132, 101, 134, 90, 230, 210]
-			},
-			{
-				name:'机械制造',
-				type:'line',
-				stack: '总量',
-				data:[220, 182, 191, 234, 290, 330, 310]
-			},
-			{
-				name:'加工业',
-				type:'line',
-				stack: '总量',
-				data:[150, 232, 201, 154, 190, 330, 410]
-			},
-			{
-				name:'旅游业',
-				type:'line',
-				stack: '总量',
-				data:[320, 332, 301, 334, 390, 330, 320]
-			},
-			{
-				name:'外贸',
-				type:'line',
-				stack: '总量',
-				data:[820, 932, 901, 934, 1290, 1330, 1320]
-			}
-		]
+			
+		series: sData
 	}; // end of option
 
 	// 使用刚指定的配置项和数据显示图表。
@@ -251,19 +236,19 @@ function setChart5(){
 		},
 		series: [{
 			type: 'bar',
-			data: [1, 2, 3, 4, 3, 5, 1],
+			data: [1000, 2400, 3100, 4700, 3450, 5201, 1035],
 			coordinateSystem: 'polar',
 			name: '互联网行业',
 			stack: 'a'
 		}, {
 			type: 'bar',
-			data: [2, 4, 6, 1, 3, 2, 1],
+			data: [2224, 4124, 6547, 1124, 3478, 2842, 1314],
 			coordinateSystem: 'polar',
 			name: '机械制造',
 			stack: 'a'
 		}, {
 			type: 'bar',
-			data: [1, 2, 3, 4, 1, 2, 5],
+			data: [1258, 2456, 3754, 4547, 1547, 2842, 5654],
 			coordinateSystem: 'polar',
 			name: '加工业',
 			stack: 'a'
@@ -295,19 +280,19 @@ function setChart6(){
 		},
 		series: [{
 			type: 'bar',
-			data: [1, 2, 3, 4, 3, 5, 1],
+			data: [1547, 4257, 3457, 4942, 3475, 5458, 2531],
 			coordinateSystem: 'polar',
 			name: '互联网行业',
 			stack: 'a'
 		}, {
 			type: 'bar',
-			data: [2, 4, 6, 1, 3, 2, 1],
+			data: [1025, 6420, 1254, 3564, 4568, 1235, 2547],
 			coordinateSystem: 'polar',
 			name: '机械制造',
 			stack: 'a'
 		}, {
 			type: 'bar',
-			data: [1, 2, 3, 4, 1, 2, 5],
+			data: [1254, 2458, 3354, 4245, 1225, 2445, 5235],
 			coordinateSystem: 'polar',
 			name: '加工业',
 			stack: 'a'
@@ -411,19 +396,19 @@ function setChart8(){
 		},
 		series: [{
 			type: 'bar',
-			data: [1, 2, 3, 4, 3, 5, 1],
+			data: [0.2, 0.3, 0.45, 0.124, 0.125, 0.154, 0.1],
 			coordinateSystem: 'polar',
 			name: '互联网行业',
 			stack: 'a'
 		}, {
 			type: 'bar',
-			data: [2, 4, 6, 1, 3, 2, 1],
+			data: [0.2, 0.24, 0.247, 0.147, 0.245, 0.147, 0.257],
 			coordinateSystem: 'polar',
 			name: '机械制造',
 			stack: 'a'
 		}, {
 			type: 'bar',
-			data: [1, 2, 3, 4, 1, 2, 5],
+			data: [0.254, 0.147, 0.125, 0.842, 0.147, 0.159, 0.423],
 			coordinateSystem: 'polar',
 			name: '加工业',
 			stack: 'a'
@@ -455,19 +440,19 @@ function setChart9(){
 		},
 		series: [{
 			type: 'bar',
-			data: [1, 2, 3, 4, 3, 5, 1],
+			data: [0.1251, 0.352, 0.1453, 0.3244, 0.1243, 0.5475, 0.351],
 			coordinateSystem: 'polar',
 			name: '互联网行业',
 			stack: 'a'
 		}, {
 			type: 'bar',
-			data: [2, 4, 6, 1, 3, 2, 1],
+			data: [0.5472, 0.2474, 0.2546, 0.1571, 0.1573, 0.5742, 0.451],
 			coordinateSystem: 'polar',
 			name: '机械制造',
 			stack: 'a'
 		}, {
 			type: 'bar',
-			data: [1, 2, 3, 4, 1, 2, 5],
+			data: [0.11, 0.322, 0.413, 0.5474, 0.4561, 0.2582, 0.4585],
 			coordinateSystem: 'polar',
 			name: '加工业',
 			stack: 'a'
@@ -657,6 +642,28 @@ function initChart2_1(){
 	var myChart = echarts.init(document.getElementById('2-chart1'));
     
 	// 指定图表的配置项和数据
+legendData =['互联网企业','外贸','工程类','机械制造', '旅游业']
+	xAxisData = ['2015', '2016', '2017', '2018']
+	seriesData = [
+		[3200.0, 3010.0, 3900.0, 3300.0] ,
+		[8200.0, 9200.0, 10000.0, 13200.0] ,
+		[1200.0, 1010.0, 900.0, 2200.0] ,
+		[2200.0, 2010.0, 2900.0, 3300.0] ,
+		[2500.0, 1900.0, 1900.0, 3400.0] ,	
+		]
+
+	sData = []
+	for (i=0; i<seriesData.length ;i++ )
+	{
+		d = {
+			name:legendData[i],
+			type:'line',
+			stack: legendData[i],
+			data:seriesData[i]
+		}
+		sData.push(d)
+	}
+
 	option = {
 		//title: {
 		//    text: '企业接受资助情况'
@@ -665,7 +672,7 @@ function initChart2_1(){
 			trigger: 'axis'
 		},
 		legend: {
-			data:['互联网企业','机械制造','加工业','旅游业','外贸']
+			data:legendData
 		},
 		grid: {
 			left: '3%',
@@ -681,43 +688,13 @@ function initChart2_1(){
 		xAxis: {
 			type: 'category',
 			boundaryGap: false,
-			data: ['2014','2015','2016','2017','2018','2019','2020']
+			data: ['2015','2016','2017','2018']
 		},
 		yAxis: {
 			type: 'value'
 		},
-		series: [
-			{
-				name:'互联网企业',
-				type:'line',
-				stack: '总量',
-				data:[120, 132, 101, 134, 90, 230, 210]
-			},
-			{
-				name:'机械制造',
-				type:'line',
-				stack: '总量',
-				data:[220, 182, 191, 234, 290, 330, 310]
-			},
-			{
-				name:'加工业',
-				type:'line',
-				stack: '总量',
-				data:[150, 232, 201, 154, 190, 330, 410]
-			},
-			{
-				name:'旅游业',
-				type:'line',
-				stack: '总量',
-				data:[320, 332, 301, 334, 390, 330, 320]
-			},
-			{
-				name:'外贸',
-				type:'line',
-				stack: '总量',
-				data:[820, 932, 901, 934, 1290, 1330, 1320]
-			}
-		]
+			
+		series: sData
 	}; // end of option
 
 	// 使用刚指定的配置项和数据显示图表。
@@ -851,6 +828,28 @@ function initChart2_4(){
 	var myChart = echarts.init(document.getElementById('2-chart4'));
     
 	// 指定图表的配置项和数据
+	legendData =['互联网企业','外贸','工程类','机械制造', '旅游业']
+	xAxisData = ['2015', '2016', '2017', '2018']
+	seriesData = [
+		[2638.0, 2239.0, 1634.0, 1430.0] ,
+		[44.0, 48.0, 497.0, 645.0] ,
+		[85.0, 106.0, 81.0, 110.0] ,
+		[133.0, 646.0, 1431.0, 1102.0] ,
+		[0.0, 1.0, 0.0, 0.0] ,
+		]
+
+	sData = []
+	for (i=0; i<seriesData.length ;i++ )
+	{
+		d = {
+			name:legendData[i],
+			type:'line',
+			stack: legendData[i],
+			data:seriesData[i]
+		}
+		sData.push(d)
+	}
+
 	option = {
 		//title: {
 		//    text: '企业接受资助情况'
@@ -859,7 +858,7 @@ function initChart2_4(){
 			trigger: 'axis'
 		},
 		legend: {
-			data:['互联网企业','机械制造','加工业','旅游业','外贸']
+			data:legendData
 		},
 		grid: {
 			left: '3%',
@@ -875,43 +874,13 @@ function initChart2_4(){
 		xAxis: {
 			type: 'category',
 			boundaryGap: false,
-			data: ['2014','2015','2016','2017','2018','2019','2020']
+			data: ['2015','2016','2017','2018']
 		},
 		yAxis: {
 			type: 'value'
 		},
-		series: [
-			{
-				name:'互联网企业',
-				type:'line',
-				stack: '总量',
-				data:[120, 132, 101, 134, 90, 230, 210]
-			},
-			{
-				name:'机械制造',
-				type:'line',
-				stack: '总量',
-				data:[220, 182, 191, 234, 290, 330, 310]
-			},
-			{
-				name:'加工业',
-				type:'line',
-				stack: '总量',
-				data:[150, 232, 201, 154, 190, 330, 410]
-			},
-			{
-				name:'旅游业',
-				type:'line',
-				stack: '总量',
-				data:[320, 332, 301, 334, 390, 330, 320]
-			},
-			{
-				name:'外贸',
-				type:'line',
-				stack: '总量',
-				data:[820, 932, 901, 934, 1290, 1330, 1320]
-			}
-		]
+			
+		series: sData
 	}; // end of option
 
 	// 使用刚指定的配置项和数据显示图表。

@@ -29,42 +29,42 @@ option = {
     },
     yAxis: {
         type: 'value',
-        axisLabel: {
-            formatter: '{value} W'
-        },
+//        axisLabel: {
+//            formatter: '{value} W'
+//        },
         axisPointer: {
             snap: true
         }
     },
-    visualMap: {
-        show: false,
-        dimension: 0,
-        pieces: [{
-            lte: 6,
-            color: 'green'
-        }, {
-            gt: 6,
-            lte: 8,
-            color: 'red'
-        }, {
-            gt: 8,
-            lte: 14,
-            color: 'green'
-        }, {
-            gt: 14,
-            lte: 17,
-            color: 'red'
-        }, {
-            gt: 17,
-            color: 'green'
-        }]
-    },
+//    visualMap: {
+//        show: false,
+//        dimension: 0,
+//        pieces: [{
+//            lte: 6,
+//            color: 'green'
+//        }, {
+//            gt: 6,
+//            lte: 8,
+//            color: 'red'
+//        }, {
+//            gt: 8,
+//            lte: 14,
+//            color: 'green'
+//        }, {
+//            gt: 14,
+//            lte: 17,
+//            color: 'red'
+//        }, {
+//            gt: 17,
+//            color: 'green'
+//        }]
+//    },
     series: [
         {
             name:'损失值',
             type:'line',
             smooth: true,
-            data: [300, 280, 250, 260, 270, 300, 550, 500, 400, 390, 380, 390, 400, 500, 600, 750, 800, 700, 600, 400],
+            data: [1.2, 1.11, 1.1, 1.0, 0.95, 0.92, 0.90, 0.88, 0.85, 0.83, 0.81, 0.79, 0.77, 0.76, 0.75, 0.74, 0.736, 0.735, 0.732, 0.731],
 //            markArea: {
 //                data: [ [{
 //                    name: '早高峰',
