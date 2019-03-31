@@ -491,6 +491,14 @@ def org(request):
 
 
 
+def AreaTimeProfile(request):
+	return render(request,'profileareatime.html')
+
+
+
+
+
+
 
 
 

@@ -23,15 +23,15 @@ from . import talentCultivationView
 from . import proIntroView
 
 urlpatterns = [
-    # url(r'^$', indexView.indexView, name='index'),
-    # #url(r'^$', views.index, name='index'),
-    # url(r'^back/$', views.back_page),
-    # url(r'^login/$', views.login),
-    # url('index', indexView.indexView),
-    # url('about', govPolicyView.govPolicyView),
-    # url('rooms', comSupportView.comSupportView),
-    # url('gallery', talentCultivationView.talentCultivationView),
-    # url('dinning', proIntroView.proIntroView),
+    url(r'^$', indexView.indexView, name='index'),
+    #url(r'^$', views.index, name='index'),
+    url(r'^back/$', views.back_page),
+    url(r'^login/$', views.login),
+    url('index', indexView.indexView),
+    url('about', govPolicyView.govPolicyView),
+    url('rooms', comSupportView.comSupportView),
+    url('gallery', talentCultivationView.talentCultivationView),
+    url('dinning', proIntroView.proIntroView),
     
     
     # url(r'^org/$', views.org),
@@ -43,8 +43,8 @@ urlpatterns = [
     # url('myget',views.myget),
 	# url(r'^test/$', views.test),
 	# url(r'^cal/$',views.cal,name='cal'),
-    url(r'^Persona_single/profilebasicinfo/$', views.profilebasicinfo),
-    url(r'^Persona_single/profiledevelop/$', views.profiledevelop),
-    url(r'^Persona_single/profilerisk/$', views.profilerisk),
-    url(r'^Persona_single/profileinno/$', views.profileinno),
+    url(r'^profilebasicinfo/$', views.profilebasicinfo),
+    url(r'^profiledevelop/$', views.profiledevelop),
+    url(r'^profilerisk/$', views.profilerisk),
+    url(r'^profileinno/$', views.profileinno),
 ]

@@ -20,5 +20,5 @@ from Web import testView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^Web/', include('Web.urls')),
+    url(r'^', include('Web.urls')),
 ]
