@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="{% static 'images/icons/favicon.png' %}"/>
+        <title>科技政务大数据平台</title>
+        <!-- Bootstrap core CSS -->
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css" />
+        <!-- Custom styles for this template -->
+        <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+        <link rel="stylesheet" href="{% static 'css/lightbox.min.css' %}">
+        <link href="{% static 'css/responsive.css' %}" rel="stylesheet">
+        <script src="{% static 'js/jquery.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap.min.js'%}" type="text/javascript"></script>
+        <script src="{% static 'js/lightbox-plus-jquery.min.js'%}" type="text/javascript"></script>
+        <script src="{% static 'js/instafeed.min.js'%}" type="text/javascript"></script>
+        <script src="{% static 'js/custom.js'%}" type="text/javascript"></script>
+        <script src="{% static 'js/echarts.js'%}"></script>
+        <script src="{% static 'js/worldcloud.js'%}"></script>
+    </head>
+
+
+    <body>
+        <div id="page">
+            <!---header top---->
+            <div class="top-header">
+                            <div class="social-grid">
+                                <ul class="list-unstyled text-right">
+                                   <!--  <li><a><i class="fa fa-facebook"></i></a></li>
+                                    <li><a><i class="fa fa-twitter"></i></a></li>
+                                    <li><a><i class="fa fa-linkedin"></i></a></li>
+                                    <li><a><i class="fa fa-instagram"></i></a></li> -->
+                                    <li><a href="login">登录</a></li>
+                                    <li><a href="back">注册</a></li>
+                                </ul>
+                            </div>
+            </div>
+
+
+            <!--header--->
+            <header class="header-container">
+                <div class="container">
+                    <div class="top-row">
+                        <div class="row">
+                            <div class="col-md-2 col-sm-6 col-xs-6">
+                                <div id="logo">
+                                    <!--<a href="index.html"><img src="../static/images/logo.png" alt="logo"></a>-->
+                                    <a href="index.html"><span>科委政务</span>大数据平台</a>
+                                </div>
+                            </div>
+
+                            <!-- <div class="col-sm-6 visible-sm">
+                                <div class="text-right"><button type="button" class="book-now-btn">Book Now</button></div>
+                            </div> -->
+                            <div class="col-md-8 col-sm-12 col-xs-12 remove-padd">
+                                <nav class="navbar navbar-default">
+                                    <div class="navbar-header page-scroll">
+                                        <button data-target=".navbar-ex1-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
+                                            <span class="sr-only">Toggle navigation</span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                        </button>
+
+                                    </div>
+                                    <div class="collapse navigation navbar-collapse navbar-ex1-collapse remove-space">
+                                        <ul class="list-unstyled nav1 cl-effect-10">
+                                            <li><a  data-hover="主页" class="active"><span>主页</span></a></li>
+                                            <li class="dropdown">
+                                                <a data-hover="政府决策"  href="about.html"><span>政府决策</span></a>
+                                                <ul class="dropdown-menu">
+                                                    <a data-hover="投入绩效分析" href="dinning.html"><span>投入绩效分析</span></a>
+                                                    <a data-hover="科技趋势预测" href="dinning.html"><span>科技趋势预测</span></a>
+                                                    <a data-hover="发展布局建议" href="dinning.html"><span>发展布局建议</span></a>
+                                                    <a data-hover="专家挖掘评价" href="dinning.html"><span>专家挖掘评价</span></a>
+                                                </ul>
+                                            </li>
+                                            <li class="dropdown">
+                                                <a data-hover="企业扶持"  href="rooms.html"><span>企业扶持</span></a>
+                                                <ul class="dropdown-menu">
+                                                    <a data-hover="企业全息画像" href="dinning.html"><span>企业全息画像</span></a>
+                                                    <a data-hover="企业成长预测" href="dinning.html"><span>企业成长预测</span></a>
+                                                    <a data-hover="科技政策推荐" href="dinning.html"><span>科技政策推荐</span></a>
+                                                </ul>
+                                            </li>
+                                            <li class="dropdown">
+                                                <a data-hover="人才培养"  href="gallery.html"><span>人才培育</span></a>
+                                                <ul class="dropdown-menu">
+                                                    <a data-hover="人才成长分析" href="dinning.html"><span>人才成长分析</span></a>
+                                                    <a data-hover="人才服务推荐" href="dinning.html"><span>人才服务推荐</span></a>
+                                                </ul>
+                                            </li>
+                                            <li><a data-hover="项目介绍" href="dinning.html"><span>项目介绍</span></a></li>
+                                        </ul>
+                                    </div>
+                                </nav>
+                            </div>
+
+                            <!-- <div class="col-md-2  col-sm-4 col-xs-12 hidden-sm">
+                                <div class="text-right"><button type="button" class="book-now-btn">Book Now</button></div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!--end-->
+
+<style>
+.tb{
+      font-size:140%;
+      border:3px solid #A6B030;
+      padding:3px 7px 3px 7px;
+  }
+.tc{
+      font-size:70%;
+      border:3px solid #A6B030;
+      padding:1px 5px 1px 5px;
+    }
+</style>
+
+<div class="container">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">查询企业全息画像</a>
+            </div>
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="企业名称" />
+                </div>
+                <button type="submit" class="btn btn-default">查询</button>
+            </form>
+        </div>
+    </nav>
+    <div class="row">
+        <div style="width:6%" class="col-md-2">
+        </div>
+        <img src="https://www.baidu.com/img/bd_logo1.png" id="qylogo" style="width: 270px;height: 120px;" /> <!----真的烦--->
+        <div style="width:60%" class="col-md-8">
+            <h1>百度信息技术有限公司</h1>
+        </div>
+    </div>
+
+    <br>
+    <br>
+
+    <div class="row">
+            <div>
+                <a class="col-md-2" onclick="" href="profilebasicinfo">基本信息</a>
+            </div>
+            <div>
+                <a class="col-md-2" onclick="" href="profiledevelop">企业发展</a>
+            </div>
+            <div>
+                <a class="col-md-2" onclick="" href="profilerisk">经营风险</a>
+            </div>
+            <div>
+                <a class="col-md-2" onclick="" href="profileinno">创新潜力</a>
+            </div>
+    </div>
+
+    <!-- TABLES -->
+        <div class="col-md-10">
+
+
+            <div class="container">
+
+
+
+    <div class="row" style = "margin-top: 20px;">
+        <div class="col-lg-12">
+            <ol class="breadcrumb">
+                <li class="active"><h3> 1.商标信息</h3></li>
+            </ol>
+        </div>
+    </div><!-- /.row -->
+
+    <div class="col-md-4">
+        <div id="chart1-1" style="width: 1000px;height:400px"></div>
+    </div>
+
+
+    <div class="row" style = "margin-top: 20px;">
+        <div class="col-lg-12">
+            <ol class="breadcrumb">
+                <li class="active"><h3> 2.专利信息</h3></li>
+            </ol>
+        </div>
+    </div><!-- /.row -->
+
+    <div class="row">
+        <div class="col-md-4">
+            <p>专利申请年份趋势 </p>
+            <div id="chart2-1" style="width: 360px;height:360px;"></div>
+        </div>
+
+        <div class="col-md-4">
+            <p>专利类型分布 </p>
+            <div id="chart2-2" style="width: 360px;height:360px;"></div>
+        </div>
+
+        <div class="col-md-4">
+            <p>专利状态分布 </p>
+            <div id="chart2-3" style="width: 360px;height:360px;"></div>
+        </div>
+    </div>
+
+    <div class="row" style = "margin-top: 20px;">
+        <div class="col-lg-12">
+            <ol class="breadcrumb">
+                <li class="active"><h3> 3.作品著作权</h3></li>
+            </ol>
+        </div>
+    </div><!-- /.row -->
+    <section class="panel b-a clear" id="zzqlist">
+
+   <table class="table table-striped">
+    <tbody>
+     <tr>
+      <th width="10%" class="tx">序号</th>
+      <th width="15%">作品名称</th>
+      <th width="15%">首次发表日期</th>
+      <th width="15%">创作完成日期</th>
+      <th width="15%">登记号</th>
+      <th width="15%">登记日期</th>
+      <th width="15%">登记类别</th>
+     </tr>
+     <tr>
+      <td class="tx">1</td>
+      <td width="10%">懂啦系列IP形象</td>
+      <td width="112" class="text-center">2018-11-29</td>
+      <td width="112" class="text-center">2018-11-29</td>
+      <td>国作登字-2018-F-00674047</td>
+      <td width="103" class="text-center">2018-11-29</td>
+      <td class="text-center">美术</td>
+     </tr>
+     <tr>
+      <td class="tx">2</td>
+      <td width="182">懂啦 LOGO</td>
+      <td width="112" class="text-center">2018-11-29</td>
+      <td width="112" class="text-center">2018-11-29</td>
+      <td>国作登字-2018-F-00674064</td>
+      <td width="103" class="text-center">2018-11-29</td>
+      <td class="text-center">美术</td>
+     </tr>
+     <tr>
+      <td class="tx">3</td>
+      <td width="182">懂啦APP icon</td>
+      <td width="112" class="text-center">2018-11-29</td>
+      <td width="112" class="text-center">2018-11-29</td>
+      <td>国作登字-2018-F-00674063</td>
+      <td width="103" class="text-center">2018-11-29</td>
+      <td class="text-center">美术</td>
+     </tr>
+     <tr>
+      <td class="tx">4</td>
+      <td width="182">百度小程序logo</td>
+      <td width="112" class="text-center">2018-08-29</td>
+      <td width="112" class="text-center">2018-08-29</td>
+      <td>国作登字-2018-F-00578969</td>
+      <td width="103" class="text-center">2018-08-29</td>
+      <td class="text-center">美术</td>
+     </tr>
+     <tr>
+      <td class="tx">5</td>
+      <td width="182">宜养添年logo</td>
+      <td width="112" class="text-center">2018-07-26</td>
+      <td width="112" class="text-center">2018-07-26</td>
+      <td>国作登字-2018-F-00577097</td>
+      <td width="103" class="text-center">2018-07-26</td>
+      <td class="text-center">美术</td>
+     </tr>
+     <tr>
+      <td class="tx">6</td>
+      <td width="182">秒dong视频logo</td>
+      <td width="112" class="text-center">2018-07-26</td>
+      <td width="112" class="text-center">2018-07-26</td>
+      <td>国作登字-2018-F-00577102</td>
+      <td width="103" class="text-center">2018-07-26</td>
+      <td class="text-center">美术</td>
+     </tr>
+     <tr>
+      <td class="tx">7</td>
+      <td width="182">秒懂百科logo</td>
+      <td width="112" class="text-center">2018-07-26</td>
+      <td width="112" class="text-center">2018-07-26</td>
+      <td>国作登字-2018-F-00577073</td>
+      <td width="103" class="text-center">2018-07-26</td>
+      <td class="text-center">美术</td>
+     </tr>
+     <tr>
+      <td class="tx">8</td>
+      <td width="182">秒懂V计划logo</td>
+      <td width="112" class="text-center">2018-07-26</td>
+      <td width="112" class="text-center">2018-07-26</td>
+      <td>国作登字-2018-F-00577091</td>
+      <td width="103" class="text-center">2018-07-26</td>
+      <td class="text-center">美术</td>
+     </tr>
+     <tr>
+      <td class="tx">9</td>
+      <td width="182">宝妈加油站logo</td>
+      <td width="112" class="text-center">2018-07-26</td>
+      <td width="112" class="text-center">2018-07-26</td>
+      <td>国作登字-2018-F-00577098</td>
+      <td width="103" class="text-center">2018-07-26</td>
+      <td class="text-center">美术</td>
+     </tr>
+     <tr>
+      <td class="tx">10</td>
+      <td width="182">宝妈秀场logo</td>
+      <td width="112" class="text-center">2018-07-26</td>
+      <td width="112" class="text-center">2018-07-26</td>
+      <td>国作登字-2018-F-00577100</td>
+      <td width="103" class="text-center">2018-07-26</td>
+      <td class="text-center">美术</td>
+     </tr>
+    </tbody>
+   </table>
+  </section>
+
+
+
+    <div class="row" style = "margin-top: 20px;">
+        <div class="col-lg-12">
+            <ol class="breadcrumb">
+                <li class="active"><h3> 4.软件著作权</h3></li>
+            </ol>
+        </div>
+    </div><!-- /.row -->
+
+
+      <section class="panel b-a clear" id="rjzzqlist">
+
+
+           <table class="table table-striped">
+            <tbody>
+             <tr>
+              <th width="10%" class="tx">序号</th>
+              <th width="15%">软件名称</th>
+              <th width="15%">版本号</th>
+              <th width="15%">发布日期</th>
+              <th width="15%">软件简称</th>
+              <th width="15%">登记号</th>
+              <th width="15%">登记批准日期</th>
+             </tr>
+             <tr>
+              <td width="10%" height="120%" class="tx">1</td>
+              <td width="15%">百度语音识别和合成系统</td>
+              <td width="15%">V1.0</td>
+              <td  width="15%">2017-11-21</td>
+              <td width="15%">BaiduSpeech</td>
+              <td width="15%">2019SR0050417</td>
+              <td  width="15%" class="text-center">2019-01-15</td>
+             </tr>
+             <tr>
+              <td class="tx">2</td>
+              <td width="278">企业AI开发平台</td>
+              <td>V2.7</td>
+              <td width="103">2018-11-20</td>
+              <td width="140">APE</td>
+              <td>2019SR0044504</td>
+              <td width="110" class="text-center">2019-01-14</td>
+             </tr>
+             <tr>
+              <td class="tx">3</td>
+              <td width="278">百度人脸识别系统</td>
+              <td>V2.1.2.1</td>
+              <td width="103">2017-12-01</td>
+              <td width="140">百度人脸识别</td>
+              <td>2019SR0040105</td>
+              <td width="110" class="text-center">2019-01-11</td>
+             </tr>
+             <tr>
+              <td class="tx">4</td>
+              <td width="278">百度Raft金融版RDS数据库软件</td>
+              <td>V1.0.4</td>
+              <td width="103">2018-08-31</td>
+              <td width="140">百度Raft金融版RDS</td>
+              <td>2019SR0035309</td>
+              <td width="110" class="text-center">2019-01-10</td>
+             </tr>
+             <tr>
+              <td class="tx">5</td>
+              <td width="278">小度软件（安卓版）</td>
+              <td>V2.0.0.0</td>
+              <td width="103">-</td>
+              <td width="140">小度</td>
+              <td>2019SR0003255</td>
+              <td width="110" class="text-center">2019-01-02</td>
+             </tr>
+             <tr>
+              <td class="tx">6</td>
+              <td width="278">百度智慧课堂-教学空间系统</td>
+              <td>V1.0.0</td>
+              <td width="103">2018-09-30</td>
+              <td width="140">教学空间</td>
+              <td>2018SR992977</td>
+              <td width="110" class="text-center">2018-12-10</td>
+             </tr>
+             <tr>
+              <td class="tx">7</td>
+              <td width="278">小度蓝牙软件（安卓版）</td>
+              <td>V1.0.1.0</td>
+              <td width="103">-</td>
+              <td width="140">小度蓝牙</td>
+              <td>2018SR944052</td>
+              <td width="110" class="text-center">2018-11-26</td>
+             </tr>
+             <tr>
+              <td class="tx">8</td>
+              <td width="278">小度商城软件</td>
+              <td>V1.0.0</td>
+              <td width="103">-</td>
+              <td width="140">-</td>
+              <td>2018SR944045</td>
+              <td width="110" class="text-center">2018-11-26</td>
+             </tr>
+             <tr>
+              <td class="tx">9</td>
+              <td width="278">看多多app安卓系统</td>
+              <td>V0.8.0.10</td>
+              <td width="103">-</td>
+              <td width="140">看多多</td>
+              <td>2018SR935946</td>
+              <td width="110" class="text-center">2018-11-22</td>
+             </tr>
+             <tr>
+              <td class="tx">10</td>
+              <td width="278">看多多appiOS系统</td>
+              <td>V0.8.0.10</td>
+              <td width="103">-</td>
+              <td width="140">看多多</td>
+              <td>2018SR926173</td>
+              <td width="110" class="text-center">2018-11-20</td>
+             </tr>
+            </tbody>
+           </table>
+          </section>
+
+
+
+
+
+</div>
+
+        </div>
+</div>
+            <!---blog block--->
+            <!--<section class="blog-block">-->
+                <!--<html>-->
+                <!--<body>-->
+                <!--<nav class="navbar navbar-default" role="navigation">-->
+                    <!--<div class="container-fluid">-->
+                        <!--<div class="navbar-header">-->
+                            <!--<a class="navbar-brand" href="#">查询企业全息画像</a>-->
+                        <!--</div>-->
+                        <!--<form class="navbar-form navbar-left" role="search">-->
+                            <!--<div class="form-group">-->
+                                <!--<input type="text" class="form-control" placeholder="企业名称" />-->
+                            <!--</div>-->
+                            <!--<button type="submit" class="btn btn-default">查询</button>-->
+                        <!--</form>-->
+                    <!--</div>-->
+                <!--</nav>-->
+                <!--<div class="row">-->
+                    <!--<div style="width:6%" class="col-md-1">-->
+                    <!--</div>-->
+                    <!--<img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" id="qylogo" style="width: 272px;height: 92px;" /> &lt;!&ndash;&#45;&#45;真的烦-&ndash;&gt;-->
+                    <!--<div style="width:60%" class="col-md-8">-->
+                        <!--<h1>谷歌信息技术有限公司</h1>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="row">-->
+                    <!--<div style="width:6%" class="col-md-1">-->
+                    <!--</div>-->
+
+                    <!--<ul id="myTab" class="nav nav-tabs">-->
+                        <!--<li class="active"><a href="#home" data-toggle="tab">词云一瞥</a></li>-->
+                        <!--<li><a href="#pingfen" data-toggle="tab">综合评分</a></li>-->
+                        <!--<li><a href="#xinxi" data-toggle="tab">详细信息</a></li>-->
+                    <!--</ul>-->
+
+                    <!--<div id="myTabContent" class="tab-content">-->
+                        <!--<div class="tab-pane fade in active" id="home">-->
+
+                            <!--&lt;!&ndash;<div class="row">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<div style="width:6%" class="col-md-1">&ndash;&gt;-->
+                                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<div id="main1" style="width:50%; height:200px" class="col-md-4"></div>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+                            <!--<div id="container1" style="width:500px;height: 500px" class="col-md-4"></div>-->
+                            <!--&lt;!&ndash;<div class="row">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<div style="width:6%" class="col-md-1">&ndash;&gt;-->
+                                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<table class="table table-bordered" style="width:70%">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<caption>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;企业档案&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</caption>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<tbody>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<tr>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<td style="background-color:#53CD29">公司中文名称</td>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<td>北汽福田汽车股份有限公司</td>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<tr>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<td style="background-color:#53CD29">发行证券名称</td>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<td>福田汽车</td>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<tr>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<td style="background-color:#53CD29">组织形式</td>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<td>地方国有企业</td>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<tr>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<td style="background-color:#53CD29">企业规模</td>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<td>大型企业</td>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<tr>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<td style="background-color:#53CD29">主营业务</td>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<td>制造销售汽车。</td>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</tbody>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</table>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--</div>-->
+
+                        <!--<div class="tab-pane fade in active-self2" id="pingfen">-->
+                            <!--<div id="container2" style="width:500px;height: 500px" class="col-md-4"></div>-->
+                        <!--</div>-->
+
+
+                        <!--<div class="tab-pane fade in active-self3-notbootstrap" id="xinxi">-->
+                            <!--<div class="row">-->
+                                <!--<div style="width:6%" class="col-md-1">-->
+                                <!--</div>-->
+                                <!--<table class="table table-bordered" style="width:70%">-->
+                                    <!--<tbody>-->
+                                    <!--<td>基本信息</td>-->
+                                    <!--<tr>-->
+                                        <!--<td style="background-color:#A6B030">公司名称</td>-->
+                                        <!--<td>谷歌信息技术有限公司</td>-->
+                                    <!--</tr>-->
+                                    <!--<tr>-->
+                                        <!--<td style="background-color:#A6B030">成立日期</td>-->
+                                        <!--<td>undefined</td>-->
+                                    <!--</tr>-->
+                                    <!--<tr>-->
+                                        <!--<td style="background-color:#A6B030">员工总数</td>-->
+                                        <!--<td>undefined</td>-->
+                                    <!--</tr>-->
+                                    <!--<tr>-->
+                                        <!--<td style="background-color:#A6B030">主营业务</td>-->
+                                        <!--<td>undefined</td>-->
+                                    <!--</tr>-->
+
+
+
+                                    <!--<td >发展能力概况</td>-->
+                                    <!--<tr>-->
+                                        <!--<td style="background-color:#1691DA">主营业务收入</td>-->
+                                        <!--<td>undefined</td>-->
+                                    <!--</tr>-->
+                                    <!--<tr>-->
+                                        <!--<td style="background-color:#1691DA">营业利润</td>-->
+                                        <!--<td>undefined</td>-->
+                                    <!--</tr>-->
+
+
+
+
+                                    <!--<td>创新潜力</td>-->
+                                    <!--<tr>-->
+                                        <!--<td style="background-color:#53CD29">员工构成</td>-->
+                                        <!--<td>undefined</td>-->
+                                    <!--</tr>-->
+                                    <!--<tr>-->
+                                        <!--<td style="background-color:#53CD29">专利申请数</td>-->
+                                        <!--<td>undefined</td>-->
+                                    <!--</tr>-->
+                                    <!--<tr>-->
+                                        <!--<td style="background-color:#53CD29">论文发表数</td>-->
+                                        <!--<td>undefined</td>-->
+                                    <!--</tr>-->
+                                    <!--<tr>-->
+                                        <!--<td style="background-color:#53CD29">成果已累计实现销售收入</td>-->
+                                        <!--<td>undefined</td>-->
+                                    <!--</tr>-->
+
+
+
+
+
+                                    <!--<td>风险信息</td>-->
+                                    <!--<tr>-->
+                                        <!--<td style="background-color:#C83F3F">所属行业类别</td>-->
+                                        <!--<td>undefined</td>-->
+                                    <!--</tr>-->
+                                    <!--<tr>-->
+                                        <!--<td style="background-color:#C83F3F">固定资产总额</td>-->
+                                        <!--<td>undefined</td>-->
+                                    <!--</tr>-->
+                                    <!--<tr>-->
+                                        <!--<td style="background-color:#C83F3F">总负债</td>-->
+                                        <!--<td>undefined</td>-->
+                                    <!--</tr>-->
+
+
+
+                                    <!--<tr>-->
+                                        <!--<td style="background-color:#C83F3F"></td>-->
+                                        <!--<td>undefined</td>-->
+                                    <!--</tr>-->
+                                  <!--</tbody>-->
+                                <!--</table>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--</body>-->
+                <!--</html>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!--</section>-->
+
+            <!---footer--->
+            <footer>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6 col-xs-12 width-set-50">
+                            <div class="footer-details">
+                                <h4>Get in touch</h4>
+                                <ul class="list-unstyled footer-contact-list">
+                                    <li>
+                                        <i class="fa fa-map-marker fa-lg"></i>
+                                        <p>701 Old York Drive Richmond USA.</p>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-phone fa-lg"></i>
+                                        <p><a href="tel:+1-202-555-0100"> +1-202-555-0100</a></p>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-envelope-o fa-lg"></i>
+                                        <p><a href="mailto:demo@info.com"> demo@info.com</a></p>
+                                    </li>
+                                </ul>
+                                <div class="footer-social-icon">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                    <a href="#"><i class="fa fa-google-plus"></i></a>
+                                    <a href="#"><i class="fa fa-youtube-play"></i></a>
+                                </div>
+                                <div class="input-group" id="subscribe">
+                                    <input type="text" class="form-control subscribe-box" value="" name="subscribe" placeholder="EMAIL ID">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn subscribe-button"><i class="fa fa-paper-plane fa-lg"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12 width-50 width-set-50">
+                            <div class="footer-details">
+                                <h4>explore</h4>
+                                <ul class="list-unstyled footer-links">
+                                    <li class="active"><a>Home</a></li>
+                                    <li><a href="about.html">About</a></li>
+                                    <li><a href="rooms.html">Rooms</a></li>
+                                    <li><a href="gallery.html">Gallery</a></li>
+                                    <li><a href="#">Dinning</a></li>
+                                    <li> <a href="news.html">News</a></li>
+                                    <li> <a href="contact.html">Contact</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <div class="footer-details">
+                                <h4>Now On Instagram</h4>
+                                <div class="row">
+                                    <div class="instagram-images">
+                                        <div id="instafeed"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </footer>
+
+            <!--back to top--->
+            <a style="display: none;" href="javascript:void(0);" class="scrollTop back-to-top" id="back-to-top">
+                <span><i aria-hidden="true" class="fa fa-angle-up fa-lg"></i></span>
+                <span>Top</span>
+            </a>
+
+        </div>
+
+
+    <script type="text/javascript">
+function initChart1(){
+	// 基于准备好的dom，初始化echarts实例
+	var myChart = echarts.init(document.getElementById('chart1-1'));
+    
+	// 指定图表的配置项和数据
+	//legendData =['2013','2014','2015','2016','2017','2018','2019']
+	xAxisData = ['2013','2014','2015','2016','2017','2018','2019']
+	seriesData = [
+			[225, 542, 448, 728,1796,5083,618]
+		]
+
+	sData = []
+	for (i=0; i<seriesData.length ;i++ )
+	{
+		d = {
+			//name:legendData[i],
+			type:'line',
+			//stack: legendData[i],
+			data:seriesData[i]
+		}
+		sData.push(d)
+	}
+
+	option = {
+		//title: {
+		//    text: '企业接受资助情况'
+		//},
+		tooltip: {
+			trigger: 'axis'
+		},
+		//legend: {
+		//	data:legendData
+		//},
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
+		},
+		toolbox: {
+			feature: {
+				saveAsImage: {}
+			}
+		},
+		xAxis: {
+			type: 'category',
+			boundaryGap: false,
+			data: ['2013','2014','2015','2016','2017','2018','2019']
+		},
+		yAxis: {
+			type: 'value'
+		},
+
+		series: sData
+	}; // end of option
+
+	// 使用刚指定的配置项和数据显示图表。
+	myChart.setOption(option);
+
+}
+
+
+
+$(function(){
+	initChart1();
+	//initChart2_1();
+	//initChart2_2();
+
+});
+
+    </script>
+
+
+
+
+    <script type="text/javascript">
+var dom = document.getElementById("chart2-1");
+var myChart = echarts.init(dom);
+var app = {};
+option = null;
+app.title = '堆叠条形图';
+
+option = {
+    tooltip : {
+        trigger: 'axis',
+        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+        }
+    },
+    legend: {
+        data: ['发明公布', '发明授权','实用新型','外观设计']
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    xAxis:  {
+        type: 'value'
+    },
+    yAxis: {
+        type: 'category',
+        data: ['2013','2014','2015','2016','2017','2018','2019']
+    },
+    series: [
+        {
+            name: '发明公布',
+            type: 'bar',
+            stack: '总量',
+            label: {
+                normal: {
+                    show: true,
+                    position: 'insideRight'
+                }
+            },
+            data: [320, 302, 301, 334, 390, 330, 320]
+        },
+        {
+            name: '发明授权',
+            type: 'bar',
+            stack: '总量',
+            label: {
+                normal: {
+                    show: true,
+                    position: 'insideRight'
+                }
+            },
+            data: [120, 132, 101, 134, 90, 230, 210]
+        },
+        {
+            name: '实用新型',
+            type: 'bar',
+            stack: '总量',
+            label: {
+                normal: {
+                    show: true,
+                    position: 'insideRight'
+                }
+            },
+            data: [220, 182, 191, 234, 290, 330, 310]
+        },
+        {
+            name: '外观设计',
+            type: 'bar',
+            stack: '总量',
+            label: {
+                normal: {
+                    show: true,
+                    position: 'insideRight'
+                }
+            },
+            data: [150, 212, 201, 154, 190, 330, 410]
+        },
+    /*    {
+            name: '搜索引擎',
+            type: 'bar',
+            stack: '总量',
+            label: {
+                normal: {
+                    show: true,
+                    position: 'insideRight'
+                }
+            },
+            data: [820, 832, 901, 934, 1290, 1330, 1320]
+        }*/
+    ]
+};;
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+}
+       </script>
+
+
+
+
+
+<script type="text/javascript">
+var dom = document.getElementById("chart2-2");
+var myChart = echarts.init(dom);
+var app = {};
+option = null;
+/*var weatherIcons = {
+    'Sunny': './data/asset/img/weather/sunny_128.png',
+    'Cloudy': './data/asset/img/weather/cloudy_128.png',
+    'Showers': './data/asset/img/weather/showers_128.png'
+};*/
+
+option = {
+    /*title: {
+        text: '天气情况统计',
+        subtext: '虚构数据',
+        left: 'center'
+    },*/
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        // orient: 'vertical',
+        // top: 'middle',
+        bottom: 10,
+        left: 'center',
+        data: ['发明公布', '发明授权','实用新型','外观设计']
+    },
+    series : [
+        {
+            type: 'pie',
+            radius : '65%',
+            center: ['50%', '50%'],
+            selectedMode: 'single',
+            data:[
+                {
+                    value:1548,
+                    name: '发明公布',
+                    /*label: {
+                        normal: {
+                            formatter: [
+                                '{title|{b}}{abg|}',
+                                '  {weatherHead|天气}{valueHead|天数}{rateHead|占比}',
+                                '{hr|}',
+                                '  {Sunny|}{value|202}{rate|55.3%}',
+                                '  {Cloudy|}{value|142}{rate|38.9%}',
+                                '  {Showers|}{value|21}{rate|5.8%}'
+                            ].join('\n'),
+                            backgroundColor: '#eee',
+                            borderColor: '#777',
+                            borderWidth: 1,
+
+                        }
+                    }*/
+                },
+                {value:535, name: '发明授权'},
+                {value:510, name: '实用新型'},
+                {value:634, name: '外观设计'},
+            ],
+            itemStyle: {
+                emphasis: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
+        }
+    ]
+};
+;
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+}
+       </script>
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+var dom = document.getElementById("chart2-3");
+var myChart = echarts.init(dom);
+var app = {};
+option = null;
+
+
+option = {
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'shadow'
+        }
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    xAxis: {
+        type: 'value',
+        boundaryGap: [0, 0.01]
+    },
+    yAxis: {
+        type: 'category',
+        data: ['其他','公开','审查驳回','审查生效','已授权']
+    },
+    series: [
+        {
+            type: 'bar',
+            data: [233, 161, 688, 4325, 5981]
+        },
+    ]
+};
+;
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+}
+       </script>
+
+
+
+
+
+
+    </body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+hello
+
+<div id='dict'></div>
+<script type="text/javascript">
+
+
+    // 字典
+    var Dict = {{ Dict|safe }};
+    console.log("--- 两种字典的取值方式  ---")
+    console.log(Dict['site']);
+    console.log(Dict.author);
+
+    console.log("---  遍历字典  ---");
+    for(i in Dict) {
+        console.log(i + Dict[i]);//注意，此处 i 为键值
+    }
+</script>
+</body>
+</html>
