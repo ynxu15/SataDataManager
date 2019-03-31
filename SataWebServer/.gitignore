@@ -1,8 +1,0 @@
-*.db
-*.sqlite3
-*.sqlite
-*.pyc
-SataWebServer/__pycache__/*
-Web/__pycache__/*
-.sqlite3
-
