@@ -6,46 +6,92 @@
 
 <link href="{% static 'css/govPolicy.css' %}" rel="stylesheet">    
  <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
-	<script src="{% static 'js/echarts.min.js'%}"></script>
-<!-- <link rel="stylesheet" href="{% static 'tubiao/css/ver1.0.css' %}" type="text/css" />
- --><script src="{% static 'lib/jQuery/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'js/echarts.min.js'%}"></script>
+<script src="{% static 'lib/jQuery/jquery-3.2.1.min.js' %}"></script>
 <!-- <script src="{% static 'lib/echarts/echarts.min.js' %}"></script>
  -->
 
-<div class="container">
+
+
+<!-- <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400" rel="stylesheet" />
+<link rel="stylesheet" href="{% static 'css/sideBarCss/lib/fontello.css'%}" />
+<link rel="stylesheet" href="{% static 'css/sideBarCss/lib/normalize.css'%}" />
+
+<link rel="stylesheet" href="{% static 'css/sideBarCss/index.css'%}" />
+
+<link rel="stylesheet" href="{% static 'css/sideBarCss/sidebar.css'%}" />
+<script src="{% static 'js/sidebar.js' %}"></script> -->
+		
+		
+
+<!-- <div class="wrapper jsc-sidebar-content jsc-sidebar-pulled">
+	<nav>
+		<a href="#" class="icon-menu link-menu jsc-sidebar-trigger"></a>
+	</nav>
+
+</div>
+
+<nav class="sidebar jsc-sidebar" id="jsi-nav" data-sidebar-options="">
+	<ul class="sidebar-list">
+		<li><a href="./" class="current">SidebarJS</a></li>
+		<li><a href="http://github.com/makotot/sidebar/">View on Github</a></li>
+		<li><a href="http://github.com/makotot/sidebar/releases">Download</a></li>
+	</ul>
+</nav> -->
+
+<!-- <script>
+			$('#jsi-nav').sidebar({
+				trigger: '.jsc-sidebar-trigger',
+				scrollbarDisplay: true,
+				pullCb: function () { console.log('pull'); },
+				pushCb: function () { console.log('push'); }
+			});
+
+			$('#api-pull').on('click', function (e) {
+				e.preventDefault();
+				$('#jsi-nav').data('sidebar').push();
+			});
+			$('#api-push').on('click', function (e) {
+				e.preventDefault();
+				$('#jsi-nav').data('sidebar').pull();
+			});
+		</script> -->
+
+
+<div class="container", style="width:100%">
     <!-- <h1>Hello, world!</h1> -->
-    <div class="row">
+<div class="row">
         <div class="col-md-2" >
             <nav class="navbar nav-tabs" role="navigation" id="govNav">
-				<div class="collapse navbar-collapse navbar-ex1-collapse nav-stacked"> 
-					<ul class="nav nav-tabs nav-stacked"> 
-						<li class="dropdown">
-							<a href="govPolicyMacroRegion.html" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-caret-square-o-down"></i>
-								宏观统计 <b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="govPolicyMacroRegion.html">不同地区状况</a></li>
-								<li><a href="govPolicyMacroTime.html">不同时间状况</a></li>
-								<!-- <li><a href="govPolicyMacroBusiness.html">不同行业状况</a></li> -->
-							</ul>
-						</li>
-						<li class="dropdown">
-							<a href="govPolicyMicroCom.html" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-caret-square-o-down"></i>
-								微观对比 <b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="govPolicyMicroCom.html">企业发展状况对比</a></li>
-							</ul>
-						</li>
-							<li class="dropdown">
-							<a href="govPolicyAnalysis.html" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-caret-square-o-down"></i>
-								分析评价 <b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="govPolicyAnalysis.html">归因分析</a></li>
-								<li><a href="govPolicyAnalysisPrediction.html">预测评价</a></li>
-							</ul>
-						</li>
-					</ul>
-				</div>
-			</nav>
+    				<div class="collapse navbar-collapse navbar-ex1-collapse nav-stacked"> 
+    					<ul class="nav nav-tabs nav-stacked"> 
+    						<li class="dropdown">
+    							<a href="govPolicyMacroRegion.html" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-caret-square-o-down"></i>
+    								宏观统计 <b class="caret"></b></a>
+    							<ul class="dropdown-menu">
+    								<li><a href="govPolicyMacroRegion.html">不同地区状况</a></li>
+    								<li><a href="govPolicyMacroTime.html">不同时间状况</a></li>
+    								<!-- <li><a href="govPolicyMacroBusiness.html">不同行业状况</a></li> -->
+    							</ul>
+    						</li>
+    						<li class="dropdown">
+    							<a href="govPolicyMicroCom.html" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-caret-square-o-down"></i>
+    								微观对比 <b class="caret"></b></a>
+    							<ul class="dropdown-menu">
+    								<li><a href="govPolicyMicroCom.html">企业发展状况对比</a></li>
+    							</ul>
+    						</li>
+    							<li class="dropdown">
+    							<a href="govPolicyAnalysis.html" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-caret-square-o-down"></i>
+    								分析评价 <b class="caret"></b></a>
+    							<ul class="dropdown-menu">
+    								<li><a href="govPolicyAnalysis.html">归因分析</a></li>
+    								<li><a href="govPolicyAnalysisPrediction.html">预测评价</a></li>
+    							</ul>
+    						</li>
+    					</ul>
+    				</div>
+    			</nav>
         </div>
 
 		<!-- TABLES --> 
