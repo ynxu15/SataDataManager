@@ -22,7 +22,7 @@ from . import talentCultivationView
 from . import proIntroView
 from . import devPredictionView
 from . import backModelView
-from . import testView
+# from . import testView
 
 urlpatterns = [
     url(r'^$', indexView.indexView, name='index'),
@@ -44,13 +44,13 @@ urlpatterns = [
     url('govPolicyAnalysisPrediction', govPolicyView.govPolicyAnalysisPredictionView),
     url('govPolicyExamples', govPolicyView.govPolicyExampleView),
     #url('addTest', testView.addTestView),
-    url('addTest$', testView.addTest),
-    url('add1', testView.add1),
-    url('myget', testView.myget),
-    url(r'^ajax_list/$', testView.ajax_list),
-    url(r'^ajax_dict/$', testView.ajax_dict),
-    url(r'testCelery$', testView.testCelery),
-    url(r'testCeleryRe', testView.testCeleryRe),
+    #url('addTest$', testView.addTest),
+    #url('add1', testView.add1),
+    #url('myget', testView.myget),
+    # url(r'^ajax_list/$', testView.ajax_list),
+    #url(r'^ajax_dict/$', testView.ajax_dict),
+    # url(r'testCelery$', testView.testCelery),
+    # url(r'testCeleryRe', testView.testCeleryRe),
     url(r'govPolicyMacroRegion/comInfo$', govPolicyView.govPolicyRegionComInfo),
     url(r'govPolicyMacroRegion/comNum$', govPolicyView.comNum),
     url(r'govPolicyMacroRegion/comCapital$', govPolicyView.govPolicyRegionComCapital),
