@@ -207,7 +207,17 @@
                 <option value="table3">年用水量</option>
             </select>
             <script type="text/javascript">
-                $('.select2').selectric().on('change', function () {});
+                $('.select2').selectric().on('change', function () {
+                    if ($(this).val() == 'table1') {
+                        myChart2.setOption(option21, true);
+                    }
+                    else if ($(this).val() == 'table2') {
+                        myChart2.setOption(option22, true);
+                    }
+                    else{
+                        myChart2.setOption(option23, true);
+                    }
+                });
             </script>
             <div id="chart2" style="height:500px"></div>
         </div>
@@ -231,7 +241,15 @@
             </select>
             <script type="text/javascript">
                 $('.select3').selectric().on('change', function () {
-
+                    if ($(this).val() == 'table1') {
+                        myChart3.setOption(option31, true);
+                    }
+                    else if ($(this).val() == 'table2') {
+                        myChart3.setOption(option32, true);
+                    }
+                    else{
+                        myChart3.setOption(option33, true);
+                    }
                 });
             </script>
             <div id="chart3" style="height:500px"></div>
@@ -255,7 +273,7 @@
         },
         tooltip: {},
         legend: {
-            data: ['2017.4', '2018.1', '2018.2', '2018.3']
+            data: ['2017', '2018', '2019', '2020']
         },
         radar: {
             shape: 'circle',
@@ -303,19 +321,19 @@
             // areaStyle: {normal: {}},
             data: [{
                     value: [1200,19000,19000,4300, 4300,10000, 28000, 35000, 50000],
-                    name: '2017.4'
+                    name: '2017'
                 },
                 {
                     value: [1500, 21000, 21000,5000, 5000,14000, 28000, 31000, 42000],
-                    name: '2018.1'
+                    name: '2018'
                 },
                 {
                     value: [1700, 19000, 20000,2500,2500, 12000, 25000, 30000, 45000],
-                    name: '2018.2'
+                    name: '2019'
                 },
                 {
                     value: [1600, 20000, 20000,2500, 2500,11000, 27000, 37000, 50000],
-                    name: '2018.3'
+                    name: '2020'
                 }
             ]
         }]
@@ -1048,7 +1066,323 @@
                 }()
             },
         ]
-    }
+    };
+    option22 = {
+        title: {
+            // text: '2000-2016年中国汽车销量及增长率'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        // toolbox: {
+        //     feature: {
+        //         dataView: {
+        //             show: true,
+        //             readOnly: false
+        //         },
+        //         restore: {
+        //             show: true
+        //         },
+        //         saveAsImage: {
+        //             show: true
+        //         }
+        //     }
+        // },
+        grid: {
+            containLabel: true
+        },
+        legend: {
+            data: ['增速', '年用电量']
+        },
+        dataZoom: [{
+            show: true,
+            type: 'slider',
+            y: '90%',
+            start: 50,
+            end: 100
+            // filterMode: 'empty'
+        }],
+        xAxis: [{
+            type: 'category',
+            axisTick: {
+                alignWithLabel: true
+            },
+            data: function () {
+                var list = [];
+                for (var i = 2000; i <= 2025; i++) {
+                    list.push(i + '年');
+                }
+                return list;
+            }()
+        }],
+        yAxis: [{
+            type: 'value',
+            name: '增速',
+            min: 0,
+            max: 50,
+            position: 'right',
+            axisLabel: {
+                formatter: '{value} %'
+            }
+        }, {
+            type: 'value',
+            name: '年用电量',
+            min: 0,
+            // max: 3000,
+            position: 'left'
+        }],
+        series: [{
+                name: '增速',
+                type: 'line',
+                smooth: true,
+                // stack: '总量1',
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top',
+                    }
+                },
+                lineStyle: {
+                    normal: {
+                        width: 3,
+                        shadowColor: 'rgba(0,0,0,0.4)',
+                        shadowBlur: 10,
+                        shadowOffsetY: 10
+                    }
+                },
+                data: [1, 13, 37, 35, 15, 13, 25, 21, 6, 45, 32, 2, 4, 13, 6, 4, 11, 21, 6].concat(['-', '-',
+                    '-'
+                ])
+            },
+            {
+                name: '年用电量',
+                type: 'bar',
+                yAxisIndex: 1,
+                stack: '总量',
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top'
+                    }
+                },
+                data: [209, 236, 325, 439, 507, 576, 722, 879, 938, 1364, 1806, 1851, 1931, 2198, 2349, 2460,
+                    2735, 3309, 3508
+                ].concat(['-', '-', '-'])
+            },
+            {
+                name: '增速',
+                type: 'line',
+                smooth: true,
+                // stack: '总量1',
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top',
+                    }
+                },
+                lineStyle: {
+                    normal: {
+                        type: 'dotted',
+                        width: 3,
+                        shadowColor: 'rgba(0,0,0,0.4)',
+                        shadowBlur: 10,
+                        shadowOffsetY: 10
+                    }
+                },
+                data: function () {
+                    var list = [];
+                    for (var i = 2000; i < 2018; i++) {
+                        list.push('-');
+                    }
+                    return list.concat([6, 2, 4, 13]);
+                }()
+            },
+            {
+                name: '年用电量',
+                type: 'bar',
+                yAxisIndex: 1,
+                stack: '总量',
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top',
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        opacity: 0.7,
+                        // color: "rgba(255,144,128,1)",
+
+                    }
+                },
+                data: function () {
+                    var list = [];
+                    for (var i = 2000; i <= 2018; i++) {
+                        list.push('-');
+                    }
+                    return list.concat([3578, 3721, 4205]);
+                }()
+            }
+        ]
+    };
+    option23 = {
+        title: {
+            // text: '2000-2016年中国汽车销量及增长率'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        // toolbox: {
+        //     feature: {
+        //         dataView: {
+        //             show: true,
+        //             readOnly: false
+        //         },
+        //         restore: {
+        //             show: true
+        //         },
+        //         saveAsImage: {
+        //             show: true
+        //         }
+        //     }
+        // },
+        grid: {
+            containLabel: true
+        },
+        legend: {
+            data: ['增速', '年用水量']
+        },
+        dataZoom: [{
+            show: true,
+            type: 'slider',
+            y: '90%',
+            start: 50,
+            end: 100
+            // filterMode: 'empty'
+        }],
+        xAxis: [{
+            type: 'category',
+            axisTick: {
+                alignWithLabel: true
+            },
+            data: function () {
+                var list = [];
+                for (var i = 2000; i <= 2025; i++) {
+                    list.push(i + '年');
+                }
+                return list;
+            }()
+        }],
+        yAxis: [{
+            type: 'value',
+            name: '增速',
+            min: 0,
+            max: 50,
+            position: 'right',
+            axisLabel: {
+                formatter: '{value} %'
+            }
+        }, {
+            type: 'value',
+            name: '年用水量',
+            min: 0,
+            // max: 3000,
+            position: 'left'
+        }],
+        series: [{
+                name: '增速',
+                type: 'line',
+                smooth: true,
+                // stack: '总量1',
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top',
+                    }
+                },
+                lineStyle: {
+                    normal: {
+                        width: 3,
+                        shadowColor: 'rgba(0,0,0,0.4)',
+                        shadowBlur: 10,
+                        shadowOffsetY: 10
+                    }
+                },
+                data: [1, 13, 37, 35, 15, 13, 25, 21, 6, 45, 32, 2, 4, 13, 6, 4, 11, 21, 6].concat(['-', '-',
+                    '-'
+                ])
+            },
+            {
+                name: '年用水量',
+                type: 'bar',
+                yAxisIndex: 1,
+                stack: '总量',
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top'
+                    }
+                },
+                data: [209, 236, 325, 439, 507, 576, 722, 879, 938, 1364, 1806, 1851, 1931, 2198, 2349, 2460,
+                    2735, 3309, 3508
+                ].concat(['-', '-', '-'])
+            },
+            {
+                name: '增速',
+                type: 'line',
+                smooth: true,
+                // stack: '总量1',
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top',
+                    }
+                },
+                lineStyle: {
+                    normal: {
+                        type: 'dotted',
+                        width: 3,
+                        shadowColor: 'rgba(0,0,0,0.4)',
+                        shadowBlur: 10,
+                        shadowOffsetY: 10
+                    }
+                },
+                data: function () {
+                    var list = [];
+                    for (var i = 2000; i < 2018; i++) {
+                        list.push('-');
+                    }
+                    return list.concat([6, 2, 4, 13]);
+                }()
+            },
+            {
+                name: '年用水量',
+                type: 'bar',
+                yAxisIndex: 1,
+                stack: '总量',
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top',
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        opacity: 0.7,
+                        // color: "rgba(255,144,128,1)",
+
+                    }
+                },
+                data: function () {
+                    var list = [];
+                    for (var i = 2000; i <= 2018; i++) {
+                        list.push('-');
+                    }
+                    return list.concat([3578, 3721, 4205]);
+                }()
+            }
+        ]
+    };
 </script>
 
 <!-- 3科技预测 -->
@@ -1217,6 +1551,325 @@
             }
         ]
     };
+    option32 = {
+        // backgroundColor: "#344b58",
+        title: {
+            x: "4%",
+
+            textStyle: {
+                color: '#fff',
+                fontSize: '22'
+            },
+            subtextStyle: {
+                color: '#90979c',
+                fontSize: '16',
+
+            },
+        },
+        tooltip: {
+            trigger: "axis",
+            axisPointer: {
+                type: "shadow",
+                textStyle: {
+                    color: "#fff"
+                }
+
+            },
+        },
+        grid: {
+            borderWidth: 0,
+            top: 110,
+            bottom: 95,
+            textStyle: {
+                color: "#fff"
+            }
+        },
+        // legend: {
+        //     x: '4%',
+        //     top: '11%',
+        //     textStyle: {
+        //         color: '#90979c',
+        //     },
+        //     data: ['本科生', '研究生', '博士生', '其他']
+        // },
+
+
+        calculable: true,
+        xAxis: [{
+            type: "category",
+            axisLine: {
+                lineStyle: {
+                    color: '#90979c'
+                }
+            },
+            splitLine: {
+                show: false
+            },
+            axisTick: {
+                show: false
+            },
+            splitArea: {
+                show: false
+            },
+            axisLabel: {
+                interval: 0,
+
+            },
+            data: function () {
+                var list = [];
+                for (var i = 2000; i <= 2025; i++) {
+                    list.push(i + '年');
+                }
+                return list;
+            }()
+        }],
+        yAxis: [{
+            type: "value",
+            splitLine: {
+                show: false
+            },
+            axisLine: {
+                lineStyle: {
+                    color: '#90979c'
+                }
+            },
+            axisTick: {
+                show: false
+            },
+            axisLabel: {
+                interval: 0,
+
+            },
+            splitArea: {
+                show: false
+            }
+        }],
+        dataZoom: [{
+            show: true,
+            type: 'slider',
+            height: 30,
+            xAxisIndex: [
+                0
+            ],
+            bottom: 30,
+            start: 50,
+            end: 100,
+
+
+        }],
+        series: [{
+                name: "论文数量",
+                type: "bar",
+                barMaxWidth: 35,
+                barGap: "10%",
+                itemStyle: {
+                    normal: {
+                        // color: "rgba(255,144,128,1)",
+                        label: {
+                            show: true,
+                            textStyle: {
+                                color: "#fff"
+                            },
+                            position: "insideTop",
+                            formatter: function (p) {
+                                return p.value > 0 ? (p.value) : '';
+                            }
+                        }
+                    }
+                },
+                data: data[0].concat(['-', '-', '-']),
+            }
+            ,
+            {
+                name: "预测",
+                type: "bar",
+                barMaxWidth: 35,
+                barGap: "10%",
+                itemStyle: {
+                    normal: {
+                        opacity: 0.5,
+                        // color: "rgba(255,144,128,1)",
+                        label: {
+                            show: true,
+                            textStyle: {
+                                color: "#fff"
+                            },
+                            position: "insideTop",
+                            formatter: function (p) {
+                                return p.value > 0 ? (p.value) : '';
+                            }
+                        }
+                    }
+                },
+                data: function () {
+                    var list = [];
+                    for (var i = 2000; i <= 2018; i++) {
+                        list.push('-');
+                    }
+                    return list.concat([138, 142, 146]);
+                }()
+            }
+        ]
+    };
+    option33 = {
+        title: {
+            x: "4%",
+
+            textStyle: {
+                color: '#fff',
+                fontSize: '22'
+            },
+            subtextStyle: {
+                color: '#90979c',
+                fontSize: '16',
+
+            },
+        },
+        tooltip: {
+            trigger: "axis",
+            axisPointer: {
+                type: "shadow",
+                textStyle: {
+                    color: "#fff"
+                }
+
+            },
+        },
+        grid: {
+            borderWidth: 0,
+            top: 110,
+            bottom: 95,
+            textStyle: {
+                color: "#fff"
+            }
+        },
+        // legend: {
+        //     x: '4%',
+        //     top: '11%',
+        //     textStyle: {
+        //         color: '#90979c',
+        //     },
+        //     data: ['本科生', '研究生', '博士生', '其他']
+        // },
+
+
+        calculable: true,
+        xAxis: [{
+            type: "category",
+            axisLine: {
+                lineStyle: {
+                    color: '#90979c'
+                }
+            },
+            splitLine: {
+                show: false
+            },
+            axisTick: {
+                show: false
+            },
+            splitArea: {
+                show: false
+            },
+            axisLabel: {
+                interval: 0,
+
+            },
+            data: function () {
+                var list = [];
+                for (var i = 2000; i <= 2025; i++) {
+                    list.push(i + '年');
+                }
+                return list;
+            }()
+        }],
+        yAxis: [{
+            type: "value",
+            splitLine: {
+                show: false
+            },
+            axisLine: {
+                lineStyle: {
+                    color: '#90979c'
+                }
+            },
+            axisTick: {
+                show: false
+            },
+            axisLabel: {
+                interval: 0,
+
+            },
+            splitArea: {
+                show: false
+            }
+        }],
+        dataZoom: [{
+            show: true,
+            type: 'slider',
+            height: 30,
+            xAxisIndex: [
+                0
+            ],
+            bottom: 30,
+            start: 50,
+            end: 100,
+
+
+        }],
+        series: [{
+                name: "专利数量",
+                type: "bar",
+                barMaxWidth: 35,
+                barGap: "10%",
+                itemStyle: {
+                    normal: {
+                        // color: "rgba(255,144,128,1)",
+                        label: {
+                            show: true,
+                            textStyle: {
+                                color: "#fff"
+                            },
+                            position: "insideTop",
+                            formatter: function (p) {
+                                return p.value > 0 ? (p.value) : '';
+                            }
+                        }
+                    }
+                },
+                data: data[0].concat(['-', '-', '-']),
+            }
+            ,
+            {
+                name: "预测",
+                type: "bar",
+                barMaxWidth: 35,
+                barGap: "10%",
+                itemStyle: {
+                    normal: {
+                        opacity: 0.5,
+                        // color: "rgba(255,144,128,1)",
+                        label: {
+                            show: true,
+                            textStyle: {
+                                color: "#fff"
+                            },
+                            position: "insideTop",
+                            formatter: function (p) {
+                                return p.value > 0 ? (p.value) : '';
+                            }
+                        }
+                    }
+                },
+                data: function () {
+                    var list = [];
+                    for (var i = 2000; i <= 2018; i++) {
+                        list.push('-');
+                    }
+                    return list.concat([138, 142, 146]);
+                }()
+            }
+        ]
+    };
 </script>
 
 <script>
@@ -1249,9 +1902,7 @@
                     }
 
                 );
-
-
-
+                
             }
 
 

@@ -3,21 +3,23 @@
 {% block title %}{{title}}{% endblock title%}
 {% block content%}
 
+<!-- <script src="{% static 'myjs/predictMain.js' %}"></script> -->
 <style>
-        .title{
-        background-color:rgb(248,248,248);
-        border:2px solid rgb(240,240,240);
+    .title {
+        background-color: rgb(248, 248, 248);
+        border: 2px solid rgb(240, 240, 240);
         height: 42px;
         text-align: center;
         line-height: 42px;
     }
-    </style>
+</style>
 
 <div class="row">
     <div class="col-lg-12">
         <ol class="breadcrumb">
             <li><a href="predictMain"><i class="fa fa-dashboard"></i> 上海市</a></li>
-            <li><i class="fa fa-dashboard"></i> <span class="region_select">{{region_select}}</span>区域<span class="type_select">{{type_select}}</span>行业</li>
+            <li><i class="fa fa-dashboard"></i> <span class="region_select">{{region_select}}</span>区域<span
+                    class="type_select">{{type_select}}</span>行业</li>
             <!-- <li href="predictCom"><i class="fa fa-table"></i> 某区某行业</li> -->
         </ol>
     </div>
@@ -36,15 +38,16 @@
     </div>
 </div><!-- /.row -->
 <div class="row">
-        <div class="col-lg-1">
-        </div>
-        <div class="col-lg-10">
-            <h3 class="title"><span class="region_select">{{region_select}}</span>区域<span class="type_select">{{type_select}}</span>行业</h3>
-        </div>
-        </div>
-        <div class="col-lg-1">
-        </div>
-    </div><!-- /.row -->
+    <div class="col-lg-1">
+    </div>
+    <div class="col-lg-10">
+        <h3 class="title"><span class="region_select">{{region_select}}</span>区域<span
+                class="type_select">{{type_select}}</span>行业</h3>
+    </div>
+</div>
+<div class="col-lg-1">
+</div>
+</div><!-- /.row -->
 <div class="row">
     <div class="col-lg-1">
     </div>
@@ -82,28 +85,28 @@
     </div>
 </div><!-- /.row -->
 <div class="row">
-        <div class="col-lg-1">
-    
-        </div>
-        <div class="col-lg-10">
-                <table id="myTable" class="tablesorter table table-hover"> 
-                        <thead> 
-                        <tr> 
-                            <th>公司名称</th> 
-                            <th>成立日期</th> 
-                            <th>组织形式</th> 
-                            <th>员工总数</th> 
-                            <th>主营业务</th> 
-                        </tr> 
-                        </thead> 
-                        <tbody class="info"> 
-                        </tbody> 
-                        </table> 
-        </div>
-        <div class="col-lg-1">
-    
-        </div>
-    </div><!-- /.row -->
+    <div class="col-lg-1">
+
+    </div>
+    <div class="col-lg-10">
+        <table id="myTable" class="tablesorter table table-hover">
+            <thead>
+                <tr>
+                    <th>公司名称</th>
+                    <th>成立日期</th>
+                    <th>组织形式</th>
+                    <th>员工总数</th>
+                    <th>主营业务</th>
+                </tr>
+            </thead>
+            <tbody class="info">
+            </tbody>
+        </table>
+    </div>
+    <div class="col-lg-1">
+
+    </div>
+</div><!-- /.row -->
 
 
 
@@ -183,15 +186,13 @@
             }
         }]
     };
-
-    
 </script>
 
 <!-- 点击事件 -->
 <script>
     myChart1.on('click', function (params) {
         var region_select = params.name;
-        if($('.region_select').html()==region_select){
+        if ($('.region_select').html() == region_select) {
             region_select = '全部';
         }
         $('.region_select').html(region_select);
@@ -218,25 +219,26 @@
             });
             myChart31.setOption({
                 series: [{
-                        data: ret['change'][0]
-                    }
-                ]
+                    data: ret['change'][0]
+                }]
             });
             myChart41.setOption({
                 series: [{
-                        data: ret['change'][1]
-                    }
-                ]
+                    data: ret['change'][1]
+                }]
             });
             myChart51.setOption({
                 series: [{
-                        data: ret['change'][2]
-                    }
-                ]
+                    data: ret['change'][2]
+                }]
             });
             $(".info").empty();
-            for(var i=0;i<10;i++){
-                $('.info').append("<tr><td><a href='predictCom?name="+ret['info'][i]['name']+"'>"+ret['info'][i]['name']+"</a></td><td>"+ret['info'][i]['date']+"</td><td>"+ret['info'][i]['scale']+"</td><td>"+ret['info'][i]['stuffnumber']+"</td><td>"+ret['info'][i]['bussiness']+"</td></tr>");
+            for (var i = 0; i < 10; i++) {
+                $('.info').append("<tr><td><a href='predictCom?name=" + ret['info'][i]['name'] + "'>" +
+                    ret['info'][i]['name'] + "</a></td><td>" + ret['info'][i]['date'] +
+                    "</td><td>" + ret['info'][i]['scale'] + "</td><td>" + ret['info'][i][
+                        'stuffnumber'
+                    ] + "</td><td>" + ret['info'][i]['bussiness'] + "</td></tr>");
             }
             $("#myTable").trigger("update");
         })
@@ -244,7 +246,7 @@
 
     myChart2.on('click', function (params) {
         var type_select = params.name;
-        if($('.type_select').html()==type_select){
+        if ($('.type_select').html() == type_select) {
             type_select = '全部';
         }
         $('.type_select').html(type_select);
@@ -270,26 +272,27 @@
             });
             myChart31.setOption({
                 series: [{
-                        data: ret['change'][0]
-                    }
-                ]
+                    data: ret['change'][0]
+                }]
             });
             myChart41.setOption({
                 series: [{
-                        data: ret['change'][1]
-                    }
-                ]
+                    data: ret['change'][1]
+                }]
             });
             myChart51.setOption({
                 series: [{
-                        data: ret['change'][2]
-                    }
-                ]
+                    data: ret['change'][2]
+                }]
             });
             $(".info").empty();
             $("#myTable").trigger("update");
-            for(var i=0;i<10;i++){
-                $('.info').append("<tr><td><a href='predictCom?name="+ret['info'][i]['name']+"'>"+ret['info'][i]['name']+"</a></td><td>"+ret['info'][i]['date']+"</td><td>"+ret['info'][i]['scale']+"</td><td>"+ret['info'][i]['stuffnumber']+"</td><td>"+ret['info'][i]['bussiness']+"</td></tr>");
+            for (var i = 0; i < 10; i++) {
+                $('.info').append("<tr><td><a href='predictCom?name=" + ret['info'][i]['name'] + "'>" +
+                    ret['info'][i]['name'] + "</a></td><td>" + ret['info'][i]['date'] +
+                    "</td><td>" + ret['info'][i]['scale'] + "</td><td>" + ret['info'][i][
+                        'stuffnumber'
+                    ] + "</td><td>" + ret['info'][i]['bussiness'] + "</td></tr>");
             }
         })
     });
@@ -315,7 +318,7 @@
             formatter: function (params) {
                 var v = params[0].value;
                 var s = params[0].name;
-                return s+'<br>平均EPS(每股收益)为'+v;
+                return s + '<br>平均EPS(每股收益)为' + v;
             }
         },
         // tooltip: {
@@ -334,8 +337,8 @@
         xAxis: {
             type: 'category',
             axisLabel: {
-						interval: 2,    //强制文字产生间隔
-                        rotate: 90, 
+                interval: 2, //强制文字产生间隔
+                rotate: 90,
             },
             boundaryGap: false,
             data: function () {
@@ -381,10 +384,10 @@
             formatter: function (params) {
                 var v = params[0].value;
                 var s = params[0].name;
-                if(v>=0){
-                    return s+'<br/>较上季度增加了'+v;
-                }else{
-                    return s+'<br/>较上季度减少了'+Math.abs(v);
+                if (v >= 0) {
+                    return s + '<br/>较上季度增加了' + v;
+                } else {
+                    return s + '<br/>较上季度减少了' + Math.abs(v);
                 }
             }
         },
@@ -397,8 +400,8 @@
         xAxis: {
             type: 'category',
             axisLabel: {
-						interval: 2,    //强制文字产生间隔
-                        rotate: 90, 
+                interval: 2, //强制文字产生间隔
+                rotate: 90,
             },
             splitLine: {
                 show: false
@@ -417,15 +420,13 @@
         yAxis: {
             type: 'value'
         },
-        dataZoom: [
-            {
-                show: true,
-                type: 'slider',
-                y: '90%',
-                start: 50,
-                end: 100
-            }
-        ],
+        dataZoom: [{
+            show: true,
+            type: 'slider',
+            y: '90%',
+            start: 50,
+            end: 100
+        }],
         visualMap: [{
             show: false,
             // type: 'piecewise',
@@ -438,24 +439,23 @@
             }]
         }],
         series: [{
-                name: '较上季度增长',
-                type: 'bar',
-                stack: '总量',
-                barCategoryGap: 0,
-                // itemStyle: {
-                //     normal: {
-                //         opacity: 0.7
-                //     }
-                // },
-                // label: {
-                //     normal: {
-                //         show: true,
-                //         position: 'top'
-                //     }
-                // },
-                data: []
-            }
-        ]
+            name: '较上季度增长',
+            type: 'bar',
+            stack: '总量',
+            barCategoryGap: 0,
+            // itemStyle: {
+            //     normal: {
+            //         opacity: 0.7
+            //     }
+            // },
+            // label: {
+            //     normal: {
+            //         show: true,
+            //         position: 'top'
+            //     }
+            // },
+            data: []
+        }]
     };
 </script>
 
@@ -479,7 +479,7 @@
             formatter: function (params) {
                 var v = params[0].value;
                 var s = params[0].name;
-                return s+'<br/>平均净利润为'+v+'元';
+                return s + '<br/>平均净利润为' + v + '元';
             }
         },
         grid: {
@@ -491,8 +491,8 @@
         xAxis: {
             type: 'category',
             axisLabel: {
-						interval: 2,    //强制文字产生间隔
-                        rotate: 90, 
+                interval: 2, //强制文字产生间隔
+                rotate: 90,
             },
             data: function () {
                 var list = [];
@@ -535,10 +535,10 @@
             formatter: function (params) {
                 var v = params[0].value;
                 var s = params[0].name;
-                if(v>=0){
-                    return s+'<br/>较上季度增加了'+v+'元';
-                }else{
-                    return s+'<br/>较上季度减少了'+Math.abs(v)+'元';
+                if (v >= 0) {
+                    return s + '<br/>较上季度增加了' + v + '元';
+                } else {
+                    return s + '<br/>较上季度减少了' + Math.abs(v) + '元';
                 }
             }
         },
@@ -554,8 +554,8 @@
         xAxis: {
             type: 'category',
             axisLabel: {
-						interval: 2,    //强制文字产生间隔
-                        rotate: 90, 
+                interval: 2, //强制文字产生间隔
+                rotate: 90,
             },
             splitLine: {
                 show: false
@@ -596,19 +596,18 @@
             }
         ],
         series: [{
-                name: '较上季度增长',
-                type: 'bar',
-                stack: '总量',
-                barCategoryGap: 0,
-                // label: {
-                //     normal: {
-                //         show: true,
-                //         position: 'top'
-                //     }
-                // },
-                data: []
-            }
-        ]
+            name: '较上季度增长',
+            type: 'bar',
+            stack: '总量',
+            barCategoryGap: 0,
+            // label: {
+            //     normal: {
+            //         show: true,
+            //         position: 'top'
+            //     }
+            // },
+            data: []
+        }]
     };
 </script>
 
@@ -632,7 +631,7 @@
             formatter: function (params) {
                 var v = params[0].value;
                 var s = params[0].name;
-                return s+'<br/>平均净收益为'+v+'元';
+                return s + '<br/>平均净收益为' + v + '元';
             }
         },
         grid: {
@@ -644,8 +643,8 @@
         xAxis: {
             type: 'category',
             axisLabel: {
-						interval: 2,    //强制文字产生间隔
-                        rotate: 90, 
+                interval: 2, //强制文字产生间隔
+                rotate: 90,
             },
             data: function () {
                 var list = [];
@@ -688,10 +687,10 @@
             formatter: function (params) {
                 var v = params[0].value;
                 var s = params[0].name;
-                if(v>=0){
-                    return s+'<br/>较上季度增加了'+v+'元';
-                }else{
-                    return s+'<br/>较上季度减少了'+Math.abs(v)+'元';
+                if (v >= 0) {
+                    return s + '<br/>较上季度增加了' + v + '元';
+                } else {
+                    return s + '<br/>较上季度减少了' + Math.abs(v) + '元';
                 }
             }
         },
@@ -707,8 +706,8 @@
         xAxis: {
             type: 'category',
             axisLabel: {
-						interval: 2,    //强制文字产生间隔
-                        rotate: 90, 
+                interval: 2, //强制文字产生间隔
+                rotate: 90,
             },
             splitLine: {
                 show: false
@@ -749,19 +748,18 @@
             }
         ],
         series: [{
-                name: '较上季度增长',
-                type: 'bar',
-                stack: '总量',
-                barCategoryGap: 0,
-                // label: {
-                //     normal: {
-                //         show: true,
-                //         position: 'top'
-                //     }
-                // },
-                data: []
-            }
-        ]
+            name: '较上季度增长',
+            type: 'bar',
+            stack: '总量',
+            barCategoryGap: 0,
+            // label: {
+            //     normal: {
+            //         show: true,
+            //         position: 'top'
+            //     }
+            // },
+            data: []
+        }]
     };
 </script>
 
@@ -769,7 +767,7 @@
 
 
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
         myChart1.setOption(option1, true);
         myChart2.setOption(option2, true);
         myChart3.setOption(option3, true);
@@ -778,11 +776,11 @@
         myChart41.setOption(option41, true);
         myChart5.setOption(option5, true);
         myChart51.setOption(option51, true);
-        var region_select = '{{region_select|safe}}';
-        var type_select = '{{type_select|safe}}';
+        var region_select = $('.region_select').html();
+        var type_select = $('.type_select').html();
         $.getJSON("/flushPart/", {
             'com_region': region_select,
-            'com_type':type_select
+            'com_type': type_select
         }, function (ret) {
             myChart3.setOption({
                 series: [{
@@ -801,25 +799,26 @@
             });
             myChart31.setOption({
                 series: [{
-                        data: ret['change'][0]
-                    }
-                ]
+                    data: ret['change'][0]
+                }]
             });
             myChart41.setOption({
                 series: [{
-                        data: ret['change'][1]
-                    }
-                ]
+                    data: ret['change'][1]
+                }]
             });
             myChart51.setOption({
                 series: [{
-                        data: ret['change'][2]
-                    }
-                ]
+                    data: ret['change'][2]
+                }]
             });
-            $("#myTable").tablesorter(); 
-            for(var i=0;i<10;i++){
-                $('.info').append("<tr><td><a href='predictCom?name="+ret['info'][i]['name']+"'>"+ret['info'][i]['name']+"</a></td><td>"+ret['info'][i]['date']+"</td><td>"+ret['info'][i]['scale']+"</td><td>"+ret['info'][i]['stuffnumber']+"</td><td>"+ret['info'][i]['bussiness']+"</td></tr>");
+            $("#myTable").tablesorter();
+            for (var i = 0; i < 10; i++) {
+                $('.info').append("<tr><td><a href='predictCom?name=" + ret['info'][i]['name'] + "'>" +
+                    ret['info'][i]['name'] + "</a></td><td>" + ret['info'][i]['date'] +
+                    "</td><td>" + ret['info'][i]['scale'] + "</td><td>" + ret['info'][i][
+                        'stuffnumber'
+                    ] + "</td><td>" + ret['info'][i]['bussiness'] + "</td></tr>");
             }
             $("#myTable").trigger("update");
         })

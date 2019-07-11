@@ -25,7 +25,6 @@ from . import testView
 
 urlpatterns = [
     url(r'^$', indexView.indexView, name='index'),
-    #url(r'^$', views.index, name='index'),
     url(r'^back/$', views.back_page),
     url(r'^login/$', views.login),
     url('index', indexView.indexView),
@@ -42,14 +41,9 @@ urlpatterns = [
     url('dataUpdate', devPredictionView.dataUpdate),
     url('dataSearch', devPredictionView.dataSearch),
     url('test', devPredictionView.test),
-    url('myget', testView.myget),
-    url(r'^ajax_list/$', testView.ajax_list),
-    url(r'^ajax_dict/$', testView.ajax_dict),
-    # url('getByRegionAndType',devPredictionView.getByRegionAndType),
-
-    # url('getByType',devPredictionView.getByType),
     url('getByComName',devPredictionView.getByComName),
     url('charts',devPredictionView.charts),
+    url('flushMain',devPredictionView.flushMain),
     url('flushPart',devPredictionView.flushPart),
     url('flushCom',devPredictionView.flushCom)
 ]

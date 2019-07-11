@@ -23,22 +23,28 @@ def predictMainView(request):
     for p in li:
         counts.append(p['count'])
 
-    # print counts
     context['li'] = counts
 
     return render(request, 'predictMain.html', context)
 
+def flushMain(request):
+    li = list(Eps.objects.values('com_region','com_type').annotate(count=Count('id')).values('count','com_region','com_type'))
 
+    counts = []
+    for p in li:
+        counts.append(p['count'])
+    ret = {'data':counts}
+    return HttpResponse(json.dumps(ret), content_type='application/json')
+    
 
 def predictPartView(request):
     context          = {}
-    context['title'] = '某区某行业'
+    context['title'] = '区域及行业'
 
     region_select = request.GET.get('region')
     type_select = request.GET.get('type')
 
     context['region_select'] = region_select
-    # context['type_select'] = '医药制造业'
     context['type_select'] = type_select
 
     regioncount = Eps.objects.values('com_region').annotate(count=Count('id')).values('count','com_region')
@@ -73,6 +79,7 @@ def predictPartView(request):
 
 
 def flushPart(request):
+    
     com_region = request.GET['com_region']
     com_type = request.GET['com_type']
 
